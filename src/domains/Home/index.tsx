@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Auth, API, graphqlOperation} from 'aws-amplify';
 // import { OnCreateMessageSubscription } from '../../API';
-import { Observable } from '../../../node_modules/zen-observable-ts';
+import { Observable } from 'rxjs';
 import { onCreateMessage } from '../../graphql/subscriptions';
 import { listMessages } from '../../graphql/queries';
 import { createMessage } from '../../graphql/mutations';
@@ -32,18 +32,18 @@ function Home() {
         
         fetchUser();
 
-        // const subscription = API.graphql({
-        //     query: onCreateMessage,
-        //     authMode: 'AMAZON_COGNITO_USER_POOLS',
-        // }) as unknown as Observable<object>;
-
-        const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
-        subscription.subscribe({
-            next: (value : any) => {
-                setStateMessages((stateMessages) => [...stateMessages, value.data.createMessage]);
-            },
-            error: (error) => console.warn(error),
-        });
+        const subscription = API.graphql(graphqlOperation(onCreateMessage));
+        if(subscription instanceof Observable){
+            console.log('subscribed');
+            const a = subscription.subscribe({
+                next: payload => {
+                    console.log('payload', payload);
+                    setStateMessages((stateMessages) => [...stateMessages, payload.data.onCreateMessage]);
+                },
+                error: (error) => console.warn(error),
+            });
+            console.log(a);
+        }
     }, []);
 
     useEffect(() => {
