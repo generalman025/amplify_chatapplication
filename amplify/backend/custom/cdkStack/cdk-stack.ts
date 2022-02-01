@@ -47,7 +47,7 @@ export class cdkStack extends cdk.Stack {
     
     const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
       resourceArn: dependencies.api.amplifychatapp.GraphQLAPIIdOutput,
-      webAclId: cfnWebACL.ref
+      webAclId: cfnWebACL.attrId
     });
 
     cfnWebACLAssociation.node.addDependency(cfnWebACL);

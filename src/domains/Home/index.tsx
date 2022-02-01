@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Auth, API, graphqlOperation} from 'aws-amplify';
 import { Observable } from 'zen-observable-ts';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import {Auth, API, graphqlOperation} from 'aws-amplify';
+import { ListMessagesQuery, Message, OnCreateMessageSubscription } from '../../API';
 import { onCreateMessage } from '../../graphql/subscriptions';
 import { listMessages } from '../../graphql/queries';
 import { createMessage } from '../../graphql/mutations';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import styles from '../../styles/Home.module.css';
 import MessageBox from '../../components/MessageBox';
-import { ListMessagesQuery, Message, OnCreateMessageSubscription } from '../../API';
+import styles from '../../styles/Home.module.css';
 
 function Home() {
     const [stateMessages, setStateMessages] = useState(Array<Message>());
