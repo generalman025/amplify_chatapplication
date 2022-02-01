@@ -22,20 +22,20 @@ export class cdkStack extends cdk.Stack {
       }] 
     );
 
-    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput)
+    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.Arn)
     
     console.log(`apiArn: ${apiArn}`);
 
-    // new CfnWebACL(this, 'WebACL', {
-    //   defaultAction: {
-    //       allow: { },
-    //   },
-    //   scope: apiArn,
-    //   visibilityConfig: {
-    //       cloudWatchMetricsEnabled: true,
-    //       metricName: 'waf',
-    //       sampledRequestsEnabled: false
-    //   }
-    // });
+    const cfnWebACL = new CfnWebACL(this, 'WebACL', {
+      defaultAction: {
+          allow: { },
+      },
+      scope: "REGIONAL",
+      visibilityConfig: {
+          cloudWatchMetricsEnabled: true,
+          metricName: 'waf',
+          sampledRequestsEnabled: false
+      }
+    });
   }
 }
