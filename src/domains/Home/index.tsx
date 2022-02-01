@@ -40,7 +40,7 @@ function Home() {
         const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
         subscription.subscribe({
             next: (value : any) => {
-                setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
+                setStateMessages((stateMessages) => [...stateMessages, value.data.createMessage]);
             },
             error: (error) => console.warn(error),
         });
