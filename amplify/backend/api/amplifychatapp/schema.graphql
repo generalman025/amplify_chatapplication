@@ -6,7 +6,8 @@ type Message
   @model
   @auth(
     rules: [
-      { allow: private }
+      { allow: public, provider: iam, operations: [read] }      
+      { allow: owner, operations: [create, read, update ] }
     ]
   ) {
   id: ID!

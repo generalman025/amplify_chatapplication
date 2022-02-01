@@ -20,4 +20,4 @@ export default function MessageBox({ message, isMe }: IProps) {
             </div>
         </div>
     );
-};
+}
