@@ -7,6 +7,7 @@ import { createMessage } from '../../graphql/mutations';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import styles from '../../styles/Home.module.css';
 import MessageBox from '../../components/MessageBox';
+import { ListMessagesQuery } from '../../API';
 
 class Message {
     id!: string;
@@ -45,8 +46,8 @@ function Home() {
     useEffect(() => {
         async function getMessages(){
             try {
-                const messageReq: any = await API.graphql(graphqlOperation(listMessages));
-                setStateMessages([...messageReq.data.listMessages.items]);
+                const messageReq = await API.graphql(graphqlOperation(listMessages)) as {data: ListMessagesQuery};
+                setStateMessages([...(messageReq.data.listMessages?.items as Message[])]);
             }catch(error){
                 console.log(error);
             }

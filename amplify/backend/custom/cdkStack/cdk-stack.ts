@@ -22,9 +22,7 @@ export class cdkStack extends cdk.Stack {
       }] 
     );
 
-    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.Arn)
-    
-    console.log(`apiArn: ${apiArn}`);
+    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput)
 
     const cfnWebACL = new CfnWebACL(this, 'WebACL', {
       defaultAction: {
