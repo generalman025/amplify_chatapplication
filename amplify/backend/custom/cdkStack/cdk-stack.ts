@@ -44,9 +44,12 @@ export class cdkStack extends cdk.Stack {
       },
     });
 
+    
     const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
       resourceArn: dependencies.api.amplifychatapp.GraphQLAPIIdOutput,
       webAclId: cfnWebACL.ref
     });
+
+    cfnWebACLAssociation.node.addDependency(cfnWebACL);
   }
 }

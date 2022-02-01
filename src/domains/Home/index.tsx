@@ -7,13 +7,7 @@ import { createMessage } from '../../graphql/mutations';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import styles from '../../styles/Home.module.css';
 import MessageBox from '../../components/MessageBox';
-import { ListMessagesQuery } from '../../API';
-
-class Message {
-    id!: string;
-    owner!: string;
-    message!: string;
-}
+import { ListMessagesQuery, Message, OnCreateMessageSubscription } from '../../API';
 
 function Home() {
     const [stateMessages, setStateMessages] = useState(Array<Message>());
@@ -35,8 +29,8 @@ function Home() {
         const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
         if(subscription instanceof Observable){
             subscription.subscribe({
-                next: ({value}: any) => {
-                    setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
+                next: (value: {data: OnCreateMessageSubscription}) => {
+                    setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage as Message]);
                 },
                 error: (error) => console.warn(error),
             });
@@ -81,7 +75,7 @@ function Home() {
                     <h1 className={styles.title}>AWS Amplify Live Chat</h1>
                     <div className={styles.chatbox}>
                         {
-                            stateMessages.sort((a: any,b: any) => b.createdAt.localeCompare(a.createdAt))
+                            stateMessages.sort((a: Message,b: Message) => b.createdAt.localeCompare(a.createdAt))
                             .map(message => 
                                 <MessageBox 
                                 message={message} 
