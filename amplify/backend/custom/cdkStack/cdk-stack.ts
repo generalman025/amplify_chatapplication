@@ -23,70 +23,19 @@ export class cdkStack extends cdk.Stack {
     );
 
     const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput)
-
-    new CfnWebACL(this, 'WebACL', {
-      defaultAction: {
-          allow: { },
-      },
-      scope: apiArn,
-      visibilityConfig: {
-          cloudWatchMetricsEnabled: true,
-          metricName: 'waf',
-          sampledRequestsEnabled: false
-      }
-    });
-
-    // Example 1: Set up an SQS queue with an SNS topic 
-
-    /*
-    const amplifyProjectInfo = AmplifyHelpers.getProjectInfo();
-    const sqsQueueResourceNamePrefix = `sqs-queue-${amplifyProjectInfo.projectName}`;
-    const queue = new sqs.Queue(this, 'sqs-queue', {
-      queueName: `${sqsQueueResourceNamePrefix}-${cdk.Fn.ref('env')}`
-    });
-    // 👇create sns topic
     
-    const snsTopicResourceNamePrefix = `sns-topic-${amplifyProjectInfo.projectName}`;
-    const topic = new sns.Topic(this, 'sns-topic', {
-      topicName: `${snsTopicResourceNamePrefix}-${cdk.Fn.ref('env')}`
-    });
-    // 👇 subscribe queue to topic
-    topic.addSubscription(new subs.SqsSubscription(queue));
-    new cdk.CfnOutput(this, 'snsTopicArn', {
-      value: topic.topicArn,
-      description: 'The arn of the SNS topic',
-    });
-    */
+    console.log(`apiArn: ${apiArn}`);
 
-    // Example 2: Adding IAM role to the custom stack 
-    /*
-    const roleResourceNamePrefix = `CustomRole-${amplifyProjectInfo.projectName}`;
-    
-    const role = new iam.Role(this, 'CustomRole', {
-      assumedBy: new iam.AccountRootPrincipal(),
-      roleName: `${roleResourceNamePrefix}-${cdk.Fn.ref('env')}`
-    }); 
-    */
-
-    // Example 3: Adding policy to the IAM role
-    /*
-    role.addToPolicy(
-      new iam.PolicyStatement({
-        actions: ['*'],
-        resources: [topic.topicArn],
-      }),
-    );
-    */
-
-    // Access other Amplify Resources 
-    /*
-    const retVal:AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this, 
-      amplifyResourceProps.category, 
-      amplifyResourceProps.resourceName, 
-      [
-        {category: <insert-amplify-category>, resourceName: <insert-amplify-resourcename>},
-      ]
-    );
-    */
+    // new CfnWebACL(this, 'WebACL', {
+    //   defaultAction: {
+    //       allow: { },
+    //   },
+    //   scope: apiArn,
+    //   visibilityConfig: {
+    //       cloudWatchMetricsEnabled: true,
+    //       metricName: 'waf',
+    //       sampledRequestsEnabled: false
+    //   }
+    // });
   }
 }
