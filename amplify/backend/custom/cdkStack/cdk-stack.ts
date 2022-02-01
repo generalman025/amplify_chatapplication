@@ -1,8 +1,8 @@
 import * as cdk from "@aws-cdk/core";
 import * as AmplifyHelpers from "@aws-amplify/cli-extensibility-helper";
 import { AmplifyDependentResourcesAttributes } from "../../types/amplify-dependent-resources-ref";
-import { CfnWebACL } from "@aws-cdk/aws-wafv2";
-import { CfnWebACLAssociation } from "@aws-cdk/aws-wafregional";
+import { CfnWebACL, CfnWebACLAssociation } from "@aws-cdk/aws-wafv2";
+// import { CfnWebACLAssociation } from "@aws-cdk/aws-wafregional";
 
 export class cdkStack extends cdk.Stack {
   constructor(
@@ -47,7 +47,7 @@ export class cdkStack extends cdk.Stack {
     
     const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
       resourceArn: dependencies.api.amplifychatapp.GraphQLAPIIdOutput,
-      webAclId: cfnWebACL.attrId
+      webAclArn: cfnWebACL.attrArn
     });
 
     cfnWebACLAssociation.node.addDependency(cfnWebACL);
