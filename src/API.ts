@@ -2,8 +2,10 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type DeleteMessageInput = {
-  id: string,
+export type CreateMessageInput = {
+  id?: string | null,
+  owner: string,
+  message: string,
 };
 
 export type ModelMessageConditionInput = {
@@ -63,16 +65,14 @@ export type Message = {
   updatedAt: string,
 };
 
-export type CreateMessageInput = {
-  id?: string | null,
-  owner: string,
-  message: string,
-};
-
 export type UpdateMessageInput = {
   id: string,
   owner?: string | null,
   message?: string | null,
+};
+
+export type DeleteMessageInput = {
+  id: string,
 };
 
 export type ModelMessageFilterInput = {
@@ -102,24 +102,8 @@ export type ModelIDInput = {
 
 export type ModelMessageConnection = {
   __typename: "ModelMessageConnection",
-  items:  Array<Message | null >,
+  items:  Array<Message >,
   nextToken?: string | null,
-};
-
-export type DeleteMessageMutationVariables = {
-  input: DeleteMessageInput,
-  condition?: ModelMessageConditionInput | null,
-};
-
-export type DeleteMessageMutation = {
-  deleteMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
 };
 
 export type CreateMessageMutationVariables = {
@@ -145,6 +129,22 @@ export type UpdateMessageMutationVariables = {
 
 export type UpdateMessageMutation = {
   updateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner: string,
+    message: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteMessageMutationVariables = {
+  input: DeleteMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type DeleteMessageMutation = {
+  deleteMessage?:  {
     __typename: "Message",
     id: string,
     owner: string,
@@ -185,13 +185,9 @@ export type ListMessagesQuery = {
       message: string,
       createdAt: string,
       updatedAt: string,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
-};
-
-export type OnCreateMessageSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateMessageSubscription = {
@@ -205,10 +201,6 @@ export type OnCreateMessageSubscription = {
   } | null,
 };
 
-export type OnUpdateMessageSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnUpdateMessageSubscription = {
   onUpdateMessage?:  {
     __typename: "Message",
@@ -218,10 +210,6 @@ export type OnUpdateMessageSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
-};
-
-export type OnDeleteMessageSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteMessageSubscription = {
