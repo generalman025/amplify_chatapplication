@@ -47,11 +47,11 @@ export class cdkStack extends cdk.Stack {
     });
 
     
-    const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
-      resourceArn: apiArn,
-      webAclArn: cfnWebACL.attrArn
-    });
+    // const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
+    //   resourceArn: apiArn,
+    //   webAclArn: cfnWebACL.attrArn
+    // });
 
-    cfnWebACLAssociation.node.addDependency(cfnWebACL);
+    // cfnWebACLAssociation.node.addDependency(cfnWebACL);
   }
 }
