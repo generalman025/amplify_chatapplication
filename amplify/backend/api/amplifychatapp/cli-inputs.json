@@ -5,14 +5,10 @@
     "serviceName": "AppSync",
     "gqlSchemaPath": "/Users/kiattich/Personal-Projects/ChatApplication/amplify_chatapplication/amplify/backend/api/amplifychatapp/schema.graphql",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "expirationTime": 7
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authamplifychatappf94c8f32"
     },
-    "additionalAuthTypes": [
-      {
-        "mode": "AMAZON_COGNITO_USER_POOLS",
-        "cognitoUserPoolId": "authamplifychatappf94c8f32"
-      }
-    ]
+    "additionalAuthTypes": [],
+    "conflictResolution": {}
   }
 }

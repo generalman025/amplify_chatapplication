@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Auth, API, graphqlOperation} from 'aws-amplify';
-import { OnCreateMessageSubscription } from '../../API';
+// import { OnCreateMessageSubscription } from '../../API';
 import { Observable } from '../../../node_modules/zen-observable-ts';
 import { onCreateMessage } from '../../graphql/subscriptions';
 import { listMessages } from '../../graphql/queries';
@@ -13,10 +13,6 @@ class Message {
     id!: string;
     owner!: string;
     message!: string;
-}
-
-interface IProps {
-    message: Message
 }
 
 function Home() {
