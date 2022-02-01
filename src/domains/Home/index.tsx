@@ -36,9 +36,9 @@ function Home() {
         if(subscription instanceof Observable){
             console.log('subscribed');
             const a = subscription.subscribe({
-                next: (payload: any) => {
-                    console.log('payload', JSON.stringify(payload));
-                    setStateMessages((stateMessages) => [...stateMessages, payload.data.onCreateMessage]);
+                next: ({value}: any) => {
+                    console.log('payload', JSON.stringify(value));
+                    setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
                 },
                 error: (error) => console.warn(error),
             });
