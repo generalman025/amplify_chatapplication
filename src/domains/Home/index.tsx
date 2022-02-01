@@ -35,7 +35,11 @@ function Home() {
         
         fetchUser();
 
-        const subscription = API.graphql(graphqlOperation(onCreateMessage)) as unknown as Observable<object>;
+        const subscription = API.graphql({
+            query: onCreateMessage,
+            authMode: 'AMAZON_COGNITO_USER_POOLS',
+        }) as unknown as Observable<object>;
+        
         subscription.subscribe({
             next: ({value}:any) => {
                 setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
