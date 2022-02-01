@@ -32,6 +32,8 @@ export class cdkStack extends cdk.Stack {
         ]
       );
 
+    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput);
+
     const cfnWebACL = new CfnWebACL(this, "WebACL", {
       defaultAction: {
         allow: {},
@@ -46,7 +48,7 @@ export class cdkStack extends cdk.Stack {
 
     
     const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
-      resourceArn: dependencies.api.amplifychatapp.GraphQLAPIIdOutput,
+      resourceArn: apiArn,
       webAclArn: cfnWebACL.attrArn
     });
 

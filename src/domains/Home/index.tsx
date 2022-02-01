@@ -8,6 +8,7 @@ import { listMessages } from '../../graphql/queries';
 import { createMessage } from '../../graphql/mutations';
 import MessageBox from '../../components/MessageBox';
 import styles from '../../styles/Home.module.css';
+import { CognitoUser } from '@aws-amplify/auth';
 
 function Home() {
     const [stateMessages, setStateMessages] = useState(Array<Message>());
@@ -17,8 +18,9 @@ function Home() {
     useEffect(() => {
         const fetchUser = async () => {
             try{
-                const amplifyUser = await Auth.currentAuthenticatedUser();
-                setUser(amplifyUser);
+                const amplifyUser = (await Auth.currentAuthenticatedUser());
+                console.log(`amplifyUser: ${JSON.stringify(amplifyUser)}`);
+                setUser(amplifyUser); 
             }catch(err){
                 setUser(null);
             }
