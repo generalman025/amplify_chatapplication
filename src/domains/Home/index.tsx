@@ -33,7 +33,7 @@ function Home() {
 
         const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
         if(subscription instanceof Observable){
-            const a = subscription.subscribe({
+            subscription.subscribe({
                 next: ({value}: any) => {
                     setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
                 },
@@ -45,10 +45,7 @@ function Home() {
     useEffect(() => {
         async function getMessages(){
             try {
-                const messageReq: any = await API.graphql({
-                    query: listMessages,
-                    authMode: 'AMAZON_COGNITO_USER_POOLS',
-                });
+                const messageReq: any = await API.graphql(graphqlOperation(listMessages));
                 setStateMessages([...messageReq.data.listMessages.items]);
             }catch(error){
                 console.log(error);
@@ -69,11 +66,7 @@ function Home() {
             };
     
             try {
-                await API.graphql({
-                    authMode: 'AMAZON_COGNITO_USER_POOLS',
-                    query: createMessage,
-                    variables: { input },
-                });
+                await API.graphql(graphqlOperation(createMessage, { input }));
             }catch(error){
                 console.error(error);
             }
