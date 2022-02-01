@@ -102,7 +102,7 @@ export type ModelIDInput = {
 
 export type ModelMessageConnection = {
   __typename: "ModelMessageConnection",
-  items:  Array<Message >,
+  items:  Array<Message | null >,
   nextToken?: string | null,
 };
 
@@ -185,7 +185,7 @@ export type ListMessagesQuery = {
       message: string,
       createdAt: string,
       updatedAt: string,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
