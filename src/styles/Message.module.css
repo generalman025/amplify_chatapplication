@@ -10,7 +10,7 @@
   .sentMessage {
     text-align: left;
     padding: 8px;
-    font-family: "roboto";
+    font-family: roboto, sans-serif;
     color: #fff;
     background: linear-gradient(243deg, #2397f5, #498efc 100%);
     border-radius: 8px;
@@ -28,7 +28,7 @@
   .receivedMessage {
     text-align: left;
     padding: 8px;
-    font-family: "roboto";
+    font-family: roboto, sans-serif;
     color: #000;
     background: linear-gradient(
       193deg,
@@ -39,7 +39,7 @@
   }
   
   .senderText {
-    font-family: "roboto";
+    font-family: roboto, sans-serif;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.7);
     margin-bottom: 4px;
