@@ -38,7 +38,7 @@ function Home() {
             const a = subscription.subscribe({
                 next: payload => {
                     console.log('payload', JSON.stringify(payload));
-                    // setStateMessages((stateMessages) => [...stateMessages, payload.data.onCreateMessage]);
+                    setStateMessages((stateMessages) => [...stateMessages, payload.data.onCreateMessage]);
                 },
                 error: (error) => console.warn(error),
             });
