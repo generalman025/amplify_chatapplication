@@ -39,7 +39,6 @@ function Home() {
                 },
                 error: (error) => console.warn(error),
             });
-            console.log(a);
         }
     }, []);
 
