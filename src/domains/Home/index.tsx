@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Auth, API, graphqlOperation} from 'aws-amplify';
 // import { OnCreateMessageSubscription } from '../../API';
-import { Observable } from 'rxjs';
+import { Observable } from 'zen-observable-ts';
 import { onCreateMessage } from '../../graphql/subscriptions';
 import { listMessages } from '../../graphql/queries';
 import { createMessage } from '../../graphql/mutations';
@@ -32,11 +32,11 @@ function Home() {
         
         fetchUser();
 
-        const subscription = API.graphql(graphqlOperation(onCreateMessage));
+        const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
         if(subscription instanceof Observable){
             console.log('subscribed');
             const a = subscription.subscribe({
-                next: payload => {
+                next: (payload: any) => {
                     console.log('payload', JSON.stringify(payload));
                     setStateMessages((stateMessages) => [...stateMessages, payload.data.onCreateMessage]);
                 },
