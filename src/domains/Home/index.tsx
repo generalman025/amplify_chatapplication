@@ -29,9 +29,9 @@ function Home() {
         const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
         if(subscription instanceof Observable){
             subscription.subscribe({
-                next: (value: {data: OnCreateMessageSubscription}) => {
-                    console.log(JSON.stringify(value));
-                    // setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage as Message]);
+                next: (response: {value: {data: OnCreateMessageSubscription}}) => {
+                    console.log(JSON.stringify(response));
+                    setStateMessages((stateMessages) => [...stateMessages, response.value.data.onCreateMessage as Message]);
                 },
                 error: (error) => console.warn(error),
             });
