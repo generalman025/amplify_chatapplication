@@ -31,7 +31,7 @@ function Home() {
         if(subscription instanceof Observable){
             subscription.subscribe({
                 next: (value: {data: OnCreateMessageSubscription}) => {
-                    console.log(value);
+                    console.log(JSON.stringify(value));
                     // setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage as Message]);
                 },
                 error: (error) => console.warn(error),
