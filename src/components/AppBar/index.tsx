@@ -1,11 +1,3 @@
-// import { AmplifyGreetings } from '@aws-amplify/ui-react';
-
-// function AppBar(user: any) {
-//   return (<AmplifyGreetings username={user.user.attributes.preferred_username} />);
-// }
-
-// export default AppBar;
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { AmplifyAuthenticator, AmplifyInput, AmplifyButton } from '@aws-amplify/ui-react';
-import { onAuthUIStateChange, AuthState } from "@aws-amplify/ui-components";
-import AppBar from '../../components/AppBar';
-import { Grid, TextField } from '@mui/material';
 import { Auth } from 'aws-amplify';
+import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { onAuthUIStateChange, AuthState } from "@aws-amplify/ui-components";
+import { Button, Grid, TextField } from '@mui/material';
+import AppBar from '../../components/AppBar';
 
 const Home = () => {
   const [authState, setAuthState] = useState();
@@ -37,7 +37,8 @@ const Home = () => {
             <TextField id="outlined-basic" defaultValue="generalman" label="Preferred Username" variant="outlined" inputRef={usernameInput}></TextField>
           </Grid>
           <Grid item justifyContent="center" xs={12}>
-            <AmplifyButton onClick={() => modifyUsername('Hello')}></AmplifyButton>
+            {/* <AmplifyButton onClick={() => modifyUsername('Hello')}></AmplifyButton> */}
+            <Button onClick={() => modifyUsername('Hello')}>Modify Username</Button>
           </Grid>
         </Grid>
       </Grid>
