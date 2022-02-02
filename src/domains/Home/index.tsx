@@ -44,7 +44,6 @@ const Home = () => {
             <TextField id="outlined-basic" defaultValue="generalman" label="Preferred Username" variant="outlined" inputRef={usernameInput}></TextField>
           </Grid>
           <Grid item justifyContent="center" xs={12}>
-            {/* <AmplifyButton onClick={() => modifyUsername('Hello')}></AmplifyButton> */}
             <Button onClick={() => modifyUsername('Hello')}>Modify Username</Button>
           </Grid>
         </Grid>
