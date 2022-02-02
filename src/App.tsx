@@ -1,15 +1,10 @@
-import './App.css';
-
-import '@aws-amplify/ui-react/styles.css';
-import { AmplifyProvider } from '@aws-amplify/ui-react';
-import Home from './domains/Home';
+import {  } from '@aws-amplify/ui-react';
 import ChatRoom from './domains/ChatRoom';
+import Home from './domains/Home';
 
 function App() {
   return (
-    <AmplifyProvider>
-      <Home />
-    </AmplifyProvider>
+      <ChatRoom />
   );
 }
 

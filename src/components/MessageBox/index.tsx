@@ -1,17 +1,7 @@
+import { IMessage } from '../../interfaces/IMessage';
 import styles from '../../styles/Message.module.css';
 
-class Message {
-  id!: string;
-  owner!: string;
-  message!: string;
-}
-
-interface IProps {
-  message: Message;
-  isMe: boolean;
-}
-
-export default function MessageBox({ message, isMe }: IProps) {
+export default function MessageBox({ message, isMe }: IMessage) {
   return (
     <div
       className={

@@ -479,14 +479,6 @@
     "@aws-cdk/core" "1.124.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-wafregional@~1.124.0":
-  version "1.124.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-wafregional/-/aws-wafregional-1.124.0.tgz#865aa271e21d7a24765f59523dadfd20c47a7297"
-  integrity sha512-8Rhz9E8gGVBZDWE0uUlq7KSKCICPgjvu6iQXkSyUKPWv3a4ZtfaScBrn5Dgyg2v3T4Z9dYNwAhP3f/suTzMfmQ==
-  dependencies:
-    "@aws-cdk/core" "1.124.0"
-    constructs "^3.3.69"
-
 "@aws-cdk/aws-wafv2@~1.124.0":
   version "1.124.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-wafv2/-/aws-wafv2-1.124.0.tgz#1932dacdc3c05c7922b599c0f64dd2704426c068"
