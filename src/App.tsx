@@ -1,11 +1,16 @@
 import './App.css';
 
 import '@aws-amplify/ui-react/styles.css';
-import { withAuthenticator } from '@aws-amplify/ui-react'
+import { AmplifyProvider } from '@aws-amplify/ui-react';
 import Home from './domains/Home';
+import ChatRoom from './domains/ChatRoom';
 
-function App(){
-  return <Home />
+function App() {
+  return (
+    <AmplifyProvider>
+      <Home />
+    </AmplifyProvider>
+  );
 }
 
-export default withAuthenticator(App)
+export default App;
