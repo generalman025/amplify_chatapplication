@@ -19,7 +19,6 @@ function Home() {
         const fetchUser = async () => {
             try{
                 const amplifyUser = (await Auth.currentAuthenticatedUser());
-                console.log(`amplifyUser: ${JSON.stringify(amplifyUser)}`);
                 setUser(amplifyUser); 
             }catch(err){
                 setUser(null);
@@ -32,7 +31,8 @@ function Home() {
         if(subscription instanceof Observable){
             subscription.subscribe({
                 next: (value: {data: OnCreateMessageSubscription}) => {
-                    setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage as Message]);
+                    console.log(value);
+                    // setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage as Message]);
                 },
                 error: (error) => console.warn(error),
             });
