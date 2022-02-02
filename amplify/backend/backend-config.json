@@ -8,7 +8,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authamplifychatappauth"
+              "userPoolId": "authamplifychatapp"
             }
           },
           "additionalAuthenticationProviders": []
@@ -17,7 +17,7 @@
     }
   },
   "auth": {
-    "amplifychatappauth": {
+    "amplifychatapp": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

@@ -4,9 +4,9 @@
   "DynamoDBEnableServerSideEncryption": false,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
-      "authamplifychatappauth",
+      "authamplifychatapp",
       "Outputs.UserPoolId"
     ]
   },
-  "AuthModeLastUpdated": "2022-02-02T19:41:57.430Z"
+  "AuthModeLastUpdated": "2022-02-02T21:04:11.910Z"
 }

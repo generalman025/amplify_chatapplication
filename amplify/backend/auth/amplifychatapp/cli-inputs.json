@@ -3,10 +3,10 @@
   "cognitoConfig": {
     "identityPoolName": "amplifychatapp_identitypool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplifa4332525",
-    "userPoolName": "amplifychatapp_userpool",
+    "resourceNameTruncated": "amplif5b34aa7e",
+    "userPoolName": "amplifychatappuserpool",
     "autoVerifiedAttributes": [
-      "EMAIL"
+      "email"
     ],
     "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
@@ -25,21 +25,21 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-      "EMAIL"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-      "EMAIL"
+      "email"
     ],
-    "userpoolClientLambdaRole": "amplifa4332525_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amplif5b34aa7e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a4332525",
-    "resourceName": "amplifychatappauth",
+    "sharedId": "5b34aa7e",
+    "resourceName": "amplifychatapp",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "manual",
     "thirdPartyAuth": true,
     "authProviders": [],
     "usernameAttributes": [
-      "EMAIL"
+      "email"
     ],
     "userPoolGroups": false,
     "adminQueries": false,
