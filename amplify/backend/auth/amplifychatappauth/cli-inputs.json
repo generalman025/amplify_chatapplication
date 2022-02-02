@@ -6,7 +6,7 @@
     "resourceNameTruncated": "amplifa4332525",
     "userPoolName": "amplifychatapp_userpool",
     "autoVerifiedAttributes": [
-      "email"
+      "EMAIL"
     ],
     "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
@@ -25,10 +25,10 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-      "email"
+      "EMAIL"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "EMAIL"
     ],
     "userpoolClientLambdaRole": "amplifa4332525_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
@@ -39,7 +39,7 @@
     "thirdPartyAuth": true,
     "authProviders": [],
     "usernameAttributes": [
-      "email"
+      "EMAIL"
     ],
     "userPoolGroups": false,
     "adminQueries": false,
