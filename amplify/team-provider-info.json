@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-amplifychatapp-dev-10959-unauthRole",
       "StackName": "amplify-amplifychatapp-dev-10959",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:131485244922:stack/amplify-amplifychatapp-dev-10959/03403000-82c1-11ec-833e-0a93c6fe19ba",
-      "AmplifyAppId": "d20w4auefqqjdb"
+      "AmplifyAppId": "d20w4auefqqjdb",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-amplifychatapp-dev-10959-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
