@@ -5,11 +5,13 @@
 export type CreateMessageInput = {
   id?: string | null,
   owner: string,
+  preferredUsername: string,
   message: string,
 };
 
 export type ModelMessageConditionInput = {
   owner?: ModelStringInput | null,
+  preferredUsername?: ModelStringInput | null,
   message?: ModelStringInput | null,
   and?: Array< ModelMessageConditionInput | null > | null,
   or?: Array< ModelMessageConditionInput | null > | null,
@@ -60,6 +62,7 @@ export type Message = {
   __typename: "Message",
   id: string,
   owner: string,
+  preferredUsername: string,
   message: string,
   createdAt: string,
   updatedAt: string,
@@ -68,6 +71,7 @@ export type Message = {
 export type UpdateMessageInput = {
   id: string,
   owner?: string | null,
+  preferredUsername?: string | null,
   message?: string | null,
 };
 
@@ -78,6 +82,7 @@ export type DeleteMessageInput = {
 export type ModelMessageFilterInput = {
   id?: ModelIDInput | null,
   owner?: ModelStringInput | null,
+  preferredUsername?: ModelStringInput | null,
   message?: ModelStringInput | null,
   and?: Array< ModelMessageFilterInput | null > | null,
   or?: Array< ModelMessageFilterInput | null > | null,
@@ -116,6 +121,7 @@ export type CreateMessageMutation = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -132,6 +138,7 @@ export type UpdateMessageMutation = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -148,6 +155,7 @@ export type DeleteMessageMutation = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -163,6 +171,7 @@ export type GetMessageQuery = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -182,6 +191,7 @@ export type ListMessagesQuery = {
       __typename: "Message",
       id: string,
       owner: string,
+      preferredUsername: string,
       message: string,
       createdAt: string,
       updatedAt: string,
@@ -195,6 +205,7 @@ export type OnCreateMessageSubscription = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -206,6 +217,7 @@ export type OnUpdateMessageSubscription = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,
@@ -217,6 +229,7 @@ export type OnDeleteMessageSubscription = {
     __typename: "Message",
     id: string,
     owner: string,
+    preferredUsername: string,
     message: string,
     createdAt: string,
     updatedAt: string,

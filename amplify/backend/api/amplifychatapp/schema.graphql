@@ -7,5 +7,6 @@ type Message
   ) {
   id: ID!
   owner: String!
+  preferredUsername: String!
   message: String!
 }

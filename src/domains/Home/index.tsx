@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from "@aws-amplify/ui-components";
 import { Button, Grid, TextField } from '@mui/material';
 import AppBar from '../../components/AppBar';
@@ -27,6 +27,13 @@ const Home = () => {
   }
 
   return (<AmplifyAuthenticator>
+    <AmplifySignUp
+          slot="sign-up"
+          formFields={[
+            { type: "username" },
+            { type: "password" }
+          ]}
+        />
     <Grid container justifyContent="center" spacing={2}>
       <Grid item xs={12}>
         {authState === AuthState.SignedIn && user ? <AppBar user={user} /> : <div>Loading...</div>}

@@ -8,7 +8,7 @@ export default function MessageBox({ message, isMe }: IMessage) {
         isMe ? styles.sentMessageContainer : styles.receivedMessageContainer
       }
     >
-      <p className={styles.senderText}>{message.owner}</p>
+      <p className={styles.senderText}>{message.preferredUsername}</p>
       <div className={isMe ? styles.sendMessage : styles.receivedMessage}>
         <p>{message.message}</p>
       </div>

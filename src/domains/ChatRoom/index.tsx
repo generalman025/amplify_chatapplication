@@ -70,7 +70,8 @@ function ChatRoom() {
     if (user) {
       const input = {
         message: messageText,
-        owner: (user as any).username
+        owner: (user as any).username,
+        preferredUsername: (user as any).attributes.preferred_username
       };
 
       try {
