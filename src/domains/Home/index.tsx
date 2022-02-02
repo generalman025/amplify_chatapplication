@@ -8,7 +8,6 @@ import { listMessages } from '../../graphql/queries';
 import { createMessage } from '../../graphql/mutations';
 import MessageBox from '../../components/MessageBox';
 import styles from '../../styles/Home.module.css';
-import { CognitoUser } from '@aws-amplify/auth';
 
 function Home() {
     const [stateMessages, setStateMessages] = useState(Array<Message>());
