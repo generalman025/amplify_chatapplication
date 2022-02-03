@@ -44,7 +44,6 @@ export class cdkStack extends cdk.Stack {
         sampledRequestsEnabled: false,
       },
     });
-
     
     // const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
     //   resourceArn: apiArn,
