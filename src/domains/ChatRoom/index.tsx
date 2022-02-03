@@ -20,11 +20,11 @@ import { IUser } from '../../interfaces/IUser';
 
 function ChatRoom() {
   const [stateMessages, setStateMessages] = useState(Array<Message>());
-  const [attributes, setAttributes] = useState<{Name: string, Value: string}[]>();
+  const [attributes, setAttributes] = useState<{ Name: string, Value: string }[]>();
   const [messageText, setMessageText] = useState('');
   const [user, setUser] = useState<CognitoUser>();
   const [authState, setAuthState] = useState();
-    
+
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState: any, authData: any) => {
       setAuthState(nextAuthState);
@@ -97,12 +97,23 @@ function ChatRoom() {
   };
 
   useEffect(() => {
-    if(authState === AuthState.SignedIn && user) {
-      user?.getUserAttributes((_error,attrs) => {
-        setAttributes(attrs); 
+    if (authState === AuthState.SignedIn && user) {
+      user?.getUserAttributes((_error, attrs) => {
+        setAttributes(attrs);
       });
     }
   }, [user, authState]);
+
+  API
+    .get("listUsersApi", "/users", {})
+    .then(response => {
+      console.log("success")
+      console.log(response)
+    })
+    .catch(error => {
+      console.log("error")
+      console.log(error);
+    });
 
   if (user) {
     return (

@@ -15,6 +15,12 @@
     "categories": {
       "auth": {
         "amplifychatapp": {}
+      },
+      "function": {
+        "amplifychatapplistusers": {
+          "deploymentBucketName": "amplify-amplifychatapp-dev-10959-deployment",
+          "s3Key": "amplify-builds/amplifychatapplistusers-376e723079734b35336a-build.zip"
+        }
       }
     }
   }
