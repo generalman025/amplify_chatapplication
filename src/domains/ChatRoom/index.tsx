@@ -122,6 +122,10 @@ function ChatRoom() {
   };
 
   useEffect(() => {
+    console.log(allUsers);
+  }, [allUsers]);
+
+  useEffect(() => {
     if (authState === AuthState.SignedIn && user) {
       user?.getUserAttributes((_error, attrs) => {
         setAttributes(attrs);
