@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Observable } from 'zen-observable-ts';
-import { AmplifyAuthenticator, withAuthenticator } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import {
   ListMessagesQuery,
@@ -13,17 +13,19 @@ import { createMessage } from '../../graphql/mutations';
 import MessageBox from '../../components/MessageBox';
 import styles from '../../styles/Home.module.css';
 import { Grid } from '@mui/material';
-import { onAuthUIStateChange, AuthState } from "@aws-amplify/ui-components";
+import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
 import { CognitoUser } from '@aws-amplify/auth';
 import AppBar from '../../components/AppBar';
 import { IUser } from '../../interfaces/IUser';
 
 function ChatRoom() {
   const [stateMessages, setStateMessages] = useState(Array<Message>());
-  const [attributes, setAttributes] = useState<{ Name: string, Value: string }[]>();
+  const [attributes, setAttributes] =
+    useState<{ Name: string; Value: string }[]>();
   const [messageText, setMessageText] = useState('');
   const [user, setUser] = useState<CognitoUser>();
   const [authState, setAuthState] = useState();
+  const [allUsers, setAllUsers] = useState<CognitoUser[]>();
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState: any, authData: any) => {
@@ -44,6 +46,21 @@ function ChatRoom() {
 
     fetchUser();
 
+    const fetchAllUsers = async () => {
+      try {
+        const users = (await API.get(
+          'listUsersApi',
+          '/users',
+          {}
+        )) as CognitoUser[];
+        setAllUsers(users);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchAllUsers();
+
     const subscription = API.graphql(
       graphqlOperation(onCreateMessage)
     ) as Observable<object>;
@@ -61,7 +78,7 @@ function ChatRoom() {
   }, []);
 
   useEffect(() => {
-    async function getMessages() {
+    const getMessages = async () => {
       try {
         const messageReq = (await API.graphql(
           graphqlOperation(listMessages)
@@ -72,7 +89,8 @@ function ChatRoom() {
       } catch (error) {
         console.log(error);
       }
-    }
+    };
+
     getMessages();
   }, [user]);
 
@@ -104,28 +122,27 @@ function ChatRoom() {
     }
   }, [user, authState]);
 
-  API
-    .get("listUsersApi", "/users", {})
-    .then(response => {
-      console.log("success")
-      console.log(response)
-    })
-    .catch(error => {
-      console.log("error")
-      console.log(error);
-    });
+  console.log(allUsers);
 
   if (user) {
     return (
       <AmplifyAuthenticator>
         <Grid container justifyContent="center">
           <Grid item xs={12}>
-            {authState === AuthState.SignedIn && user && attributes ? <AppBar {...{ attributes: attributes, username: user.getUsername() } as unknown as IUser} /> : <div>Loading...</div>}
+            {authState === AuthState.SignedIn && user && attributes ? (
+              <AppBar
+                {...({
+                  attributes: attributes,
+                  username: user.getUsername()
+                } as unknown as IUser)}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
           </Grid>
           <Grid item xs={12}>
-            <div className={styles.background}>
-              <div className={styles.container}>
-                <h1 className={styles.title}>AWS Amplify Live Chat</h1>
+            <div>
+              <div>
                 <div className={styles.chatbox}>
                   {stateMessages
                     .sort((a: Message, b: Message) =>
@@ -158,11 +175,11 @@ function ChatRoom() {
             </div>
           </Grid>
         </Grid>
-      </AmplifyAuthenticator >
+      </AmplifyAuthenticator>
     );
   } else {
     return <div>Loading...</div>;
   }
 }
 
-export default withAuthenticator(ChatRoom);
+export default ChatRoom;

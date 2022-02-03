@@ -1,6 +1,6 @@
-import { Message } from "../API";
+import { Message } from '../API';
 
 export interface IMessage {
-    message: Message;
-    isMe: boolean;
-  }
+  message: Message;
+  isMe: boolean;
+}
