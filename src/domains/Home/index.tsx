@@ -1,123 +1,106 @@
-import React, {useEffect, useState} from 'react';
-import {Auth, API, graphqlOperation} from 'aws-amplify';
-import { Observable } from 'zen-observable-ts';
-import { onCreateMessage } from '../../graphql/subscriptions';
-import { listMessages } from '../../graphql/queries';
-import { createMessage } from '../../graphql/mutations';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import styles from '../../styles/Home.module.css';
-import MessageBox from '../../components/MessageBox';
+import { useEffect, useRef, useState } from 'react';
+import { Auth } from 'aws-amplify';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
+import { CognitoUser } from '@aws-amplify/auth';
+import { Alert, Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import AppBar from '../../components/AppBar';
+import { IUser } from '../../interfaces/IUser';
+import { useNavigate } from 'react-router-dom';
 
-class Message {
-    id!: string;
-    owner!: string;
-    message!: string;
-}
+const Home = () => {
+  const [authState, setAuthState] = useState();
+  const [input, setInput] = useState('');
+  const [user, setUser] = useState<CognitoUser>();
+  const [attributes, setAttributes] =
+    useState<{ Name: string; Value: string }[]>();
+  const [showAlert, setShowAlert] = useState(false);
+  const usernameInput = useRef<HTMLInputElement>();
+  const navigate = useNavigate();
 
-function Home() {
-    const [stateMessages, setStateMessages] = useState(Array<Message>());
-    const [messageText, setMessageText] = useState("");
-    const [user, setUser] = useState(null);
+  useEffect(() => {
+    return onAuthUIStateChange((nextAuthState: any, authData: any) => {
+      setAuthState(nextAuthState);
+      setUser(authData);
+    });
+  }, []);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try{
-                const amplifyUser = await Auth.currentAuthenticatedUser();
-                setUser(amplifyUser);
-            }catch(err){
-                setUser(null);
-            }
-        }
-        
-        fetchUser();
-
-        const subscription = API.graphql(graphqlOperation(onCreateMessage)) as Observable<object>;
-        if(subscription instanceof Observable){
-            const a = subscription.subscribe({
-                next: ({value}: any) => {
-                    setStateMessages((stateMessages) => [...stateMessages, value.data.onCreateMessage]);
-                },
-                error: (error) => console.warn(error),
-            });
-            console.log(a);
-        }
-    }, []);
-
-    useEffect(() => {
-        async function getMessages(){
-            try {
-                const messageReq: any = await API.graphql({
-                    query: listMessages,
-                    authMode: 'AMAZON_COGNITO_USER_POOLS',
-                });
-                setStateMessages([...messageReq.data.listMessages.items]);
-            }catch(error){
-                console.log(error);
-            }
-        }
-        getMessages();
-    }, [user]);
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        setMessageText("");
-
-        if(user){
-            const input = {
-                message: messageText,
-                owner: (user as any).username,
-            };
-    
-            try {
-                await API.graphql({
-                    authMode: 'AMAZON_COGNITO_USER_POOLS',
-                    query: createMessage,
-                    variables: { input },
-                });
-            }catch(error){
-                console.error(error);
-            }
-        }
-    };
-
-    if(user){
-        return (
-            <div className={styles.background}>
-                <div className={styles.container}>
-                    <h1 className={styles.title}>AWS Amplify Live Chat</h1>
-                    <div className={styles.chatbox}>
-                        {
-                            stateMessages.sort((a: any,b: any) => b.createdAt.localeCompare(a.createdAt))
-                            .map(message => 
-                                <MessageBox 
-                                message={message} 
-                                isMe={(user as any).username === message.owner} 
-                                key={message.id}/>
-                            )
-                        }
-                    </div>
-                    <div className={styles.formContainer}>
-                        <form onSubmit={handleSubmit} className={styles.formBase}>
-                            <input
-                                type="text"
-                                id="message"
-                                autoFocus
-                                required
-                                value={messageText}
-                                onChange={(event) => setMessageText(event.target.value)}
-                                placeholder="Type your message here..."
-                                className={styles.textBox}
-                            />
-                            <button style={{marginLeft: "8px"}}>Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        );
-    }else{
-        return <div>Loading...</div>;
+  const modifyUsername = async () => {
+    if (usernameInput) {
+      const result = await Auth.updateUserAttributes(user, {
+        preferred_username: input
+      });
+      setShowAlert(true);
     }
-}
+  };
 
-export default withAuthenticator(Home);
+  useEffect(() => {
+    if (authState === AuthState.SignedIn && user) {
+      user?.getUserAttributes((_error, attrs) => {
+        const preferredUsername = attrs?.find(
+          (a) => a.Name === 'preferred_username'
+        );
+        if (preferredUsername) setInput(preferredUsername!.Value);
+        setAttributes(attrs);
+      });
+    }
+  }, [user, authState]);
+
+  return (
+    <AmplifyAuthenticator>
+      <AmplifySignUp
+        slot="sign-up"
+        formFields={[{ type: 'username' }, { type: 'password' }]}
+      />
+      <Grid container justifyContent="center" spacing={2}>
+        <Grid item xs={12}>
+          {authState === AuthState.SignedIn && user && attributes ? (
+            <AppBar
+              {...({
+                attributes: attributes,
+                username: user.getUsername()
+              } as unknown as IUser)}
+            />
+          ) : (
+            <div>Loading...</div>
+          )}
+        </Grid>
+        <Grid item xs={6}>
+          <Grid item container spacing={3}>
+            <Grid item justifyContent="center" xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Preferred Username"
+                variant="outlined"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              ></TextField>
+            </Grid>
+            <Grid item justifyContent="center" xs={12}>
+              <Button variant="contained" onClick={modifyUsername}>
+                <Typography color="common.white">
+                Proceed to Chat Room
+                </Typography>
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Snackbar
+          open={showAlert}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          onClose={(event, reason) => {
+            setShowAlert(false);
+            navigate('/chatroom');
+          }}
+        >
+          <Alert variant="outlined" severity="success">
+            This is a success message!
+          </Alert>
+        </Snackbar>
+      </Grid>
+    </AmplifyAuthenticator>
+  );
+};
+
+export default Home;

@@ -7,6 +7,7 @@ export const onCreateMessage = /* GraphQL */ `
     onCreateMessage {
       id
       owner
+      preferredUsername
       message
       createdAt
       updatedAt
@@ -18,6 +19,7 @@ export const onUpdateMessage = /* GraphQL */ `
     onUpdateMessage {
       id
       owner
+      preferredUsername
       message
       createdAt
       updatedAt
@@ -29,6 +31,7 @@ export const onDeleteMessage = /* GraphQL */ `
     onDeleteMessage {
       id
       owner
+      preferredUsername
       message
       createdAt
       updatedAt
