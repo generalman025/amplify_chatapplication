@@ -17,6 +17,7 @@ Amplify Params - DO NOT EDIT */
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const AWS = require('aws-sdk')
 
 // declare a new express app
 var app = express()
@@ -30,14 +31,18 @@ app.use(function(req, res, next) {
   next()
 });
 
-
-/**********************
- * Example get method *
- **********************/
-
 app.get('/users', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+  const serviceProvider = new AWS.CognitoIdentityServiceProvider()
+  var params = {
+    UserPoolId: process.env.AUTH_AMPLIFYCHATAPP_USERPOOLID
+  };
+  
+  serviceProvider.listUsers(params, function(err, data) {
+    if (err) {
+      return res.status(500).json(err)
+    }
+    res.json({users: data.Users});
+  });
 });
 
 app.listen(3000, function() {
