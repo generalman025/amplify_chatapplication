@@ -64,8 +64,10 @@ function ChatRoom() {
     const subscription = API.graphql(
       graphqlOperation(onCreateMessage)
     ) as Observable<object>;
+    let unsubscribe;
+
     if (subscription instanceof Observable) {
-      subscription.subscribe({
+      const sub = subscription.subscribe({
         next: (response: { value: { data: OnCreateMessageSubscription } }) => {
           setStateMessages((stateMessages) => [
             ...stateMessages,
@@ -74,7 +76,12 @@ function ChatRoom() {
         },
         error: (error) => console.warn(error)
       });
+
+      unsubscribe = () => {
+        sub.unsubscribe();
+      };
     }
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
@@ -122,8 +129,6 @@ function ChatRoom() {
     }
   }, [user, authState]);
 
-  console.log(allUsers);
-
   if (user) {
     return (
       <AmplifyAuthenticator>
@@ -141,8 +146,8 @@ function ChatRoom() {
             )}
           </Grid>
           <Grid item xs={12}>
-            <div>
-              <div>
+            <div className={styles.background}>
+              <div className={styles.container}>
                 <div className={styles.chatbox}>
                   {stateMessages
                     .sort((a: Message, b: Message) =>
