@@ -3,7 +3,15 @@ import { Auth } from 'aws-amplify';
 import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
 import { CognitoUser } from '@aws-amplify/auth';
-import { Alert, Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Button,
+  Grid,
+  Paper,
+  Snackbar,
+  TextField,
+  Typography
+} from '@mui/material';
 import AppBar from '../../components/AppBar';
 import { IUser } from '../../interfaces/IUser';
 import { useNavigate } from 'react-router-dom';
@@ -66,24 +74,26 @@ const Home = () => {
           )}
         </Grid>
         <Grid item xs={6}>
-          <Grid item container spacing={3}>
-            <Grid item justifyContent="center" xs={12}>
-              <TextField
-                id="outlined-basic"
-                label="Preferred Username"
-                variant="outlined"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              ></TextField>
+          <Paper elevation={1}>
+            <Grid item container spacing={3}>
+              <Grid item justifyContent="center" xs={12}>
+                <TextField
+                  id="outlined-basic"
+                  label="Preferred Username"
+                  variant="outlined"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                ></TextField>
+              </Grid>
+              <Grid item justifyContent="center" xs={12}>
+                <Button variant="contained" onClick={modifyUsername}>
+                  <Typography color="common.white">
+                    Proceed to Chat Room
+                  </Typography>
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item justifyContent="center" xs={12}>
-              <Button variant="contained" onClick={modifyUsername}>
-                <Typography color="common.white">
-                Proceed to Chat Room
-                </Typography>
-              </Button>
-            </Grid>
-          </Grid>
+          </Paper>
         </Grid>
         <Snackbar
           open={showAlert}
