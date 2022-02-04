@@ -13,7 +13,7 @@ export default function RequireAuth() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const user = (await Auth.currentAuthenticatedUser()) as CognitoUser;
+        const user = await Auth.currentAuthenticatedUser();
         if (user) {
           setIsAuth(true);
           setUser(user);
