@@ -31,7 +31,7 @@ export class cdkStack extends cdk.Stack {
         ]
       );
 
-    const apiArn = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput);
+    const apiId = cdk.Fn.ref(dependencies.api.amplifychatapp.GraphQLAPIIdOutput);
 
     const cfnWebACL = new CfnWebACL(this, "WebACL", {
       defaultAction: {
@@ -45,11 +45,11 @@ export class cdkStack extends cdk.Stack {
       },
     });
     
-    // const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
-    //   resourceArn: apiArn,
-    //   webAclArn: cfnWebACL.attrArn
-    // });
+    const cfnWebACLAssociation = new CfnWebACLAssociation(this, 'WebACLAssociation', {
+      resourceArn: `arn:aws:appsync:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:apis/${apiId}`,
+      webAclArn: cfnWebACL.attrArn
+    });
 
-    // cfnWebACLAssociation.node.addDependency(cfnWebACL);
+    cfnWebACLAssociation.node.addDependency(cfnWebACL);
   }
 }
