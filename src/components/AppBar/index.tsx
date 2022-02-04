@@ -17,7 +17,7 @@ export default function AppBar() {
   const { callAlert } = useContext(UtilContext);
 
   const handleLogout = useCallback(async () => {
-    await Auth.signOut({ global: true });
+    await Auth.signOut();
     navigate('/');
   }, []);
 
