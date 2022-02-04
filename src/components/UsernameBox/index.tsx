@@ -4,21 +4,12 @@ import { AuthState } from '@aws-amplify/ui-components';
 import { Paper, Grid, TextField, Button, Typography } from '@mui/material';
 import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
+import { UtilContext } from '../../context/UtilContext';
 
-type UsernameBoxProps = {
-  callAlert: (
-    showAlert: boolean,
-    alertMessage: string,
-    severity: SeverityType
-  ) => void;
-};
-
-export default function UsernameBox({
-  callAlert
-}: UsernameBoxProps) {
+export default function UsernameBox() {
   const [input, setInput] = useState('');
-  const [, setAttributes] = useState<{ Name: string; Value: string }[]>();
-  const { user, authState } = useContext(AuthContext);
+  const { user, authState, setUsername } = useContext(AuthContext);
+  const { callAlert } = useContext(UtilContext);
 
   const modifyUsername = async () => {
     if (!input || input === '') {
@@ -34,6 +25,7 @@ export default function UsernameBox({
       await Auth.updateUserAttributes(user, {
         preferred_username: input
       });
+      setUsername(input);
 
       callAlert(true, 'Redirecting to Chat Room...', SeverityType.success);
     } catch (error) {
@@ -50,7 +42,6 @@ export default function UsernameBox({
             (a) => a.Name === 'preferred_username'
           );
           if (preferredUsername) setInput(preferredUsername.Value);
-          setAttributes(attrs);
         });
       } catch (error) {
         if (error instanceof Error)

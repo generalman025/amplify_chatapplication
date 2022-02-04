@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { AuthState } from '@aws-amplify/ui-components';
 import { AppBar as MuiAppBar } from '@mui/material';
@@ -9,31 +9,28 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
+import { UtilContext } from '../../context/UtilContext';
 
-type AppBarProps = {
-  callAlert: (
-    showAlert: boolean,
-    alertMessage: string,
-    severity: SeverityType
-  ) => void;
-};
-
-export default function AppBar({ callAlert }: AppBarProps) {
+export default function AppBar() {
   const navigate = useNavigate();
-  const [attributes, setAttributes] =
-    useState<{ Name: string; Value: string }[]>();
-  const { user, authState } = useContext(AuthContext);
+  const { user, authState, username, setUsername } = useContext(AuthContext);
+  const { callAlert } = useContext(UtilContext);
 
-  const handleLogout = async () => {
-    await Auth.signOut();
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut({ global: true });
     navigate('/');
-  };
+  }, []);
 
   useEffect(() => {
     if (authState === AuthState.SignedIn && user) {
       try {
         user?.getUserAttributes((_error, attrs) => {
-          setAttributes(attrs);
+          if (attrs) {
+            const attribute = attrs.find((attr) => attr.Name === 'preferred_username');
+            if (attribute) {
+              setUsername(attribute.Value)
+            }
+          }
         });
       } catch (error) {
         if (error instanceof Error)
@@ -52,13 +49,11 @@ export default function AppBar({ callAlert }: AppBarProps) {
             color="common.white"
             sx={{ flexGrow: 1 }}
           >
-            {authState === AuthState.SignedIn && user && attributes
-              ? `Hello, ${
-                  attributes.find((a) => a.Name === 'preferred_username')?.Value
-                }`
+            {authState === AuthState.SignedIn && user && username
+              ? `Hello, ${username}`
               : ''}
           </Typography>
-          <Button color="inherit" onClick={handleLogout}>
+          <Button type='submit' onClick={() => handleLogout()} color="inherit">
             <Typography color="common.white">Logout</Typography>
           </Button>
         </Toolbar>

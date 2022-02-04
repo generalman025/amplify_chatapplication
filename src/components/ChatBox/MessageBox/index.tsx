@@ -9,6 +9,7 @@ export default function MessageBox({ message, isMe }: IMessage) {
       }
     >
       <p className={styles.senderText}>{message.preferredUsername}</p>
+      <p className={styles.senderText}>{message.createdAt}</p>
       <div className={isMe ? styles.sendMessage : styles.receivedMessage}>
         <p>{message.message}</p>
       </div>

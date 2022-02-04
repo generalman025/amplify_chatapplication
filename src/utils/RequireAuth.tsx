@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { useContext, useEffect, useState } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from '../context/AuthContext';
 
 export default function RequireAuth() {
   const location = useLocation();
@@ -13,7 +13,7 @@ export default function RequireAuth() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const user = await Auth.currentAuthenticatedUser() as CognitoUser;
+        const user = (await Auth.currentAuthenticatedUser()) as CognitoUser;
         if (user) {
           setIsAuth(true);
           setUser(user);
@@ -22,7 +22,7 @@ export default function RequireAuth() {
       } catch (error) {
         setIsLoading(false);
       }
-    }
+    };
 
     checkAuth();
   }, []);

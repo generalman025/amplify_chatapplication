@@ -7,7 +7,9 @@ import RequireAuth from './utils/RequireAuth';
 import { useState } from 'react';
 import { AuthState } from '@aws-amplify/ui-components';
 import { AuthContext } from './context/AuthContext';
+import { UtilContext } from './context/UtilContext';
 import { CognitoUser } from '@aws-amplify/auth';
+import { SeverityType } from './components/Alert';
 
 const theme = createTheme({
   palette: {
@@ -21,23 +23,49 @@ function App() {
   const [user, setUser] = useState<CognitoUser | null>(null);
   const [username, setUsername] = useState('');
   const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
+  const [severity, setSeverity] = useState(SeverityType.success);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const callAlert = (
+    showAlert: boolean,
+    alertMessage: string,
+    severity: SeverityType
+  ) => {
+    setShowAlert(showAlert);
+    setAlertMessage(alertMessage);
+    setSeverity(severity);
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <AuthContext.Provider value={{
-        user,
-        username,
-        authState,
-        setUser,
-        setUsername,
-        setAuthState
-      }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/chatroom" element={<ChatRoom />} />
-          </Route>
-        </Routes>
+      <AuthContext.Provider
+        value={{
+          user,
+          username,
+          authState,
+          setUser,
+          setUsername,
+          setAuthState
+        }}
+      >
+        <UtilContext.Provider
+          value={{
+            severity,
+            alertMessage,
+            showAlert,
+            setSeverity,
+            setAlertMessage,
+            setShowAlert,
+            callAlert
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/chatroom" element={<ChatRoom />} />
+            </Route>
+          </Routes>
+        </UtilContext.Provider>
       </AuthContext.Provider>
     </ThemeProvider>
   );

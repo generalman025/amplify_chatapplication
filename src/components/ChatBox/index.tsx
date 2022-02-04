@@ -14,19 +14,13 @@ import MessageBox from './MessageBox';
 import { SeverityType } from '../Alert';
 import styles from '../../styles/Home.module.css';
 import { AuthContext } from '../../context/AuthContext';
+import { UtilContext } from '../../context/UtilContext';
 
-type ChatBoxProps = {
-  callAlert: (
-    showAlert: boolean,
-    alertMessage: string,
-    severity: SeverityType
-  ) => void;
-};
-
-export default function ChatBox({ callAlert }: ChatBoxProps) {
+export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
   const [message, setMessage] = useState('');
-  const {user} = useContext(AuthContext);
+  const { user, username } = useContext(AuthContext);
+  const { callAlert } = useContext(UtilContext);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -75,8 +69,8 @@ export default function ChatBox({ callAlert }: ChatBoxProps) {
     if (user) {
       const input = {
         message,
-        owner: (user as any).username,
-        preferredUsername: (user as any).attributes.preferred_username
+        owner: user.getUsername(),
+        preferredUsername: username
       };
 
       try {
@@ -99,7 +93,7 @@ export default function ChatBox({ callAlert }: ChatBoxProps) {
             .map((msg) => (
               <MessageBox
                 message={msg}
-                isMe={(user as any).username === msg.owner}
+                isMe={user?.getUsername() === msg.owner}
                 key={msg.id}
               />
             ))}
