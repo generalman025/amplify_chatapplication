@@ -47,7 +47,11 @@ const Home = () => {
       />
       <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
-            <AppBar authState={authState} user={user as unknown as CognitoUser} callAlert={callAlert}/>
+          <AppBar
+            authState={authState}
+            user={user as unknown as CognitoUser}
+            callAlert={callAlert}
+          />
         </Grid>
         <Grid margin={5} item xs={3}>
           <UsernameBox

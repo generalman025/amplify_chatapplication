@@ -21,8 +21,7 @@ export default function UsernameBox({
   callAlert
 }: UsernameBoxProps) {
   const [input, setInput] = useState('');
-  const [, setAttributes] =
-    useState<{ Name: string; Value: string }[]>();
+  const [, setAttributes] = useState<{ Name: string; Value: string }[]>();
 
   const modifyUsername = async () => {
     if (!input || input === '') {
@@ -40,9 +39,9 @@ export default function UsernameBox({
       });
 
       callAlert(true, 'Redirecting to Chat Room...', SeverityType.success);
-    }
-    catch (error) {
-      if (error instanceof Error) callAlert(true, error.message, SeverityType.error);
+    } catch (error) {
+      if (error instanceof Error)
+        callAlert(true, error.message, SeverityType.error);
     }
   };
 
@@ -56,9 +55,9 @@ export default function UsernameBox({
           if (preferredUsername) setInput(preferredUsername.Value);
           setAttributes(attrs);
         });
-      }
-      catch (error) {
-        if (error instanceof Error) callAlert(true, error.message, SeverityType.error);
+      } catch (error) {
+        if (error instanceof Error)
+          callAlert(true, error.message, SeverityType.error);
       }
     }
   }, [user, authState]);

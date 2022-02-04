@@ -13,12 +13,17 @@ import { SeverityType } from '../Alert';
 type AppBarProps = {
   authState: AuthState;
   user: CognitoUser;
-  callAlert: (showAlert: boolean, alertMessage: string, severity: SeverityType) => void;
+  callAlert: (
+    showAlert: boolean,
+    alertMessage: string,
+    severity: SeverityType
+  ) => void;
 };
 
-export default function AppBar({ authState, user, callAlert}: AppBarProps) {
+export default function AppBar({ authState, user, callAlert }: AppBarProps) {
   const navigate = useNavigate();
-  const [attributes, setAttributes] = useState<{ Name: string; Value: string }[]>();
+  const [attributes, setAttributes] =
+    useState<{ Name: string; Value: string }[]>();
 
   const handleLogout = async () => {
     await Auth.signOut();
@@ -32,7 +37,8 @@ export default function AppBar({ authState, user, callAlert}: AppBarProps) {
           setAttributes(attrs);
         });
       } catch (error) {
-        if (error instanceof Error) callAlert(true, error.message, SeverityType.error);
+        if (error instanceof Error)
+          callAlert(true, error.message, SeverityType.error);
       }
     }
   }, [user, authState]);
@@ -47,13 +53,11 @@ export default function AppBar({ authState, user, callAlert}: AppBarProps) {
             color="common.white"
             sx={{ flexGrow: 1 }}
           >
-            {authState === AuthState.SignedIn && user && attributes ? (
-              `Hello, ${attributes.find((a) => a.Name === 'preferred_username')
-                ?.Value
-              }`
-            ) : (
-              "Loading..."
-            )}
+            {authState === AuthState.SignedIn && user && attributes
+              ? `Hello, ${
+                  attributes.find((a) => a.Name === 'preferred_username')?.Value
+                }`
+              : ''}
           </Typography>
           <Button color="inherit" onClick={handleLogout}>
             <Typography color="common.white">Logout</Typography>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { Grid } from '@mui/material';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
@@ -8,8 +8,10 @@ import AppBar from '../../components/AppBar';
 import ChatBox from '../../components/ChatBox';
 import UserListsBox from '../../components/UserListsBox';
 import Alert, { SeverityType } from '../../components/Alert';
+import { useNavigate } from 'react-router-dom';
 
-export default function ChatRoom() {
+function ChatRoom() {
+  const navigate = useNavigate();
   const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
   const [user, setUser] = useState<CognitoUser>();
 
@@ -18,18 +20,28 @@ export default function ChatRoom() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    return onAuthUIStateChange((nextAuthState: any,) => {
+    return onAuthUIStateChange((nextAuthState: any) => {
       setAuthState(nextAuthState);
     });
   }, []);
 
   useEffect(() => {
+
     const fetchUser = async () => {
       try {
-        const amplifyUser = await Auth.currentAuthenticatedUser();
+        const amplifyUser = await Auth.currentAuthenticatedUser() as CognitoUser;
+        amplifyUser.getUserAttributes((_error, attrs) => {
+          const preferredUsername = attrs?.find(
+            (a) => a.Name === 'preferred_username'
+          );
+          if (preferredUsername) setUser(amplifyUser);
+          else navigate('/');
+        });
         setUser(amplifyUser);
       } catch (error) {
-        if (error instanceof Error) callAlert(true, error.message, SeverityType.error);
+        if (error instanceof Error)
+          callAlert(true, error.message, SeverityType.error);
+          navigate('/');
       }
     };
 
@@ -47,10 +59,13 @@ export default function ChatRoom() {
   };
 
   return (
-    <AmplifyAuthenticator>
       <Grid container justifyContent="center">
         <Grid item xs={12}>
-          <AppBar authState={authState} user={user as unknown as CognitoUser} callAlert={callAlert} />
+          <AppBar
+            authState={authState}
+            user={user as unknown as CognitoUser}
+            callAlert={callAlert}
+          />
         </Grid>
         <Grid container>
           <Grid item xs={3} padding={3}>
@@ -68,6 +83,7 @@ export default function ChatRoom() {
           onSuccess={() => true}
         />
       </Grid>
-    </AmplifyAuthenticator>
   );
 }
+
+export default ChatRoom;
