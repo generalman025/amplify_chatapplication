@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import { CognitoUser } from '@aws-amplify/auth';
 import { AuthContext } from '../context/AuthContext';
 
 export default function RequireAuth() {

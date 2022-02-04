@@ -15,6 +15,7 @@ import { SeverityType } from '../Alert';
 import styles from '../../styles/Home.module.css';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
+import { Grid } from '@mui/material';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
@@ -83,9 +84,8 @@ export default function ChatBox() {
   };
 
   return (
-    <div>
-      <div>
-        <div className={styles.chatbox}>
+    <Grid container>
+      <div className={styles.chatbox}>
           {messages
             .sort((prev: Message, next: Message) =>
               next.createdAt.localeCompare(prev.createdAt)
@@ -105,7 +105,6 @@ export default function ChatBox() {
             handleSubmit={handleSubmit}
           />
         </div>
-      </div>
-    </div>
+    </Grid>
   );
 }
