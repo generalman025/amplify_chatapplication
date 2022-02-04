@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
-import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
+import { onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Grid } from '@mui/material';
 import AppBar from '../../components/AppBar';
 import Alert, { SeverityType } from '../../components/Alert';
 import UsernameBox from '../../components/UsernameBox';
-import { CognitoUser } from '@aws-amplify/auth';
+import { AuthContext } from '../../context/AuthContext';
 
 const Home = () => {
-  const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
-  const [user, setUser] = useState<CognitoUser>();
-
   const [severity, setSeverity] = useState(SeverityType.success);
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-
+  
   const navigate = useNavigate();
+  const { setUser, setAuthState } = useContext(AuthContext);
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState: any, authData: any) => {
@@ -48,15 +46,11 @@ const Home = () => {
       <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
           <AppBar
-            authState={authState}
-            user={user as unknown as CognitoUser}
             callAlert={callAlert}
           />
         </Grid>
         <Grid margin={5} item xs={3}>
           <UsernameBox
-            authState={authState}
-            user={user as unknown as CognitoUser}
             callAlert={callAlert}
           />
         </Grid>

@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { CognitoUser } from '@aws-amplify/auth';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
 import { onCreateMessage } from '../../graphql/subscriptions';
@@ -14,9 +13,9 @@ import MessageInput from './MessageInput';
 import MessageBox from './MessageBox';
 import { SeverityType } from '../Alert';
 import styles from '../../styles/Home.module.css';
+import { AuthContext } from '../../context/AuthContext';
 
 type ChatBoxProps = {
-  user: CognitoUser;
   callAlert: (
     showAlert: boolean,
     alertMessage: string,
@@ -24,9 +23,10 @@ type ChatBoxProps = {
   ) => void;
 };
 
-export default function ChatBox({ user, callAlert }: ChatBoxProps) {
+export default function ChatBox({ callAlert }: ChatBoxProps) {
   const [messages, setMessages] = useState(Array<Message>());
   const [message, setMessage] = useState('');
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     const getMessages = async () => {

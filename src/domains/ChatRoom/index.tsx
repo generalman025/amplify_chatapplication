@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import { useContext, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { Grid } from '@mui/material';
-import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
+import { onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { CognitoUser } from '@aws-amplify/auth';
 import AppBar from '../../components/AppBar';
 import ChatBox from '../../components/ChatBox';
 import UserListsBox from '../../components/UserListsBox';
 import Alert, { SeverityType } from '../../components/Alert';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 function ChatRoom() {
   const navigate = useNavigate();
-  const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
-  const [user, setUser] = useState<CognitoUser>();
+  const {setAuthState, setUser} = useContext(AuthContext);
 
   const [severity, setSeverity] = useState(SeverityType.success);
   const [alertMessage, setAlertMessage] = useState('');
@@ -62,17 +61,15 @@ function ChatRoom() {
       <Grid container justifyContent="center">
         <Grid item xs={12}>
           <AppBar
-            authState={authState}
-            user={user as unknown as CognitoUser}
             callAlert={callAlert}
           />
         </Grid>
         <Grid container>
           <Grid item xs={3} padding={3}>
-            <UserListsBox user={user!} callAlert={callAlert} />
+            <UserListsBox callAlert={callAlert} />
           </Grid>
           <Grid item xs={9} padding={3}>
-            <ChatBox user={user!} callAlert={callAlert} />
+            <ChatBox callAlert={callAlert} />
           </Grid>
         </Grid>
         <Alert

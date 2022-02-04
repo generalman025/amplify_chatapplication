@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { CognitoUser } from '@aws-amplify/auth';
 import { AuthState } from '@aws-amplify/ui-components';
 import { Paper, Grid, TextField, Button, Typography } from '@mui/material';
 import { SeverityType } from '../Alert';
+import { AuthContext } from '../../context/AuthContext';
 
 type UsernameBoxProps = {
-  authState: AuthState;
-  user: CognitoUser;
   callAlert: (
     showAlert: boolean,
     alertMessage: string,
@@ -16,12 +14,11 @@ type UsernameBoxProps = {
 };
 
 export default function UsernameBox({
-  authState,
-  user,
   callAlert
 }: UsernameBoxProps) {
   const [input, setInput] = useState('');
   const [, setAttributes] = useState<{ Name: string; Value: string }[]>();
+  const { user, authState } = useContext(AuthContext);
 
   const modifyUsername = async () => {
     if (!input || input === '') {

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { API } from 'aws-amplify';
-import { CognitoUser } from '@aws-amplify/auth';
 import { IUser } from '../../interfaces/IUser';
 import { SeverityType } from '../Alert';
+import { AuthContext } from '../../context/AuthContext';
 
 type ChatBoxProps = {
-  user: CognitoUser;
   callAlert: (
     showAlert: boolean,
     alertMessage: string,
@@ -13,8 +12,9 @@ type ChatBoxProps = {
   ) => void;
 };
 
-export default function UserListsBox({ user, callAlert }: ChatBoxProps) {
+export default function UserListsBox({ callAlert }: ChatBoxProps) {
   const [allUsers, setAllUsers] = useState<IUser[]>();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchAllUsers = async () => {
