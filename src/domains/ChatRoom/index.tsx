@@ -14,12 +14,6 @@ function ChatRoom() {
   const { severity, alertMessage, showAlert, setShowAlert } =
     useContext(UtilContext);
 
-  // useEffect(() => {
-  //   return onAuthUIStateChange((nextAuthState: any) => {
-  //     setAuthState(nextAuthState);
-  //   });
-  // }, []);
-
   useEffect(() => {
     if(!username || username === ''){
       navigate('/');

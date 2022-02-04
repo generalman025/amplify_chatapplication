@@ -31,14 +31,14 @@ export default function UserListsBox() {
   return (
     <div>
       {allUsers &&
-        allUsers.map((u: IUser) => {
-          const preferredUsername = u.Attributes.find(
-            (u) => u.Name === 'preferred_username'
+        allUsers.map((iu: IUser) => {
+          const preferredUsername = iu.Attributes.find(
+            usr => usr.Name === 'preferred_username'
           );
-          const email = u.Attributes.find((u) => u.Name === 'email');
+          const email = iu.Attributes.find(usr => usr.Name === 'email');
           return (
-            <div key={u.Username}>
-              {u.Username !== user?.getUsername()
+            <div key={iu.Username}>
+              {iu.Username !== user?.getUsername()
                 ? `${preferredUsername?.Value} / ${email?.Value}`
                 : 'You'}
             </div>

@@ -44,8 +44,8 @@ export default function ChatBox() {
     if (subscription instanceof Observable) {
       const sub = subscription.subscribe({
         next: (response: { value: { data: OnCreateMessageSubscription } }) => {
-          setMessages((messages) => [
-            ...messages,
+          setMessages((msgs) => [
+            ...msgs,
             response.value.data.onCreateMessage as Message
           ]);
         },

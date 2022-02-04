@@ -27,13 +27,13 @@ function App() {
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const callAlert = (
-    showAlert: boolean,
-    alertMessage: string,
-    severity: SeverityType
+    showAlertParam: boolean,
+    alertMessageParam: string,
+    severityParam: SeverityType
   ) => {
-    setShowAlert(showAlert);
-    setAlertMessage(alertMessage);
-    setSeverity(severity);
+    setShowAlert(showAlertParam);
+    setAlertMessage(alertMessageParam);
+    setSeverity(severityParam);
   };
 
   return (
