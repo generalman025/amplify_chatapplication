@@ -1,5 +1,5 @@
-import { IMessage } from '../../interfaces/IMessage';
-import styles from '../../styles/Message.module.css';
+import { IMessage } from '../../../interfaces/IMessage';
+import styles from '../../../styles/Message.module.css';
 
 export default function MessageBox({ message, isMe }: IMessage) {
   return (

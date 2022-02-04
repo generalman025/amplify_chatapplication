@@ -1,9 +1,9 @@
 export interface IUser {
-  attributes: [
+  Attributes: [
     {
       Name: string;
       Value: string;
     }
   ];
-  username: string;
+  Username: string;
 }
