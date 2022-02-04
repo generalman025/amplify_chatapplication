@@ -20,13 +20,15 @@ var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'
 const AWS = require('aws-sdk')
 
 // declare a new express app
+let helmet = require("helmet")
 var app = express()
+app.use(helmet.hidePoweredBy())
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "https://chatapp.g025app.com, https://chatapp-dev.g025.com")
   res.header("Access-Control-Allow-Headers", "*")
   next()
 });

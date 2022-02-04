@@ -1,5 +1,5 @@
-import { IMessage } from '../../interfaces/IMessage';
-import styles from '../../styles/Message.module.css';
+import { IMessage } from '../../../interfaces/IMessage';
+import styles from '../../../styles/Message.module.css';
 
 export default function MessageBox({ message, isMe }: IMessage) {
   return (
@@ -9,6 +9,7 @@ export default function MessageBox({ message, isMe }: IMessage) {
       }
     >
       <p className={styles.senderText}>{message.preferredUsername}</p>
+      <p className={styles.senderText}>{message.createdAt}</p>
       <div className={isMe ? styles.sendMessage : styles.receivedMessage}>
         <p>{message.message}</p>
       </div>

@@ -1,58 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CognitoUser } from '@aws-amplify/auth';
 import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
-import { CognitoUser } from '@aws-amplify/auth';
-import {
-  Alert,
-  Button,
-  Grid,
-  Paper,
-  Snackbar,
-  TextField,
-  Typography
-} from '@mui/material';
+import { Grid } from '@mui/material';
 import AppBar from '../../components/AppBar';
-import { IUser } from '../../interfaces/IUser';
-import { useNavigate } from 'react-router-dom';
+import Alert from '../../components/Alert';
+import UsernameBox from '../../components/UsernameBox';
+import { AuthContext } from '../../context/AuthContext';
+import { UtilContext } from '../../context/UtilContext';
 
 const Home = () => {
-  const [authState, setAuthState] = useState();
-  const [input, setInput] = useState('');
-  const [user, setUser] = useState<CognitoUser>();
-  const [attributes, setAttributes] =
-    useState<{ Name: string; Value: string }[]>();
-  const [showAlert, setShowAlert] = useState(false);
-  const usernameInput = useRef<HTMLInputElement>();
   const navigate = useNavigate();
+  const { setUser, setAuthState } = useContext(AuthContext);
+  const { severity, alertMessage, showAlert, setShowAlert } =
+    useContext(UtilContext);
 
   useEffect(() => {
-    return onAuthUIStateChange((nextAuthState: any, authData: any) => {
+    return onAuthUIStateChange((nextAuthState: AuthState, authData: object|undefined) => {
       setAuthState(nextAuthState);
-      setUser(authData);
+      if(authData) setUser(authData as CognitoUser);
     });
   }, []);
 
-  const modifyUsername = async () => {
-    if (usernameInput) {
-      const result = await Auth.updateUserAttributes(user, {
-        preferred_username: input
-      });
-      setShowAlert(true);
-    }
+  const proceedToChatRoom = () => {
+    navigate('/chatroom');
   };
-
-  useEffect(() => {
-    if (authState === AuthState.SignedIn && user) {
-      user?.getUserAttributes((_error, attrs) => {
-        const preferredUsername = attrs?.find(
-          (a) => a.Name === 'preferred_username'
-        );
-        if (preferredUsername) setInput(preferredUsername!.Value);
-        setAttributes(attrs);
-      });
-    }
-  }, [user, authState]);
 
   return (
     <AmplifyAuthenticator>
@@ -62,52 +35,18 @@ const Home = () => {
       />
       <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
-          {authState === AuthState.SignedIn && user && attributes ? (
-            <AppBar
-              {...({
-                attributes: attributes,
-                username: user.getUsername()
-              } as unknown as IUser)}
-            />
-          ) : (
-            <div>Loading...</div>
-          )}
+          <AppBar />
         </Grid>
-        <Grid item xs={6}>
-          <Paper elevation={1}>
-            <Grid item container spacing={3}>
-              <Grid item justifyContent="center" xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Preferred Username"
-                  variant="outlined"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                ></TextField>
-              </Grid>
-              <Grid item justifyContent="center" xs={12}>
-                <Button variant="contained" onClick={modifyUsername}>
-                  <Typography color="common.white">
-                    Proceed to Chat Room
-                  </Typography>
-                </Button>
-              </Grid>
-            </Grid>
-          </Paper>
+        <Grid margin={5} item xs={3}>
+          <UsernameBox />
         </Grid>
-        <Snackbar
-          open={showAlert}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={(event, reason) => {
-            setShowAlert(false);
-            navigate('/chatroom');
-          }}
-        >
-          <Alert variant="outlined" severity="success">
-            This is a success message!
-          </Alert>
-        </Snackbar>
+        <Alert
+          showAlert={showAlert}
+          alertMessage={alertMessage}
+          severity={severity}
+          setShowAlert={setShowAlert}
+          onSuccess={proceedToChatRoom}
+        />
       </Grid>
     </AmplifyAuthenticator>
   );
