@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  unit test:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,8 +16,5 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
-  test:
-    runs-on: ubuntu-latest
-    steps:
       - run: npm run lint
       - run: npm test
