@@ -14,7 +14,7 @@ test('Should render a textbox', () => {
 
 test('Should render a button', () => {
     render(<UsernameBox />);
-    const linkElement = screen.getByText(/Proceed to Chat RoomX/i);
+    const linkElement = screen.getByText(/Proceed to Chat Room/i);
     expect(linkElement).toBeInTheDocument();
 });
 
