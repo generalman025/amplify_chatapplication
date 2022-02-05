@@ -21,11 +21,17 @@ frontend:
     paths:
       - node_modules/**/*
 test:
-  phases:
-    tests:
-      commands:
-        - npm run test
   artifacts:
     baseDirectory: build
     files:
       - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  phases:
+    preTest:
+      commands:
+        - npm run build
+    test:
+      commands:
+        - npm run test
