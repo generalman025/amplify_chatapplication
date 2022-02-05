@@ -4,12 +4,8 @@ import {createTheme} from '@mui/material/styles';
 import ChatRoom from './domains/ChatRoom';
 import Home from './domains/Home';
 import RequireAuth from './utils/RequireAuth';
-import { useState } from 'react';
-import { AuthState } from '@aws-amplify/ui-components';
-import { AuthContext } from './context/AuthContext';
-import { UtilContext } from './context/UtilContext';
-import { CognitoUser } from '@aws-amplify/auth';
-import { SeverityType } from './components/Alert';
+import { AuthContextProvider } from './context/AuthContext';
+import { UtilContextProvider } from './context/UtilContext';
 import NotFound from './domains/404';
 
 const theme = createTheme({
@@ -21,45 +17,11 @@ const theme = createTheme({
 });
 
 function App() {
-  const [user, setUser] = useState<CognitoUser | null>(null);
-  const [username, setUsername] = useState('');
-  const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
-  const [severity, setSeverity] = useState(SeverityType.success);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
-  const callAlert = (
-    showAlertParam: boolean,
-    alertMessageParam: string,
-    severityParam: SeverityType
-  ) => {
-    setShowAlert(showAlertParam);
-    setAlertMessage(alertMessageParam);
-    setSeverity(severityParam);
-  };
 
   return (
     <ThemeProvider theme={theme}>
-      <AuthContext.Provider
-        value={{
-          user,
-          username,
-          authState,
-          setUser,
-          setUsername,
-          setAuthState
-        }}
-      >
-        <UtilContext.Provider
-          value={{
-            severity,
-            alertMessage,
-            showAlert,
-            setSeverity,
-            setAlertMessage,
-            setShowAlert,
-            callAlert
-          }}
-        >
+      <AuthContextProvider>
+        <UtilContextProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route element={<RequireAuth />}>
@@ -67,8 +29,8 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </UtilContext.Provider>
-      </AuthContext.Provider>
+        </UtilContextProvider>
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

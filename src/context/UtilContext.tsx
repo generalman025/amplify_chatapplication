@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { SeverityType } from '../components/Alert';
 
 export interface UtilContextData {
@@ -28,3 +28,32 @@ export const utilContextDefaultValue: UtilContextData = {
 export const UtilContext = createContext<UtilContextData>(
   utilContextDefaultValue
 );
+
+interface InputProviderProps {
+  children: React.ReactNode;
+}
+
+export const UtilContextProvider = ({ children }: InputProviderProps) => {
+  const [severity, setSeverity] = useState(SeverityType.success);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const callAlert = (
+    showAlertParam: boolean,
+    alertMessageParam: string,
+    severityParam: SeverityType
+  ) => {
+    setShowAlert(showAlertParam);
+    setAlertMessage(alertMessageParam);
+    setSeverity(severityParam);
+  };
+
+  return <UtilContext.Provider value={{
+    severity,
+    alertMessage,
+    showAlert,
+    setSeverity,
+    setAlertMessage,
+    setShowAlert,
+    callAlert
+  }}>{children}</UtilContext.Provider>;
+}

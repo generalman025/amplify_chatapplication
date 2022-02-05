@@ -18,18 +18,18 @@ export class cdkStack extends cdk.Stack {
     });
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
     
-    const apiGatewayDependencies: AmplifyDependentResourcesAttributes =
-      AmplifyHelpers.addResourceDependency(
-        this,
-        amplifyResourceProps.category,
-        amplifyResourceProps.resourceName,
-        [
-          {
-            category: 'api',
-            resourceName: 'listUsersApi'
-          }
-        ]
-      );
+    // const apiGatewayDependencies: AmplifyDependentResourcesAttributes =
+    //   AmplifyHelpers.addResourceDependency(
+    //     this,
+    //     amplifyResourceProps.category,
+    //     amplifyResourceProps.resourceName,
+    //     [
+    //       {
+    //         category: 'api',
+    //         resourceName: 'listUsersApi'
+    //       }
+    //     ]
+    //   );
 
     const appSyncDependencies: AmplifyDependentResourcesAttributes =
       AmplifyHelpers.addResourceDependency(
@@ -44,7 +44,9 @@ export class cdkStack extends cdk.Stack {
         ]
       );
 
-    const apiGatewayId = apiGatewayDependencies.api.listUsersApi.ApiId;
+    // const apiGatewayId = cdk.Fn.ref(
+    //   apiGatewayDependencies.api.listUsersApi.ApiId
+    // );
 
     const appSyncId = cdk.Fn.ref(
       appSyncDependencies.api.amplifychatapp.GraphQLAPIIdOutput
@@ -63,16 +65,16 @@ export class cdkStack extends cdk.Stack {
       rules: awsManagedRules.map((wafRule) => wafRule.rule)
     });
 
-    const apiGatewayAssociation = new CfnWebACLAssociation(
-      this,
-      'AssociatedApiGateway',
-      {
-        resourceArn: `arn:aws:apigateway:${
-          cdk.Aws.REGION
-        }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
-        webAclArn: webAcl.attrArn
-      }
-    );
+    // const apiGatewayAssociation = new CfnWebACLAssociation(
+    //   this,
+    //   'AssociatedApiGateway',
+    //   {
+    //     resourceArn: `arn:aws:apigateway:${
+    //       cdk.Aws.REGION
+    //     }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
+    //     webAclArn: webAcl.attrArn
+    //   }
+    // );
 
     const appSyncAssociation = new CfnWebACLAssociation(
       this,
@@ -83,8 +85,8 @@ export class cdkStack extends cdk.Stack {
       }
     );
     
-    apiGatewayAssociation.node.addDependency(apiGatewayId);
-    apiGatewayAssociation.node.addDependency(webAcl);
+    // apiGatewayAssociation.node.addDependency(apiGatewayId);
+    // apiGatewayAssociation.node.addDependency(webAcl);
     appSyncAssociation.node.addDependency(appSyncId);
     appSyncAssociation.node.addDependency(webAcl);
 
