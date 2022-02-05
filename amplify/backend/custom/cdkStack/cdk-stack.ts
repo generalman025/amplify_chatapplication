@@ -75,7 +75,7 @@ export class cdkStack extends cdk.Stack {
         webAclArn: webAcl.attrArn
       }
     );
-    
+
     const appSyncAssociation = new CfnWebACLAssociation(
       this,
       'WebACLAssociation',
@@ -85,7 +85,9 @@ export class cdkStack extends cdk.Stack {
       }
     );
 
+    appSyncAssociation.node.addDependency(apiGatewayId);
     appSyncAssociation.node.addDependency(webAcl);
+    apiGatewayAssociation.node.addDependency(appSyncId);
     apiGatewayAssociation.node.addDependency(webAcl);
 
     //   const appSyncDependencies: AmplifyDependentResourcesAttributes =

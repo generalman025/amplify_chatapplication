@@ -26,13 +26,13 @@ const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
 }
 
 
-// test('Should render a default username', () => {
-//     // jest.mock("../../context/AuthContext", () => ({
-//     //     __esModule: true,
-//     //     default: createContext({ username: 'test' })
-//     // }));
-//     // render(<AuthContext.Provider value={{ username: 'test', user: null, authState: AuthState.SignedIn, setUsername: (() => true), setUser: (() => true), setAuthState: (() => true) }}><UsernameBox /></AuthContext.Provider>);
-//     customRender(<UsernameBox />, [{ user: {getUsername: () => 'test'} as CognitoUser, username: 'test' }]);
-//     const linkElement = screen.getByLabelText(/test/i);
-//     expect(linkElement).toBeInTheDocument();
-// });
+test('Should render a default username', () => {
+    // jest.mock("../../context/AuthContext", () => ({
+    //     __esModule: true,
+    //     default: createContext({ username: 'test' })
+    // }));
+    // render(<AuthContext.Provider value={{ username: 'test', user: null, authState: AuthState.SignedIn, setUsername: (() => true), setUser: (() => true), setAuthState: (() => true) }}><UsernameBox /></AuthContext.Provider>);
+    customRender(<UsernameBox />, { user: {getUsername: () => 'test'} as CognitoUser, username: 'test' });
+    const linkElement = screen.getByLabelText(/test/i);
+    expect(linkElement).toBeInTheDocument();
+});
