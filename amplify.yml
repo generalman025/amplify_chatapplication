@@ -35,4 +35,7 @@ test:
         - npm ci
     test:
       commands:
-        - npx react-scripts test 
+        - npx react-scripts test
+    postTest:
+      commands:
+        - npx mochawesome --reporter json-summary --report-dir reports
