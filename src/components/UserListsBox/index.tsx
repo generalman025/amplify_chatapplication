@@ -4,7 +4,13 @@ import { IUser } from '../../interfaces/IUser';
 import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import {
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText
+} from '@mui/material';
 import { Person } from '@mui/icons-material';
 
 class ListUserApi {
@@ -19,7 +25,11 @@ export default function UserListsBox() {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const payload = (await API.get('listUsersApi', '/users', {})) as ListUserApi;
+        const payload = (await API.get(
+          'listUsersApi',
+          '/users',
+          {}
+        )) as ListUserApi;
         setAllUsers(payload.users);
       } catch (error) {
         if (error instanceof Error)
@@ -30,14 +40,29 @@ export default function UserListsBox() {
     fetchAllUsers();
   }, []);
 
-  return (<List dense={true}>
-    {allUsers && allUsers.map((iu: IUser) => {
-      const preferredUsername = iu.Attributes.find(usr => usr.Name === 'preferred_username');
-      return (<ListItem key={iu.Username}>
-        <ListItemText
-          primary={`${preferredUsername?.Value}` + (iu.Username === user?.getUsername() ? ' (You)' : '')}
-        />
-      </ListItem>)
-    })}
-  </List>);
+  return (
+    <List dense={true}>
+      {allUsers &&
+        allUsers.map((iu: IUser) => {
+          const preferredUsername = iu.Attributes.find(
+            (usr) => usr.Name === 'preferred_username'
+          );
+          return (
+            <ListItem key={iu.Username}>
+              <ListItemAvatar>
+                <Avatar>
+                  <Person color="primary" />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  `${preferredUsername?.Value}` +
+                  (iu.Username === user?.getUsername() ? ' (You)' : '')
+                }
+              />
+            </ListItem>
+          );
+        })}
+    </List>
+  );
 }
