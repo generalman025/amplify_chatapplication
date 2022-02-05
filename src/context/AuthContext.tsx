@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactChild, ReactFragment, ReactPortal, useState } from 'react';
 import { CognitoUser } from '@aws-amplify/auth';
 import { AuthState } from '@aws-amplify/ui-components';
 
@@ -24,11 +24,17 @@ export const AuthContext = createContext<AuthContextData>(
   authContextDefaultValue
 );
 
-// interface x {
-//   a: AuthContextData;
-//   b: any
-// }
+export const AuthContextProvider = (children: ReactChild) => {
+  const [user, setUser] = useState<CognitoUser | null>(null);
+  const [username, setUsername] = useState('');
+  const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
 
-// export const AuthContextProvider = ({ step: AuthContextData, children }: x) => (
-//   <AuthContext.Provider value={step}>{children}</AuthContext.Provider>
-// )
+  return <AuthContext.Provider value={{
+    user,
+    username,
+    authState,
+    setUser,
+    setUsername,
+    setAuthState
+  }}>{children}</AuthContext.Provider>;
+}
