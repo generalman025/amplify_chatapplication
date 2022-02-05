@@ -12,7 +12,6 @@ frontend:
     build:
       commands:
         - npm run lint
-        - npm run test
         - npm run build
   artifacts:
     baseDirectory: build
@@ -21,3 +20,22 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+test:
+  artifacts:
+    baseDirectory: build
+    configFilePath: '**/mochawesome.json'
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  phases:
+    preTest:
+      commands:
+        - npm ci
+    test:
+      commands:
+        - npx jest
+    postTest:
+      commands:
+        - npx mochawesome --reporter json-summary --report-dir reports
