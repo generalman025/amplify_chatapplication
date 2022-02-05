@@ -16,5 +16,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
+  test:
+    steps:
       - run: npm run lint
       - run: npm test
