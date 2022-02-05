@@ -63,16 +63,16 @@ export class cdkStack extends cdk.Stack {
       rules: awsManagedRules.map((wafRule) => wafRule.rule)
     });
 
-    // const apiGatewayAssociation = new CfnWebACLAssociation(
-    //   this,
-    //   'AssociatedApiGateway',
-    //   {
-    //     resourceArn: `arn:aws:apigateway:${
-    //       cdk.Aws.REGION
-    //     }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
-    //     webAclArn: webAcl.attrArn
-    //   }
-    // );
+    const apiGatewayAssociation = new CfnWebACLAssociation(
+      this,
+      'AssociatedApiGateway',
+      {
+        resourceArn: `arn:aws:apigateway:${
+          cdk.Aws.REGION
+        }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
+        webAclArn: webAcl.attrArn
+      }
+    );
 
     const appSyncAssociation = new CfnWebACLAssociation(
       this,
