@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import createTheme from '@mui/material/styles/createTheme';
+import {createTheme} from '@mui/material/styles';
 import ChatRoom from './domains/ChatRoom';
 import Home from './domains/Home';
 import RequireAuth from './utils/RequireAuth';
