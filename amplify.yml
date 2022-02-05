@@ -23,6 +23,7 @@ frontend:
 test:
   artifacts:
     baseDirectory: build
+    configFilePath: '**/mochawesome.json'
     files:
       - '**/*'
   cache:
