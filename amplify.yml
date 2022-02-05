@@ -35,4 +35,4 @@ test:
         - npm ci
     test:
       commands:
-        - npm test
+        - npx react-scripts test 
