@@ -17,10 +17,12 @@ const Home = () => {
     useContext(UtilContext);
 
   useEffect(() => {
-    return onAuthUIStateChange((nextAuthState: AuthState, authData: object|undefined) => {
-      setAuthState(nextAuthState);
-      if(authData) setUser(authData as CognitoUser);
-    });
+    return onAuthUIStateChange(
+      (nextAuthState: AuthState, authData: object | undefined) => {
+        setAuthState(nextAuthState);
+        if (authData) setUser(authData as CognitoUser);
+      }
+    );
   }, []);
 
   const proceedToChatRoom = () => {

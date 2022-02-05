@@ -38,9 +38,7 @@ export default function ChatBox() {
 
     getMessages();
 
-    const subscription = API.graphql(
-      graphqlOperation(onCreateMessage)
-    );
+    const subscription = API.graphql(graphqlOperation(onCreateMessage));
     let unsubscribe;
     if (subscription instanceof Observable) {
       const sub = subscription.subscribe({
@@ -86,25 +84,25 @@ export default function ChatBox() {
   return (
     <Grid container>
       <div className={styles.chatbox}>
-          {messages
-            .sort((prev: Message, next: Message) =>
-              next.createdAt.localeCompare(prev.createdAt)
-            )
-            .map((msg) => (
-              <MessageBox
-                message={msg}
-                isMe={user?.getUsername() === msg.owner}
-                key={msg.id}
-              />
-            ))}
-        </div>
-        <div className={styles.formContainer}>
-          <MessageInput
-            message={message}
-            setMessage={setMessage}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+        {messages
+          .sort((prev: Message, next: Message) =>
+            next.createdAt.localeCompare(prev.createdAt)
+          )
+          .map((msg) => (
+            <MessageBox
+              message={msg}
+              isMe={user?.getUsername() === msg.owner}
+              key={msg.id}
+            />
+          ))}
+      </div>
+      <div className={styles.formContainer}>
+        <MessageInput
+          message={message}
+          setMessage={setMessage}
+          handleSubmit={handleSubmit}
+        />
+      </div>
     </Grid>
   );
 }

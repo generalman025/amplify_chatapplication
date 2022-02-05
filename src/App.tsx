@@ -65,7 +65,7 @@ function App() {
             <Route element={<RequireAuth />}>
               <Route path="/chatroom" element={<ChatRoom />} />
             </Route>
-            <Route path='*' element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </UtilContext.Provider>
       </AuthContext.Provider>
