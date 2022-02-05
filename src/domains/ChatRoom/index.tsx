@@ -1,24 +1,14 @@
-import { useContext, useEffect } from 'react';
-import { Grid } from '@mui/material';
+import { useContext } from 'react';
+import { Grid, Paper } from '@mui/material';
 import AppBar from '../../components/AppBar';
 import ChatBox from '../../components/ChatBox';
 import UserListsBox from '../../components/UserListsBox';
 import Alert from '../../components/Alert';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 
 function ChatRoom() {
-  const navigate = useNavigate();
-  const { username } = useContext(AuthContext);
   const { severity, alertMessage, showAlert, setShowAlert } =
     useContext(UtilContext);
-
-  useEffect(() => {
-    if(!username || username === ''){
-      navigate('/');
-    }
-  }, []);
 
   return (
     <Grid container justifyContent="center">
@@ -26,11 +16,15 @@ function ChatRoom() {
         <AppBar />
       </Grid>
       <Grid container>
-        <Grid item xs={3} padding={3}>
-          <UserListsBox />
+        <Grid item xs={3} padding={1}>
+          <Paper>
+            <UserListsBox />
+          </Paper>
         </Grid>
-        <Grid item xs={9} padding={3}>
-          <ChatBox />
+        <Grid item xs={9} padding={1}>
+          <Paper>
+            <ChatBox />
+          </Paper>
         </Grid>
       </Grid>
       <Alert

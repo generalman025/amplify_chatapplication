@@ -33,16 +33,9 @@ export default function UserListsBox() {
   return (<List dense={true}>
     {allUsers && allUsers.map((iu: IUser) => {
       const preferredUsername = iu.Attributes.find(usr => usr.Name === 'preferred_username');
-      const email = iu.Attributes.find(usr => usr.Name === 'email');
-      return (<ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <Person color="primary" />
-          </Avatar>
-        </ListItemAvatar>
+      return (<ListItem key={iu.Username}>
         <ListItemText
           primary={`${preferredUsername?.Value}` + (iu.Username === user?.getUsername() ? ' (You)' : '')}
-          secondary={email?.Value}
         />
       </ListItem>)
     })}

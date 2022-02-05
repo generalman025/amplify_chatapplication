@@ -10,6 +10,7 @@ import { AuthContext } from './context/AuthContext';
 import { UtilContext } from './context/UtilContext';
 import { CognitoUser } from '@aws-amplify/auth';
 import { SeverityType } from './components/Alert';
+import NotFound from './domains/404';
 
 const theme = createTheme({
   palette: {
@@ -64,6 +65,7 @@ function App() {
             <Route element={<RequireAuth />}>
               <Route path="/chatroom" element={<ChatRoom />} />
             </Route>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </UtilContext.Provider>
       </AuthContext.Provider>
