@@ -24,6 +24,11 @@ export const AuthContext = createContext<AuthContextData>(
   authContextDefaultValue
 );
 
-// export const AuthContextProvider = ({ step: AuthContextData, children: any }) => (
+// interface x {
+//   a: AuthContextData;
+//   b: any
+// }
+
+// export const AuthContextProvider = ({ step: AuthContextData, children }: x) => (
 //   <AuthContext.Provider value={step}>{children}</AuthContext.Provider>
 // )
