@@ -21,6 +21,13 @@ frontend:
     paths:
       - node_modules/**/*
 test:
+  phases:
+    preTest:
+      commands:
+        - npm install
+    test:
+      commands:
+        - npm test -- --watchAll=false
   artifacts:
     baseDirectory: build
     configFilePath: '**/mochawesome.json'
@@ -29,13 +36,3 @@ test:
   cache:
     paths:
       - node_modules/**/*
-  phases:
-    preTest:
-      commands:
-        - npm ci
-    test:
-      commands:
-        - npm test -- --watchAll=false
-    postTest:
-      commands:
-        - npx mochawesome --reporter json-summary --report-dir reports
