@@ -1,11 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-import {BrowserRouter as Router} from 'react-router-dom';
+import UsernameBox from '.';
 
-test('login page', () => {
-  render(<Router>
-    <App/>
-    </Router>);
+test('Should render button', () => {
+  render(<UsernameBox />);
   const linkElement = screen.getByText(/Proceed to Chat Room/i);
   expect(linkElement).toBeInTheDocument();
 });

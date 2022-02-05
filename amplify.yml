@@ -22,7 +22,7 @@ frontend:
       - node_modules/**/*
 test:
   phases:
-    test:
+    tests:
       commands:
         - npm run test
   artifacts:
