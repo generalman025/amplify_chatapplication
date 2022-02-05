@@ -47,11 +47,12 @@ export class cdkStack extends cdk.Stack {
     const appsyncId = cdk.Fn.ref(
       appSyncDependencies.api.amplifychatapp.GraphQLAPIIdOutput
     );
-    const apiGatewayId = cdk.Fn.ref(
-      apiGatewayDependencies.api.listUsersApi.ApiId
-    );
+    // const apiGatewayId = cdk.Fn.ref(
+    //   apiGatewayDependencies.api.listUsersApi.ApiId
+    // );
 
     const webAcl = new CfnWebACL(this, 'WebACL', {
+      name: `WebACL-${cdk.Fn.ref('env')}`,
       defaultAction: {
         allow: {}
       },
@@ -73,17 +74,32 @@ export class cdkStack extends cdk.Stack {
       }
     );
 
-    const associatedApiGateway = new CfnWebACLAssociation(
-      this,
-      'AssociatedApiGateway',
-      {
-        resourceArn: `arn:aws:apigateway:${cdk.Aws.REGION}::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
-        webAclArn: webAcl.attrArn
-      }
-    );
+    // const associatedApiGateway = new CfnWebACLAssociation(
+    //   this,
+    //   'AssociatedApiGateway',
+    //   {
+    //     resourceArn: `arn:aws:apigateway:${cdk.Aws.REGION}::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
+    //     webAclArn: webAcl.attrArn
+    //   }
+    // );
 
     associatedAppSync.node.addDependency(webAcl);
-    associatedApiGateway.node.addDependency(webAcl);
+    // associatedApiGateway.node.addDependency(webAcl);
+
+    // const cloudFrontAcl = new CfnWebACL(this, 'CloudFrontACL', {
+    //   name: `CloudFrontACL-${cdk.Fn.ref('env')}`,
+    //   defaultAction: {
+    //     allow: {}
+    //   },
+    //   scope: 'CLOUDFRONT',
+    //   visibilityConfig: {
+    //     cloudWatchMetricsEnabled: true,
+    //     metricName: 'waf',
+    //     sampledRequestsEnabled: false
+    //   }
+    // });
+
+
   }
 }
 
