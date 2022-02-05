@@ -32,7 +32,7 @@ test:
   phases:
     preTest:
       commands:
-        - npm run build
+        - npm ci
     test:
       commands:
-        - npm run test
+        - npm test
