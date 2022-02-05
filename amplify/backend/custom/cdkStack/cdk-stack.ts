@@ -84,11 +84,11 @@ export class cdkStack extends cdk.Stack {
         webAclArn: webAcl.attrArn
       }
     );
-
-    appSyncAssociation.node.addDependency(apiGatewayId);
-    appSyncAssociation.node.addDependency(webAcl);
-    apiGatewayAssociation.node.addDependency(appSyncId);
+    
+    apiGatewayAssociation.node.addDependency(apiGatewayId);
     apiGatewayAssociation.node.addDependency(webAcl);
+    appSyncAssociation.node.addDependency(appSyncId);
+    appSyncAssociation.node.addDependency(webAcl);
 
     //   const appSyncDependencies: AmplifyDependentResourcesAttributes =
     //   AmplifyHelpers.addResourceDependency(
