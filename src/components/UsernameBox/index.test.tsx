@@ -18,12 +18,12 @@ test('Should render a button', () => {
     expect(linkElement).toBeInTheDocument();
 });
 
-// const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
-//     return render(
-//         <AuthContext.Provider {...providerProps}>{ui}</AuthContext.Provider>,
-//         renderOptions,
-//     )
-// }
+const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
+    return render(
+        <AuthContext.Provider {...providerProps}>{ui}</AuthContext.Provider>,
+        renderOptions,
+    )
+}
 
 
 // test('Should render a default username', () => {
