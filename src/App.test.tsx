@@ -8,6 +8,7 @@ test('login page', () => {
       <App />
     </Router>
   );
+  expect(<App />).toBeInTheDocument();
   const linkElement = screen.getByText(/Proceed to Chat Room/i);
   expect(linkElement).toBeInTheDocument();
 });
