@@ -2,14 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { FormEvent } from 'react';
 import MessageInput from '.';
 
-const MockedMessageInput = <MessageInput message={''} setMessage={function (message: string): void {
-  throw new Error('Function not implemented.');
-} } handleSubmit={function (event: FormEvent<HTMLFormElement>): void {
-  throw new Error('Function not implemented.');
-} } />;
-
 test('test', () => {
-  expect(true).toBeTruthy();
+  expect(<MessageInput message={''} setMessage={() => true}
+  handleSubmit={() => true} />).toBeTruthy();
 });
 
 // test('Should render a textbox', () => {
