@@ -37,7 +37,7 @@ export default function ChatBox() {
     };
 
     getMessages();
-
+    
     const subscription = API.graphql(graphqlOperation(onCreateMessage));
     let unsubscribe;
     if (subscription instanceof Observable) {

@@ -35,6 +35,9 @@ export default function UsernameBox() {
   };
 
   useEffect(() => {
+    
+    console.log('data: ', authState, user);
+
     if (authState === AuthState.SignedIn && user) {
       try {
         user?.getUserAttributes((_error, attrs) => {
