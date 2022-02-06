@@ -77,6 +77,7 @@ export default function ChatBox() {
       } catch (error) {
         if (error instanceof Error)
           callAlert(true, error.message, SeverityType.error);
+          console.log(error);
       }
     }
   };
