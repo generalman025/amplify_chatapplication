@@ -1,24 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import { FormEvent } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import MessageInput from '.';
 
-test('test', () => {
-  expect(<MessageInput message={''} setMessage={() => true}
-  handleSubmit={() => true} />).toBeTruthy();
+test('Should display a placeholder', () => {
+  const handleSubmit = jest.fn();
+  render(
+    <MessageInput message="" setMessage={() => {}} handleSubmit={handleSubmit} />);
+  const input = screen.getByPlaceholderText('Type your message here...');
+  expect(input).toBeInTheDocument();
 });
 
-// test('Should render a textbox', () => {
-//   render(<MockedMessageInput/>);
-//   const linkElement = screen.getByLabelText(/Preferred Username/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
-// test('Should render a button', () => {
-//   render(<MessageInput message={''} setMessage={function (message: string): void {
-//     throw new Error('Function not implemented.');
-//   } } handleSubmit={function (event: FormEvent<HTMLFormElement>): void {
-//     throw new Error('Function not implemented.');
-//   } } />);
-//   const linkElement = screen.getByText(/Proceed to Chat Room/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+test('test 2', () => {
+  const dom = render(<MessageInput message="" setMessage={() => {}} handleSubmit={() => {}} />);
+  const input = dom.container.querySelector('#messageInput');
+  fireEvent.change(input as Element, { target: { value: '5555555' } });
+  // expect(screen.getByDisplayValue('Type your message here...')).toBe(true);
+});

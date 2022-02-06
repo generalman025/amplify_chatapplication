@@ -1,4 +1,4 @@
-describe('add comment', () => {
+describe('03 - add comment', () => {
 
   it('visit', () => {
     cy.visit('http://localhost:3000');
