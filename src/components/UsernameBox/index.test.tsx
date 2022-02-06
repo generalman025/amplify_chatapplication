@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import UsernameBox from '.';
 import { AuthContext, AuthContextProvider } from '../../context/AuthContext';
 import { AuthState } from '@aws-amplify/ui-components';
-import { createContext, ReactChild } from 'react';
+import { createContext, ReactChild, useContext } from 'react';
 import { CognitoUser } from '@aws-amplify/auth';
 
 test('Should render a textbox', () => {
@@ -27,12 +27,10 @@ const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
 
 
 // test('Should render a default username', () => {
-//     // jest.mock("../../context/AuthContext", () => ({
-//     //     __esModule: true,
-//     //     default: createContext({ username: 'test' })
-//     // }));
-//     // render(<AuthContext.Provider value={{ username: 'test', user: null, authState: AuthState.SignedIn, setUsername: (() => true), setUser: (() => true), setAuthState: (() => true) }}><UsernameBox /></AuthContext.Provider>);
-//     customRender(<UsernameBox />, { username: 'test' });
+//     const { setAuthState } = useContext(AuthContext);
+//     setAuthState(AuthState.SignedIn);
+
+//     render(<AuthContextProvider><UsernameBox /></AuthContextProvider>);
 //     const linkElement = screen.getByLabelText(/test/i);
 //     expect(linkElement).toBeInTheDocument();
 // });

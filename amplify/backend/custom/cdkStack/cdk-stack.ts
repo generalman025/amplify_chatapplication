@@ -53,13 +53,14 @@ export class cdkStack extends cdk.Stack {
     );
 
     const webAcl = new CfnWebACL(this, 'WebACL', {
+      name: `WebACL-${cdk.Fn.ref('env')}`,
       defaultAction: {
         allow: {}
       },
       scope: 'REGIONAL',
       visibilityConfig: {
         cloudWatchMetricsEnabled: true,
-        metricName: 'waf',
+        metricName: 'AppSyncWAF',
         sampledRequestsEnabled: false
       },
       rules: awsManagedRules.map((wafRule) => wafRule.rule)
