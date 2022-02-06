@@ -37,7 +37,7 @@ export default function ChatBox() {
     };
 
     getMessages();
-    
+
     const subscription = API.graphql(graphqlOperation(onCreateMessage));
     let unsubscribe;
     if (subscription instanceof Observable) {
@@ -83,7 +83,7 @@ export default function ChatBox() {
 
   return (
     <Grid container>
-      <div className={styles.chatbox}>
+      <div data-test="chatbox" className={styles.chatbox}>
         {messages
           .sort((prev: Message, next: Message) =>
             next.createdAt.localeCompare(prev.createdAt)

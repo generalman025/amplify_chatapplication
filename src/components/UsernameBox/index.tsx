@@ -35,9 +35,6 @@ export default function UsernameBox() {
   };
 
   useEffect(() => {
-    
-    console.log('data: ', authState, user);
-
     if (authState === AuthState.SignedIn && user) {
       try {
         user?.getUserAttributes((_error, attrs) => {
@@ -65,7 +62,8 @@ export default function UsernameBox() {
       >
         <Grid item xs={12}>
           <TextField
-            id="outlined-basic"
+            id="preferredUsername"
+            data-test="preferredUsername"
             label="Preferred Username"
             variant="outlined"
             value={input}

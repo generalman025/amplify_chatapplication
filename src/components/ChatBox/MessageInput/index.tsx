@@ -16,7 +16,7 @@ export default function MessageInput({
   return (
     <form onSubmit={handleSubmit} className={styles.formBase}>
       <TextField
-        id="outlined-basic"
+        id="messageInput"
         variant="outlined"
         required
         autoFocus
@@ -27,6 +27,7 @@ export default function MessageInput({
         style={{ padding: '5px' }}
       ></TextField>
       <Button
+        id="sendMessage"
         style={{ marginLeft: '8px' }}
         type="submit"
         variant="contained"

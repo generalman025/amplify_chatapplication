@@ -42,7 +42,7 @@ export default function AppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <MuiAppBar position="static">
+      <MuiAppBar data-test="appbar" position="static">
         <Toolbar>
           <Typography
             variant="h6"
@@ -52,7 +52,12 @@ export default function AppBar() {
           >
             {user && username ? `Hello, ${username}` : ''}
           </Typography>
-          <Button type="submit" onClick={() => handleLogout()} color="inherit">
+          <Button
+            type="submit"
+            onClick={() => handleLogout()}
+            color="inherit"
+            data-test="logout"
+          >
             <Typography color="common.white">Logout</Typography>
           </Button>
         </Toolbar>

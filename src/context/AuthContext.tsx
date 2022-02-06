@@ -31,13 +31,19 @@ export const AuthContextProvider = ({ children }: InputProviderProps) => {
   const [user, setUser] = useState<CognitoUser | null>(null);
   const [username, setUsername] = useState('');
   const [authState, setAuthState] = useState<AuthState>(AuthState.Loading);
-  
-  return <AuthContext.Provider value={{
-    user,
-    username,
-    authState,
-    setUser,
-    setUsername,
-    setAuthState
-  }}>{children}</AuthContext.Provider>;
-}
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        username,
+        authState,
+        setUser,
+        setUsername,
+        setAuthState
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
