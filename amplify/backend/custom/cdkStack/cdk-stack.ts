@@ -17,21 +17,8 @@ export class cdkStack extends cdk.Stack {
       description: 'Current Amplify CLI env name'
     });
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
-    
-    // const apiGatewayDependencies: AmplifyDependentResourcesAttributes =
-    //   AmplifyHelpers.addResourceDependency(
-    //     this,
-    //     amplifyResourceProps.category,
-    //     amplifyResourceProps.resourceName,
-    //     [
-    //       {
-    //         category: 'api',
-    //         resourceName: 'listUsersApi'
-    //       }
-    //     ]
-    //   );
 
-    const appSyncDependencies: AmplifyDependentResourcesAttributes =
+    const dependencies: AmplifyDependentResourcesAttributes =
       AmplifyHelpers.addResourceDependency(
         this,
         amplifyResourceProps.category,
@@ -39,17 +26,23 @@ export class cdkStack extends cdk.Stack {
         [
           {
             category: 'api',
+            resourceName: 'listUsersApi'
+          },
+          {
+            category: 'api',
             resourceName: 'amplifychatapp'
+          },
+          {
+            category: 'hosting',
+            resourceName: 'S3AndCloudFront'
           }
         ]
       );
 
-    // const apiGatewayId = cdk.Fn.ref(
-    //   apiGatewayDependencies.api.listUsersApi.ApiId
-    // );
+    const apiGatewayId = cdk.Fn.ref(dependencies.api.listUsersApi.ApiId);
 
     const appSyncId = cdk.Fn.ref(
-      appSyncDependencies.api.amplifychatapp.GraphQLAPIIdOutput
+      dependencies.api.amplifychatapp.GraphQLAPIIdOutput
     );
 
     const webAcl = new CfnWebACL(this, 'WebACL', {
@@ -60,22 +53,22 @@ export class cdkStack extends cdk.Stack {
       scope: 'REGIONAL',
       visibilityConfig: {
         cloudWatchMetricsEnabled: true,
-        metricName: 'AppSyncWAF',
+        metricName: 'webAcl',
         sampledRequestsEnabled: false
       },
       rules: awsManagedRules.map((wafRule) => wafRule.rule)
     });
 
-    // const apiGatewayAssociation = new CfnWebACLAssociation(
-    //   this,
-    //   'AssociatedApiGateway',
-    //   {
-    //     resourceArn: `arn:aws:apigateway:${
-    //       cdk.Aws.REGION
-    //     }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
-    //     webAclArn: webAcl.attrArn
-    //   }
-    // );
+    const apiGatewayAssociation = new CfnWebACLAssociation(
+      this,
+      'AssociatedApiGateway',
+      {
+        resourceArn: `arn:aws:apigateway:${
+          cdk.Aws.REGION
+        }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
+        webAclArn: webAcl.attrArn
+      }
+    );
 
     const appSyncAssociation = new CfnWebACLAssociation(
       this,
@@ -85,92 +78,11 @@ export class cdkStack extends cdk.Stack {
         webAclArn: webAcl.attrArn
       }
     );
-    
-    // apiGatewayAssociation.node.addDependency(apiGatewayId);
-    // apiGatewayAssociation.node.addDependency(webAcl);
+
+    apiGatewayAssociation.node.addDependency(apiGatewayId);
+    apiGatewayAssociation.node.addDependency(webAcl);
     appSyncAssociation.node.addDependency(appSyncId);
     appSyncAssociation.node.addDependency(webAcl);
-
-    //   const appSyncDependencies: AmplifyDependentResourcesAttributes =
-    //   AmplifyHelpers.addResourceDependency(
-    //     this,
-    //     amplifyResourceProps.category,
-    //     amplifyResourceProps.resourceName,
-    //     [
-    //       {
-    //         category: 'api',
-    //         resourceName: 'amplifychatapp'
-    //       }
-    //     ]
-    //   );
-
-    // const apiGatewayDependencies: AmplifyDependentResourcesAttributes =
-    //   AmplifyHelpers.addResourceDependency(
-    //     this,
-    //     amplifyResourceProps.category,
-    //     amplifyResourceProps.resourceName,
-    //     [
-    //       {
-    //         category: 'api',
-    //         resourceName: 'listUsersApi'
-    //       }
-    //     ]
-    //   );
-
-    // const appsyncId = cdk.Fn.ref(
-    //   appSyncDependencies.api.amplifychatapp.GraphQLAPIIdOutput
-    // );
-    // const apiGatewayId = cdk.Fn.ref(
-    //   apiGatewayDependencies.api.listUsersApi.ApiId
-    // );
-
-    // const webAcl = new CfnWebACL(this, 'WebACL', {
-    //   name: `WebACL-${cdk.Fn.ref('env')}`,
-    //   defaultAction: {
-    //     allow: {}
-    //   },
-    //   scope: 'REGIONAL',
-    //   visibilityConfig: {
-    //     cloudWatchMetricsEnabled: true,
-    //     metricName: 'waf',
-    //     sampledRequestsEnabled: false
-    //   },
-    //   rules: awsManagedRules.map((wafRule) => wafRule.rule)
-    // });
-
-    // const associatedAppSync = new CfnWebACLAssociation(
-    //   this,
-    //   'AssociatedAppSync',
-    //   {
-    //     resourceArn: `arn:aws:appsync:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:apis/${appsyncId}`,
-    //     webAclArn: webAcl.attrArn
-    //   }
-    // );
-
-    // const associatedApiGateway = new CfnWebACLAssociation(
-    //   this,
-    //   'AssociatedApiGateway',
-    //   {
-    //     resourceArn: `arn:aws:apigateway:${cdk.Aws.REGION}::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
-    //     webAclArn: webAcl.attrArn
-    //   }
-    // );
-
-    // associatedAppSync.node.addDependency(webAcl);
-    // associatedApiGateway.node.addDependency(webAcl);
-
-    // const cloudFrontAcl = new CfnWebACL(this, 'CloudFrontACL', {
-    //   name: `CloudFrontACL-${cdk.Fn.ref('env')}`,
-    //   defaultAction: {
-    //     allow: {}
-    //   },
-    //   scope: 'CLOUDFRONT',
-    //   visibilityConfig: {
-    //     cloudWatchMetricsEnabled: true,
-    //     metricName: 'waf',
-    //     sampledRequestsEnabled: false
-    //   }
-    // });
   }
 }
 

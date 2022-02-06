@@ -64,10 +64,33 @@
       "dependsOn": [
         {
           "category": "api",
+          "resourceName": "listUsersApi",
+          "attributes": [
+            "RootUrl",
+            "ApiName",
+            "ApiId"
+          ]
+        },
+        {
+          "category": "api",
           "resourceName": "amplifychatapp",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
+          "category": "hosting",
+          "resourceName": "S3AndCloudFront",
+          "attributes": [
+            "Region",
+            "HostingBucketName",
+            "WebsiteURL",
+            "S3BucketSecureURL",
+            "CloudFrontDistributionID",
+            "CloudFrontDomainName",
+            "CloudFrontSecureURL",
+            "CloudFrontOriginAccessIdentity"
           ]
         }
       ]
