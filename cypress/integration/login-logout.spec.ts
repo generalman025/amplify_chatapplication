@@ -39,25 +39,15 @@ describe('add comment', () => {
       .click();
   });
 
-  it('go to chat room and add comment', () => {
-    cy.get('#preferredUsername').wait(2000);
-    cy.contains('Proceed to Chat Room').click();
-    cy.wait(3000);
+  it('logout', () => {
+    cy.get('[data-test=logout]').click();
 
-    const uuid = () => Cypress._.random(0, 1e6)
-    const id = uuid()
-
-    cy.get('#messageInput').type(id);
-    cy.get('#sendMessage').click();
-
-    // TODO: Need to fix subscription feature in local server, issue: https://github.com/aws-amplify/amplify-cli/issues/9621
-    cy.visit('http://localhost:3000');
-
-    cy.get('#preferredUsername').wait(2000);
-    cy.contains('Proceed to Chat Room').click();
-    cy.wait(3000);
-
-    cy.get('[data-test=chatbox').should('contain', id);
+    cy.get('amplify-authenticator')
+      .shadow()
+      .find('amplify-sign-in')
+      .shadow()
+      .find('amplify-form-section')
+      .should('contain', 'Sign in to your account');
   });
 
 

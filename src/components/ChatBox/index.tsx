@@ -24,6 +24,7 @@ export default function ChatBox() {
   const { callAlert } = useContext(UtilContext);
 
   useEffect(() => {
+
     const getMessages = async () => {
       try {
         const messageReq = (await API.graphql(
@@ -37,12 +38,13 @@ export default function ChatBox() {
     };
 
     getMessages();
-    
+
     const subscription = API.graphql(graphqlOperation(onCreateMessage));
     let unsubscribe;
     if (subscription instanceof Observable) {
       const sub = subscription.subscribe({
         next: (response: { value: { data: OnCreateMessageSubscription } }) => {
+          console.log(response);
           setMessages((msgs) => [
             ...msgs,
             response.value.data.onCreateMessage as Message
@@ -84,7 +86,7 @@ export default function ChatBox() {
 
   return (
     <Grid container>
-      <div className={styles.chatbox}>
+      <div data-test="chatbox" className={styles.chatbox}>
         {messages
           .sort((prev: Message, next: Message) =>
             next.createdAt.localeCompare(prev.createdAt)
