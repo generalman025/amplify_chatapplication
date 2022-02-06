@@ -52,7 +52,12 @@ export default function AppBar() {
           >
             {user && username ? `Hello, ${username}` : ''}
           </Typography>
-          <Button type="submit" onClick={() => handleLogout()} color="inherit" data-test="logout">
+          <Button
+            type="submit"
+            onClick={() => handleLogout()}
+            color="inherit"
+            data-test="logout"
+          >
             <Typography color="common.white">Logout</Typography>
           </Button>
         </Toolbar>

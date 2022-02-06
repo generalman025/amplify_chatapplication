@@ -47,13 +47,19 @@ export const UtilContextProvider = ({ children }: InputProviderProps) => {
     setSeverity(severityParam);
   };
 
-  return <UtilContext.Provider value={{
-    severity,
-    alertMessage,
-    showAlert,
-    setSeverity,
-    setAlertMessage,
-    setShowAlert,
-    callAlert
-  }}>{children}</UtilContext.Provider>;
-}
+  return (
+    <UtilContext.Provider
+      value={{
+        severity,
+        alertMessage,
+        showAlert,
+        setSeverity,
+        setAlertMessage,
+        setShowAlert,
+        callAlert
+      }}
+    >
+      {children}
+    </UtilContext.Provider>
+  );
+};

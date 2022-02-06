@@ -14,11 +14,11 @@ function ChatRoom() {
   const { severity, alertMessage, showAlert, setShowAlert } =
     useContext(UtilContext);
 
-    useEffect(() => {
-      if(!username || username === ''){
-        navigate('/');
-      }
-    }, []);
+  useEffect(() => {
+    if (!username || username === '') {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <Grid container justifyContent="center">

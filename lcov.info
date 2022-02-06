@@ -1,0 +1,1 @@
+sonar.javascript.lcov.reportPaths=test-coverage/lcov.info

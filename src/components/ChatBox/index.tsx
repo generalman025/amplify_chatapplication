@@ -24,7 +24,6 @@ export default function ChatBox() {
   const { callAlert } = useContext(UtilContext);
 
   useEffect(() => {
-
     const getMessages = async () => {
       try {
         const messageReq = (await API.graphql(
@@ -44,7 +43,6 @@ export default function ChatBox() {
     if (subscription instanceof Observable) {
       const sub = subscription.subscribe({
         next: (response: { value: { data: OnCreateMessageSubscription } }) => {
-          console.log(response);
           setMessages((msgs) => [
             ...msgs,
             response.value.data.onCreateMessage as Message
@@ -79,7 +77,6 @@ export default function ChatBox() {
       } catch (error) {
         if (error instanceof Error)
           callAlert(true, error.message, SeverityType.error);
-          console.log(error);
       }
     }
   };
