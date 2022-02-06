@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.5",
+    "@aws-cdk/aws-cloudfront": "^1.143.0",
     "@aws-cdk/aws-wafv2": "^1.142.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -40,7 +41,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"
-    ]},
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
