@@ -20,8 +20,6 @@ test('', () => {
     const spy1 = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
     const spy2 = jest.spyOn(React, 'useCallback').mockImplementation(f => f());
 
-    waitFor(() => {
-    })
     shallow(<MemoryRouter><AppBar /></MemoryRouter>);
     expect(true).toBeTruthy();
     
