@@ -3,8 +3,6 @@ import Amplify, { Auth } from 'aws-amplify';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
-import awsconfig from '../aws-exports';
-Amplify.configure(awsconfig);
 
 describe('', () => {
     let realAuth: any;
