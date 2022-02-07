@@ -48,9 +48,8 @@ describe('03 - add comment', () => {
     const id = uuid()
 
     cy.get('#messageInput').type(id);
-    cy.get('#sendMessage').click();
+    cy.get('#sendMessage').click().wait(3000);
 
-    // TODO: Need to fix subscription feature in local server, issue: https://github.com/aws-amplify/amplify-cli/issues/9621
     cy.visit('http://localhost:3000');
 
     cy.get('#preferredUsername').wait(2000);

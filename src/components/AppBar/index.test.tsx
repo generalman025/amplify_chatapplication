@@ -90,7 +90,7 @@ test('ccc', () => {
     </UtilContext.Provider></MemoryRouter>
   ));
 
-  console.log(x.find('#logoutButton-1').last().simulate('click'));
+  x.find('#logoutButton-1').last().simulate('click');
 
   waitFor(() => {
     expect(zz).toBeCalled();
