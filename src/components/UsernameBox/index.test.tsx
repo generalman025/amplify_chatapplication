@@ -37,7 +37,7 @@ test('Should render a textbox', () => {
 
 test('Should render a button', () => {
 
-  ReactDOM.render((
+  const x = mount(
     <UtilContext.Provider value={{...utilContextDefaultValue, callAlert: jest.fn()}}>
       <AuthContext.Provider value={{
         ...authContextDefaultValue,
@@ -47,7 +47,7 @@ test('Should render a button', () => {
         <UsernameBox />
       </AuthContext.Provider>
     </UtilContext.Provider>
-  ), container);
+  );
 
   waitFor(() => {
     const linkElement = screen.getByText(/Proceed to Chat Room/i);
