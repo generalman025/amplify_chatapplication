@@ -43,7 +43,7 @@ test('Should display an alert', () => {
     const mockedFetchAllUsers = jest.fn().mockResolvedValueOnce(mRes as any);
     (global as any).fetchAllUsers = mockedFetchAllUsers;
 
-    setStateMock(() => {
+    setStateMock(() => ({
         users: [
             {
                 Attributes: [
@@ -54,7 +54,7 @@ test('Should display an alert', () => {
                 ]
             }
         ]
-    });
+    }));
 
     API.get = jest.fn().mockImplementation(() => {
         return Promise.resolve({

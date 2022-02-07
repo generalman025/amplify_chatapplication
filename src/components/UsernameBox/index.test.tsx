@@ -41,7 +41,7 @@ test('Should render a button', () => {
       <AuthContext.Provider value={{
         ...authContextDefaultValue,
         authState: AuthState.SignedIn,
-        user: { getUserAttributes: () => { [{ Name: 'preferred_username', Value: 'test' }] } } as unknown as CognitoUser
+        user: { getUserAttributes: () => ([{ Name: 'preferred_username', Value: 'test' }]) } as unknown as CognitoUser
       }}>
         <UsernameBox />
       </AuthContext.Provider>
