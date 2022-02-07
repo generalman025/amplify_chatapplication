@@ -8,6 +8,7 @@ import { CognitoUser } from '@aws-amplify/auth';
 import { UtilContext, utilContextDefaultValue } from '../../context/UtilContext';
 import { act } from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
+import { API, Auth } from 'aws-amplify';
 
 let container: any;
 beforeEach(() => {
@@ -53,3 +54,12 @@ test('Should render a button', () => {
     expect(linkElement).toBeInTheDocument();
   })
 });
+
+// test('', () => {
+//   Auth.updateUserAttributes = jest.fn();
+
+//   const x = shallow(<UsernameBox />);
+//   // x.setState({input: 'test'});
+//   console.log(x.state());
+
+// })

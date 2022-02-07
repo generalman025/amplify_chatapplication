@@ -1,5 +1,5 @@
 import { waitFor } from '@testing-library/react';
-import { mount, shallow } from 'enzyme';
+import { render, mount, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
@@ -10,11 +10,27 @@ import { AuthState } from '@aws-amplify/ui-components';
 import { CognitoUser } from '@aws-amplify/auth';
 
 const mockedUsedNavigate = jest.fn();
+let container: any;
 
 const mock = jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom') as any,
     useNavigate: () => mockedUsedNavigate,
 }));
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useLayoutEffect: jest.requireActual('react').useEffect,
+}));
+
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+});
 
 test('', () => {
     const spy1 = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
@@ -25,20 +41,20 @@ test('', () => {
     
     spy1.mockRestore();
     spy2.mockRestore();
-    mock.restoreAllMocks();
 })
 
-// test('', () => {
-//     let container: any;
-//     ReactDOM.render((
-//         <UtilContext.Provider value={{...utilContextDefaultValue, callAlert: jest.fn()}}>
-//           <AuthContext.Provider value={{
-//             ...authContextDefaultValue,
-//             authState: AuthState.SignedIn,
-//             user: { getUserAttributes: () => { [{ Name: 'preferred_username', Value: 'test' }] } } as unknown as CognitoUser
-//           }}>
-//             <MemoryRouter><AppBar /></MemoryRouter>
-//           </AuthContext.Provider>
-//         </UtilContext.Provider>
-//       ), container);
-// })
+test('bbb', () => {
+    render((
+        <UtilContext.Provider value={{...utilContextDefaultValue, callAlert: jest.fn()}}>
+          <AuthContext.Provider value={{
+            ...authContextDefaultValue,
+            authState: AuthState.SignedIn,
+            user: { getUserAttributes: () => { [{ Name: 'preferred_username', Value: 'test' }] } } as unknown as CognitoUser
+          }}>
+            <MemoryRouter><AppBar /></MemoryRouter>
+          </AuthContext.Provider>
+        </UtilContext.Provider>
+      ), container);
+})
+
+mock.restoreAllMocks();

@@ -21,6 +21,7 @@ export default function AppBar() {
   }, []);
 
   useEffect(() => {
+    console.log('user', user);
     if (user) {
       try {
         user?.getUserAttributes((_error, attrs) => {

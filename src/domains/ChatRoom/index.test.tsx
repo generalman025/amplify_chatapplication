@@ -13,6 +13,11 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedUsedNavigate,
 }));
 
+jest.mock('react', () => ({
+    ...jest.requireActual('react'),
+    useLayoutEffect: jest.requireActual('react').useEffect,
+  }));
+
 test('Should display an alert', () => {
 
     const spy = jest.spyOn(React, 'useEffect').mockImplementation(f => f());

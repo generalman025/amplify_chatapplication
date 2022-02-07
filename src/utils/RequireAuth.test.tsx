@@ -49,7 +49,7 @@ describe('', () => {
 
         const component2 = shallow(<MemoryRouter><RequireAuth /></MemoryRouter>);
         waitFor(() => {
-            console.log(component2.find(RequireAuth).dive().setState({isAuth: false}));
+            component2.find(RequireAuth).dive().setState({isAuth: false});
         })
       });
 })
