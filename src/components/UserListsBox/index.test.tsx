@@ -74,8 +74,10 @@ test('Should display an alert', () => {
     const prop = {
         fetchAllUsers: jest.fn()
     }
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
 
     waitFor(() => {
+
         const { getDOMNode } = shallow(<UserListsBox />);
 
     })

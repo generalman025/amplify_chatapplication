@@ -40,7 +40,7 @@ describe('03 - add comment', () => {
   });
 
   it('go to chat room and add comment', () => {
-    cy.get('#preferredUsername').wait(2000);
+    cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 

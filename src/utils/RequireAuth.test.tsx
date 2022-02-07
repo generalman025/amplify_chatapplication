@@ -18,25 +18,38 @@ describe('', () => {
     });
     
     test('Should render a loading text', () => {
-        waitFor(() => {
-            
-            Auth.currentAuthenticatedUser = jest.fn().mockImplementation(() => {
-                return Promise.resolve({
-                    users: [
-                        {
-                            Attributes: [
-                                {
-                                    Name: "preferred_username",
-                                    Value: "test",
-                                }
-                            ]
-                        }
-                    ]
-                });
-            })
-            
-            const component = render(<MemoryRouter><RequireAuth /></MemoryRouter>);
+        Auth.currentAuthenticatedUser = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                users: [
+                    {
+                        Attributes: [
+                            {
+                                Name: "preferred_username",
+                                Value: "test",
+                            }
+                        ]
+                    }
+                ]
+            });
+        })
+
+        const component = render(<MemoryRouter><RequireAuth /></MemoryRouter>);
+        
+        waitFor(() => {    
             expect(component.findAllByDisplayValue('Loading...')).toHaveLength(1);
+        })
+      });
+
+      test('Should render a loading text', () => {
+        Auth.currentAuthenticatedUser = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                users: null
+            });
+        })
+
+        const component2 = shallow(<MemoryRouter><RequireAuth /></MemoryRouter>);
+        waitFor(() => {
+            console.log(component2.find(RequireAuth).dive().setState({isAuth: false}));
         })
       });
 })

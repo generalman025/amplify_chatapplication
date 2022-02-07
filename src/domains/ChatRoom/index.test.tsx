@@ -1,39 +1,26 @@
 import React from "react";
 import ChatRoom from ".";
-import { shallow } from "enzyme";
+import { mount, render, shallow } from "enzyme";
+import {AuthContextProvider} from '../../context/AuthContext';
+import { ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { waitFor } from "@testing-library/react";
 
-let realUseContext: any;
-let useContextMock: any;
+const mockedUsedNavigate = jest.fn();
 
-// Setup mock
-beforeEach(() => {
-    realUseContext = React.useContext;
-    useContextMock = React.useContext = jest.fn().mockImplementation(() => ({
-        user: jest.fn(),
-    }));
-});
-
-// Cleanup mock
-afterEach(() => {
-    React.useContext = realUseContext;
-});
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom') as any,
+    useNavigate: () => mockedUsedNavigate,
+}));
 
 test('Should display an alert', () => {
-    // const setStateMock = jest.fn();
-    // const useStateMock: any = (useState: any) => [useState, setStateMock];
-    // const useEffectMock: any = jest.fn();
 
-    // jest.mock("react-router-dom", () => ({
-    //     ...jest.requireActual("react-router-dom"),
-    //     useNavigate: jest.fn(),
-    //     useLocation: () => ({
-    //       pathname: "localhost:3000/example/path"
-    //     })
-    //   }));
+    const spy = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
 
-    // jest.spyOn(React, 'useState').mockImplementation(useStateMock);
-    // jest.spyOn(React, 'useEffect').mockImplementation(useEffectMock);
+      waitFor(() => {
+          render(<ChatRoom />);
+          expect(true).toBeTruthy();
+      })
 
-    // shallow(<ChatRoom />);
-    expect(true).toBeTruthy();
+      spy.mockRestore();
 });

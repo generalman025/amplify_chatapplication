@@ -8,7 +8,7 @@ import { UtilContext } from '../../context/UtilContext';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-function ChatRoom() {
+export default function ChatRoom() {
   const navigate = useNavigate();
   const { username } = useContext(AuthContext);
   const { severity, alertMessage, showAlert, setShowAlert } =
@@ -47,5 +47,3 @@ function ChatRoom() {
     </Grid>
   );
 }
-
-export default ChatRoom;

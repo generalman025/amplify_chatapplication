@@ -12,6 +12,7 @@
     "@mui/material": "^5.4.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/node": "^16.11.21",
     "@types/react": "^17.0.38",
@@ -42,7 +43,8 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/**/*.d.ts",
-      "!src/index.js"
+      "!src/index.tsx",
+      "!src/reportWebVitals.ts"
     ]
   },
   "eslintConfig": {
