@@ -27,6 +27,7 @@ export default function Alert({
 
   return (
     <Snackbar
+      data-testid="alert-bar"
       open={showAlert}
       autoHideDuration={1500}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}

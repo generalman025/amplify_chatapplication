@@ -21,7 +21,7 @@ export default function UserListsBox() {
   const [allUsers, setAllUsers] = useState<IUser[]>();
   const { user } = useContext(AuthContext);
   const { callAlert } = useContext(UtilContext);
-
+  
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -36,7 +36,7 @@ export default function UserListsBox() {
           callAlert(true, error.message, SeverityType.error);
       }
     };
-
+    
     fetchAllUsers();
   }, []);
 

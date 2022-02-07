@@ -9,9 +9,10 @@ test('Should display a placeholder', () => {
   expect(input).toBeInTheDocument();
 });
 
-test('test 2', () => {
-  const dom = render(<MessageInput message="" setMessage={() => true} handleSubmit={() => true} />);
+test('Should set a message', () => {
+  const setMessage = jest.fn();
+  const dom = render(<MessageInput message="" setMessage={setMessage} handleSubmit={() => true} />);
   const input = dom.container.querySelector('#messageInput');
-  fireEvent.change(input as Element, { target: { value: '5555555' } });
-  // expect(screen.getByDisplayValue('Type your message here...')).toBe(true);
+  fireEvent.change(input as Element, { target: { value: 'test' } });
+  expect(setMessage.mock.calls[0][0]).toBe('test');
 });
