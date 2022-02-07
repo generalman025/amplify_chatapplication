@@ -1,4 +1,4 @@
-describe('add comment', () => {
+describe('03 - add comment', () => {
 
   it('visit', () => {
     cy.visit('http://localhost:3000');
@@ -40,7 +40,7 @@ describe('add comment', () => {
   });
 
   it('go to chat room and add comment', () => {
-    cy.get('#preferredUsername').wait(2000);
+    cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 
@@ -48,9 +48,8 @@ describe('add comment', () => {
     const id = uuid()
 
     cy.get('#messageInput').type(id);
-    cy.get('#sendMessage').click();
+    cy.get('#sendMessage').click().wait(3000);
 
-    // TODO: Need to fix subscription feature in local server, issue: https://github.com/aws-amplify/amplify-cli/issues/9621
     cy.visit('http://localhost:3000');
 
     cy.get('#preferredUsername').wait(2000);

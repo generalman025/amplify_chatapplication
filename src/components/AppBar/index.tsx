@@ -21,6 +21,7 @@ export default function AppBar() {
   }, []);
 
   useEffect(() => {
+    console.log('user', user);
     if (user) {
       try {
         user?.getUserAttributes((_error, attrs) => {
@@ -53,6 +54,7 @@ export default function AppBar() {
             {user && username ? `Hello, ${username}` : ''}
           </Typography>
           <Button
+            id='logoutButton-1'
             type="submit"
             onClick={() => handleLogout()}
             color="inherit"

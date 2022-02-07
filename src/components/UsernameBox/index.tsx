@@ -36,6 +36,7 @@ export default function UsernameBox() {
 
   useEffect(() => {
     if (authState === AuthState.SignedIn && user) {
+      console.log(authState, user);
       try {
         user?.getUserAttributes((_error, attrs) => {
           const preferredUsername = attrs?.find(
@@ -71,7 +72,7 @@ export default function UsernameBox() {
           ></TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" onClick={modifyUsername}>
+          <Button id="changeUsernameButton" variant="contained" onClick={modifyUsername}>
             <Typography color="common.white">Proceed to Chat Room</Typography>
           </Button>
         </Grid>
