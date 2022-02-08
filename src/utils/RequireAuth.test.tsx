@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
-
+// TODO : FIX UNIT TEST
 describe('Unit Testing : RequireAuth', () => {
   let realAuth: any;
 

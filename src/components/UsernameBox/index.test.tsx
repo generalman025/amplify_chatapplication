@@ -10,7 +10,7 @@ import {
   UtilContext,
   utilContextDefaultValue
 } from '../../context/UtilContext';
-
+// TODO : FIX UNIT TEST
 describe('Unit Testing : UsernameBox', () => {
   test('Should render a textbox', () => {
     const component = shallow(<UsernameBox />);
