@@ -8,18 +8,18 @@ import UserListsBox from ".";
 describe('Unit Testing : UserListBox', () => {
     let realConsoleError: any;
     let realAPIGet: any;
-    // beforeAll(() => {
-    //     realConsoleError = console.error;
-    //     console.error = jest.fn(); // suppress warnings
+    beforeAll(() => {
+        realConsoleError = console.error;
+        console.error = jest.fn(); // suppress warnings
 
-    //     realAPIGet = API.get;
-    // })
+        realAPIGet = API.get;
+    })
 
-    // afterAll(() => {
-    //     console.error = realConsoleError;
+    afterAll(() => {
+        console.error = realConsoleError;
 
-    //     API.get = realAPIGet;
-    // })
+        API.get = realAPIGet;
+    })
 
     test('Should display an alert', () => {
         API.get = jest.fn().mockImplementation(() => {
