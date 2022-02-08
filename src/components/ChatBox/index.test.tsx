@@ -4,9 +4,17 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import ChatBox from ".";
 
-test('', () => {
-    const spy = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    shallow(<ChatBox />);
-    expect(true).toBeTruthy();
-    spy.mockRestore();
+test('Should display a chat box', () => {
+    const component = mount(<ChatBox />);
+    expect(component).toHaveLength(1);
+})
+
+test('Should display a textfield', () => {
+    const component = mount(<ChatBox />);
+    expect(component.find('MessageInput')).toHaveLength(1);
+})
+
+test('Should display a sending button', () => {
+    const component = mount(<ChatBox />);
+    expect(component).toHaveLength(1);
 })

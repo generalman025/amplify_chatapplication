@@ -5,7 +5,7 @@ test('Should display an alert', () => {
     expect(component.props.open).toEqual(true);
 });
 
-test('Should not call onSuccess when showing an error alert', () => {
+test('Should call onSuccess', () => {
     const onSuccess = jest.fn();
     const component = Alert({showAlert:true, alertMessage:'', severity: SeverityType.success, setShowAlert: jest.fn(), onSuccess: onSuccess});
     component.props.onClose();

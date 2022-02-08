@@ -9,7 +9,7 @@ test('Should display a placeholder', () => {
   expect(input).toBeInTheDocument();
 });
 
-test('Should set a message', () => {
+test('Should display an input message', () => {
   const setMessage = jest.fn();
   const dom = render(<MessageInput message="" setMessage={setMessage} handleSubmit={() => true} />);
   const input = dom.container.querySelector('#messageInput');

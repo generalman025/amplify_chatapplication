@@ -52,7 +52,7 @@ describe('03 - add comment', () => {
 
     cy.visit('http://localhost:3000');
 
-    cy.get('#preferredUsername').wait(2000);
+    cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 

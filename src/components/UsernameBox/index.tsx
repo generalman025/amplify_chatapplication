@@ -36,9 +36,8 @@ export default function UsernameBox() {
 
   useEffect(() => {
     if (authState === AuthState.SignedIn && user) {
-      console.log(authState, user);
       try {
-        user?.getUserAttributes((_error, attrs) => {
+        user.getUserAttributes((_error, attrs) => {
           const preferredUsername = attrs?.find(
             (a) => a.Name === 'preferred_username'
           );
