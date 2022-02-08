@@ -21,10 +21,9 @@ export default function AppBar() {
   }, []);
 
   useEffect(() => {
-    console.log('user', user);
     if (user) {
       try {
-        user?.getUserAttributes((_error, attrs) => {
+        user.getUserAttributes((_error, attrs) => {
           if (attrs) {
             const attribute = attrs.find(
               (attr) => attr.Name === 'preferred_username'
@@ -54,7 +53,7 @@ export default function AppBar() {
             {user && username ? `Hello, ${username}` : ''}
           </Typography>
           <Button
-            id='logoutButton-1'
+            id='logoutButton'
             type="submit"
             onClick={() => handleLogout()}
             color="inherit"

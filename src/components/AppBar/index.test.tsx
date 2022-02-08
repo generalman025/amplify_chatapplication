@@ -82,7 +82,7 @@ test('ccc', () => {
       <AuthContext.Provider value={{
         ...authContextDefaultValue,
         authState: AuthState.SignedIn,
-        user: { getUserAttributes: () => ([{ Name: 'preferred_username', Value: 'test' }]) } as unknown as CognitoUser,
+        user: { getUserAttributes: ((_error:any, attrs:any = [{ Name: 'preferred_username', Value: 'test' }]) => jest.fn()) } as unknown as CognitoUser,
         username: 'test'
       }}>
         <AppBar />
@@ -90,7 +90,7 @@ test('ccc', () => {
     </UtilContext.Provider></MemoryRouter>
   ));
 
-  x.find('#logoutButton-1').last().simulate('click');
+  x.find('#logoutButton').last().simulate('click');
 
   waitFor(() => {
     expect(zz).toBeCalled();

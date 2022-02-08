@@ -2,6 +2,9 @@ import * as cdk from '@aws-cdk/core';
 import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
 import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
 import { CfnWebACL, CfnWebACLAssociation } from '@aws-cdk/aws-wafv2';
+import {App as amplifyApp, RedirectStatus} from '@aws-cdk/aws-amplify';
+import { App } from '@aws-cdk/core';
+// import teamProviderInfo from '../../../team-provider-info.json';
 
 export class cdkStack extends cdk.Stack {
   constructor(
@@ -17,7 +20,9 @@ export class cdkStack extends cdk.Stack {
       description: 'Current Amplify CLI env name'
     });
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
-
+    
+    const envName = cdk.Fn.ref('env');
+    
     const dependencies: AmplifyDependentResourcesAttributes =
       AmplifyHelpers.addResourceDependency(
         this,
@@ -31,14 +36,33 @@ export class cdkStack extends cdk.Stack {
           {
             category: 'api',
             resourceName: 'amplifychatapp'
-          },
-          {
-            category: 'hosting',
-            resourceName: 'S3AndCloudFront'
           }
         ]
       );
-
+      
+      
+      // const amplifyAppId = teamProviderInfo[envName]['awscloudformation']['AmplifyAppId'];
+      // const app = amplifyApp.fromAppId(this, 'amplifyApp', 'd20w4auefqqjdb');
+      
+      // new amplifyApp(this, 'id', {
+      //   appName: 'amplifychatapp',        
+      //   customRules: [
+      //     {
+      //       source:
+      //         "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+      //       target: "/index.html",
+      //       status: RedirectStatus.REWRITE,
+      //     }
+      //   ]
+      // });
+      
+      // app.addCustomRule({
+      //   source:
+      //     "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+      //   target: "/index.html",
+      //   status: RedirectStatus.REWRITE,
+      // });
+      
     const apiGatewayId = cdk.Fn.ref(dependencies.api.listUsersApi.ApiId);
 
     const appSyncId = cdk.Fn.ref(
@@ -46,7 +70,7 @@ export class cdkStack extends cdk.Stack {
     );
 
     const webAcl = new CfnWebACL(this, 'WebACL', {
-      name: `WebACL-${cdk.Fn.ref('env')}`,
+      name: `WebACL-${envName}`,
       defaultAction: {
         allow: {}
       },
@@ -65,7 +89,7 @@ export class cdkStack extends cdk.Stack {
       {
         resourceArn: `arn:aws:apigateway:${
           cdk.Aws.REGION
-        }::/restapis/${apiGatewayId}/stages/${cdk.Fn.ref('env')}`,
+        }::/restapis/${apiGatewayId}/stages/${envName}`,
         webAclArn: webAcl.attrArn
       }
     );

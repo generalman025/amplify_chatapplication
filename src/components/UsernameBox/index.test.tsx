@@ -36,9 +36,9 @@ test('Should render a textbox', () => {
 });
 
 test('Should render a button', () => {
-
+  
   const x = mount(
-    <UtilContext.Provider value={{...utilContextDefaultValue, callAlert: jest.fn()}}>
+    <UtilContext.Provider value={{ ...utilContextDefaultValue, callAlert: jest.fn() }}>
       <AuthContext.Provider value={{
         ...authContextDefaultValue,
         authState: AuthState.SignedIn,
@@ -48,7 +48,7 @@ test('Should render a button', () => {
       </AuthContext.Provider>
     </UtilContext.Provider>
   );
-
+  
   waitFor(() => {
     const linkElement = screen.getByText(/Proceed to Chat Room/i);
     expect(linkElement).toBeInTheDocument();

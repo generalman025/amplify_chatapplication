@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
@@ -62,7 +62,7 @@ export default function ChatBox() {
     return unsubscribe;
   }, []);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setMessage('');
 
@@ -80,7 +80,7 @@ export default function ChatBox() {
           callAlert(true, error.message, SeverityType.error);
       }
     }
-  };
+  }, []);
 
   return (
     <Grid container>
