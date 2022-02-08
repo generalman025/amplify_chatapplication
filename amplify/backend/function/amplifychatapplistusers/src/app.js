@@ -22,7 +22,7 @@ const AWS = require('aws-sdk')
 // declare a new express app
 let helmet = require("helmet")
 var app = express()
-app.use(helmet.hidePoweredBy())
+app.use(helmet())
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
