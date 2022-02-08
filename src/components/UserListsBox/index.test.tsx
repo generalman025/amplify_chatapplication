@@ -1,65 +1,60 @@
-import { render, waitFor } from "@testing-library/react";
-import { API } from "aws-amplify";
-import { shallow } from "enzyme";
-import React, { useEffect } from "react";
-import UserListsBox from ".";
+import { waitFor } from '@testing-library/react';
+import { API } from 'aws-amplify';
+import { mount } from 'enzyme';
+import UserListsBox from '.';
 
-let realFetchAllUsers: any;
-let realAPI: any;
+describe('Unit Testing : UserListBox', () => {
+  let realConsoleError: any;
+  let realAPIGet: any;
+//   beforeAll(() => {
+//     realConsoleError = console.error;
+//     console.error = jest.fn(); // suppress warnings
 
-// Setup mock
-beforeEach(() => {
-    realAPI = (global as any).API;
-    realFetchAllUsers = (global as any).fetchAllUsers;
-});
+//     realAPIGet = API.get;
+//   });
 
-// Cleanup mock
-afterEach(() => {
-    (global as any).API = realAPI;
-    (global as any).fetchAllUsers = realFetchAllUsers;
-});
+//   afterAll(() => {
+//     console.error = realConsoleError;
 
-test('Should display an alert', () => {
-    const setStateMock = jest.fn();
-    const fakeResponse = { title: 'example text' };
-    const mRes = { json: jest.fn().mockResolvedValueOnce(fakeResponse) };
-    const mockedFetchAllUsers = jest.fn().mockResolvedValueOnce(mRes as any);
-    (global as any).fetchAllUsers = mockedFetchAllUsers;
+//     API.get = realAPIGet;
+//   });
 
-    setStateMock(() => ({
-        users: [
-            {
-                Attributes: [
-                    {
-                        Name: "preferred_username",
-                        Value: "test",
-                    }
-                ]
-            }
-        ]
-    }));
+  test('Should display an alert', () => {
+    // API.get = jest.fn().mockImplementation(() => {
+    //   return Promise.resolve({
+    //     users: [
+    //       {
+    //         Attributes: [
+    //           {
+    //             Name: 'preferred_username',
+    //             Value: 'test1'
+    //           }
+    //         ]
+    //       },
+    //       {
+    //         Attributes: [
+    //           {
+    //             Name: 'preferred_username',
+    //             Value: 'test2'
+    //           }
+    //         ]
+    //       },
+    //       {
+    //         Attributes: [
+    //           {
+    //             Name: 'preferred_username',
+    //             Value: 'test3'
+    //           }
+    //         ]
+    //       }
+    //     ]
+    //   });
+    // });
 
-    API.get = jest.fn().mockImplementation(() => {
-        return Promise.resolve({
-            users: [
-                {
-                    Attributes: [
-                        {
-                            Name: "preferred_username",
-                            Value: "test",
-                        }
-                    ]
-                }
-            ]
-        });
-    })
-
-    const prop = {
-        fetchAllUsers: jest.fn()
-    }
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-
+    let component: any;
+    component = mount(<UserListsBox />);
     waitFor(() => {
-        const { getDOMNode } = shallow(<UserListsBox />);
-    })
+        component.setState({ allUsers: API.get });
+    });
+  });
 });

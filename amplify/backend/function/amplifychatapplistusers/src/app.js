@@ -22,13 +22,13 @@ const AWS = require('aws-sdk')
 // declare a new express app
 let helmet = require("helmet")
 var app = express()
-app.use(helmet.hidePoweredBy())
+app.use(helmet())
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
-  let allowedOrigins = ["https://chatapp.g025app.com, https://chatapp-dev.g025app.com"];
+  let allowedOrigins = ["https://chatapp.g025app.com", "https://chatapp-dev.g025app.com"];
   let origin = req.headers.origin;
   if(allowedOrigins.includes(origin)){
     res.header("Access-Control-Allow-Origin", origin)

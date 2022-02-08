@@ -12,10 +12,10 @@ import Observable from 'zen-observable-ts';
 import MessageInput from './MessageInput';
 import MessageBox from './MessageBox';
 import { SeverityType } from '../Alert';
-import styles from '../../styles/Home.module.css';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
+import styles from '../../styles/Message.module.css';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
@@ -62,25 +62,28 @@ export default function ChatBox() {
     return unsubscribe;
   }, []);
 
-  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setMessage('');
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setMessage('');
 
-    if (user) {
-      const input = {
-        message,
-        owner: user.getUsername(),
-        preferredUsername: username
-      };
+      if (user) {
+        const input = {
+          message,
+          owner: user.getUsername(),
+          preferredUsername: username
+        };
 
-      try {
-        await API.graphql(graphqlOperation(createMessage, { input }));
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+        try {
+          await API.graphql(graphqlOperation(createMessage, { input }));
+        } catch (error) {
+          if (error instanceof Error)
+            callAlert(true, error.message, SeverityType.error);
+        }
       }
-    }
-  }, [user, username, message]);
+    },
+    [user, username, message]
+  );
 
   return (
     <Grid container>

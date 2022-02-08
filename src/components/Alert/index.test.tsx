@@ -1,20 +1,40 @@
 import Alert, { SeverityType } from '.';
 
-test('Should display an alert', () => {
-    const component = Alert({showAlert:true, alertMessage:'', severity: SeverityType.success, setShowAlert: jest.fn(), onSuccess: jest.fn()});
+describe('Unit Testing : Alert', () => {
+  test('Should display an alert', () => {
+    const component = Alert({
+      showAlert: true,
+      alertMessage: '',
+      severity: SeverityType.success,
+      setShowAlert: jest.fn(),
+      onSuccess: jest.fn()
+    });
     expect(component.props.open).toEqual(true);
-});
+  });
 
-test('Should call onSuccess', () => {
+  test('Should call an onSuccess event', () => {
     const onSuccess = jest.fn();
-    const component = Alert({showAlert:true, alertMessage:'', severity: SeverityType.success, setShowAlert: jest.fn(), onSuccess: onSuccess});
+    const component = Alert({
+      showAlert: true,
+      alertMessage: '',
+      severity: SeverityType.success,
+      setShowAlert: jest.fn(),
+      onSuccess: onSuccess
+    });
     component.props.onClose();
     expect(onSuccess).toBeCalled();
-});
+  });
 
-test('Should not call onSuccess when showing an error alert', () => {
+  test('Should not call an onSuccess event on error', () => {
     const onSuccess = jest.fn();
-    const component = Alert({showAlert:true, alertMessage:'', severity: SeverityType.error, setShowAlert: jest.fn(), onSuccess: onSuccess});
+    const component = Alert({
+      showAlert: true,
+      alertMessage: '',
+      severity: SeverityType.error,
+      setShowAlert: jest.fn(),
+      onSuccess: onSuccess
+    });
     component.props.onClose();
     expect(onSuccess).toBeCalledTimes(0);
+  });
 });

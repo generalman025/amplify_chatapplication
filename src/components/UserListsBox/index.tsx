@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { API } from 'aws-amplify';
-import { IUser } from '../../interfaces/IUser';
 import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
@@ -13,15 +12,11 @@ import {
 } from '@mui/material';
 import { Person } from '@mui/icons-material';
 
-class ListUserApi {
-  users: IUser[] | undefined;
-}
-
 export default function UserListsBox() {
-  const [allUsers, setAllUsers] = useState<IUser[]>();
+  const [allUsers, setAllUsers] = useState<User[]>();
   const { user } = useContext(AuthContext);
   const { callAlert } = useContext(UtilContext);
-  
+
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -36,14 +31,14 @@ export default function UserListsBox() {
           callAlert(true, error.message, SeverityType.error);
       }
     };
-    
+
     fetchAllUsers();
   }, []);
 
   return (
     <List dense={true}>
       {allUsers &&
-        allUsers.map((iu: IUser) => {
+        allUsers.map((iu: User) => {
           const preferredUsername = iu.Attributes.find(
             (usr) => usr.Name === 'preferred_username'
           );
@@ -66,3 +61,17 @@ export default function UserListsBox() {
     </List>
   );
 }
+
+type ListUserApi = {
+  users: User[] | undefined;
+};
+
+type User = {
+  Attributes: [
+    {
+      Name: string;
+      Value: string;
+    }
+  ];
+  Username: string;
+};
