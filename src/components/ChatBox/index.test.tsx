@@ -4,18 +4,17 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import ChatBox from ".";
 
-test('', () => {
-    // const spy = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    // const spy2 = jest.spyOn(React, 'useCallback').mockImplementationOnce(() => 'test');
-    // const zz = jest.fn();
-    // const realHandleSubmit = (global as any).handleSubmit;
-    // (global as any).handleSubmit = zz;
+test('Should display a chat box', () => {
+    const component = mount(<ChatBox />);
+    expect(component).toHaveLength(1);
+})
 
-    // const cond = mount(<ChatBox />);
-    // cond.find('#messageInput').last().prop('handleSubmit');
-    
-    expect(true).toBeTruthy();
-    // spy.mockRestore();
-    // spy2.mockRestore();
-    // (global as any).handleSubmit = realHandleSubmit;
+test('Should display a textfield', () => {
+    const component = mount(<ChatBox />);
+    expect(component.find('MessageInput')).toHaveLength(1);
+})
+
+test('Should display a sending button', () => {
+    const component = mount(<ChatBox />);
+    expect(component).toHaveLength(1);
 })

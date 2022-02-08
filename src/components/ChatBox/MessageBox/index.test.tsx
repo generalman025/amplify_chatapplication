@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import MessageBox from '.'
 
-test('', () => {
-    shallow(<MessageBox message={{
+test('Should display an owner message style', () => {
+    const component = shallow(<MessageBox message={{
         __typename: 'Message',
         id: '',
         owner: '',
@@ -11,12 +11,12 @@ test('', () => {
         createdAt: '',
         updatedAt: ''
     }} isMe={true} />);
-    expect(true).toBeTruthy();
+    expect(component.find('.sentMessageContainer')).toHaveLength(1);
 })
 
 
-test('', () => {
-    shallow(<MessageBox message={{
+test('Should display an owner style', () => {
+    const component = shallow(<MessageBox message={{
         __typename: 'Message',
         id: '',
         owner: '',
@@ -25,5 +25,5 @@ test('', () => {
         createdAt: '',
         updatedAt: ''
     }} isMe={false} />);
-    expect(true).toBeTruthy();
+    expect(component.find('.receivedMessageContainer')).toHaveLength(1);
 })

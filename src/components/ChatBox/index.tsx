@@ -80,7 +80,7 @@ export default function ChatBox() {
           callAlert(true, error.message, SeverityType.error);
       }
     }
-  }, []);
+  }, [user, username, message]);
 
   return (
     <Grid container>
