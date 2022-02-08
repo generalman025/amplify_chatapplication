@@ -30,15 +30,14 @@ describe('Unit Testing : RequireAuth', () => {
         ]
       });
     });
+    
+    const component = shallow(
+      <MemoryRouter>
+        <RequireAuth />
+      </MemoryRouter>
+    );
 
-    waitFor(() => {
-      const component = mount(
-        <MemoryRouter>
-          <RequireAuth />
-        </MemoryRouter>
-      );
-      console.log(component.debug());
-    });
+    console.log(component.debug());
   });
 
   test('Should render a loading text', () => {
