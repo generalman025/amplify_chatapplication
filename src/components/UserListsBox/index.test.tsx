@@ -1,7 +1,6 @@
 import { waitFor } from "@testing-library/react";
 import { API } from "aws-amplify";
-import { mount, shallow } from "enzyme";
-import React from "react";
+import { mount } from "enzyme";
 import UserListsBox from ".";
 
 

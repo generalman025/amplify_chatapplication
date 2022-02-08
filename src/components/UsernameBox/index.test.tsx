@@ -20,7 +20,7 @@ describe('Unit Testing : UsernameBox', () => {
   });
 
   test('Should render a button', () => {
-    const component = mount(
+    mount(
       <UtilContext.Provider value={{ ...utilContextDefaultValue, callAlert: jest.fn() }}>
         <AuthContext.Provider value={{
           ...authContextDefaultValue,

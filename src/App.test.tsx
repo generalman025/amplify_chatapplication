@@ -1,5 +1,4 @@
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
-import { render, screen } from '@testing-library/react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';

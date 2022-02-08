@@ -1,5 +1,5 @@
-import { screen, render, waitFor } from '@testing-library/react';
-import Amplify, { Auth } from 'aws-amplify';
+import { waitFor } from '@testing-library/react';
+import { Auth } from 'aws-amplify';
 import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
@@ -34,7 +34,6 @@ describe('Unit Testing : RequireAuth', () => {
         
         waitFor(() => {    
             const component = mount(<MemoryRouter><RequireAuth /></MemoryRouter>);
-            // expect(component.findAllByDisplayValue('Loading...')).toHaveLength(1);
             console.log(component.debug());
         })
       });
