@@ -16,7 +16,7 @@ export default function UserListsBox() {
   const [allUsers, setAllUsers] = useState<User[]>();
   const { user } = useContext(AuthContext);
   const { callAlert } = useContext(UtilContext);
-  
+
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -31,7 +31,7 @@ export default function UserListsBox() {
           callAlert(true, error.message, SeverityType.error);
       }
     };
-    
+
     fetchAllUsers();
   }, []);
 
@@ -64,7 +64,7 @@ export default function UserListsBox() {
 
 type ListUserApi = {
   users: User[] | undefined;
-}
+};
 
 type User = {
   Attributes: [
@@ -74,4 +74,4 @@ type User = {
     }
   ];
   Username: string;
-}
+};

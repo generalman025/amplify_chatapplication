@@ -62,25 +62,28 @@ export default function ChatBox() {
     return unsubscribe;
   }, []);
 
-  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setMessage('');
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setMessage('');
 
-    if (user) {
-      const input = {
-        message,
-        owner: user.getUsername(),
-        preferredUsername: username
-      };
+      if (user) {
+        const input = {
+          message,
+          owner: user.getUsername(),
+          preferredUsername: username
+        };
 
-      try {
-        await API.graphql(graphqlOperation(createMessage, { input }));
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+        try {
+          await API.graphql(graphqlOperation(createMessage, { input }));
+        } catch (error) {
+          if (error instanceof Error)
+            callAlert(true, error.message, SeverityType.error);
+        }
       }
-    }
-  }, [user, username, message]);
+    },
+    [user, username, message]
+  );
 
   return (
     <Grid container>

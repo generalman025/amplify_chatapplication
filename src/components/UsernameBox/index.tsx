@@ -71,7 +71,11 @@ export default function UsernameBox() {
           ></TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button id="changeUsernameButton" variant="contained" onClick={modifyUsername}>
+          <Button
+            id="changeUsernameButton"
+            variant="contained"
+            onClick={modifyUsername}
+          >
             <Typography color="common.white">Proceed to Chat Room</Typography>
           </Button>
         </Grid>

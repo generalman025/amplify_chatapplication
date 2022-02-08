@@ -20,4 +20,4 @@ export default function MessageBox({ message, isMe }: MessageBoxProps) {
 type MessageBoxProps = {
   message: Message;
   isMe: boolean;
-}
+};
