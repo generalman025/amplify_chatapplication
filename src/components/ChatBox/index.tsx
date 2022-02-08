@@ -12,10 +12,10 @@ import Observable from 'zen-observable-ts';
 import MessageInput from './MessageInput';
 import MessageBox from './MessageBox';
 import { SeverityType } from '../Alert';
-import styles from '../../styles/Home.module.css';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
+import styles from '../../styles/Message.module.css';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());

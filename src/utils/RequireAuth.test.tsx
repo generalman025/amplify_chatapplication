@@ -1,10 +1,10 @@
 import { screen, render, waitFor } from '@testing-library/react';
 import Amplify, { Auth } from 'aws-amplify';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
 
-describe('', () => {
+describe('Unit Testing : RequireAuth', () => {
     let realAuth: any;
 
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe('', () => {
         (global as any).Auth = realAuth;
     });
     
-    test('Should render a loading text', () => {
+    test('Should renders a loading text', () => {
         Auth.currentAuthenticatedUser = jest.fn().mockImplementation(() => {
             return Promise.resolve({
                 users: [
@@ -31,10 +31,11 @@ describe('', () => {
             });
         })
 
-        const component = render(<MemoryRouter><RequireAuth /></MemoryRouter>);
         
         waitFor(() => {    
-            expect(component.findAllByDisplayValue('Loading...')).toHaveLength(1);
+            const component = mount(<MemoryRouter><RequireAuth /></MemoryRouter>);
+            // expect(component.findAllByDisplayValue('Loading...')).toHaveLength(1);
+            console.log(component.debug());
         })
       });
 

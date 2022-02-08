@@ -1,12 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import { Send } from '@mui/icons-material';
-import styles from '../../../styles/Home.module.css';
-
-type MessageInputProps = {
-  message: string;
-  setMessage: (message: string) => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-};
+import styles from '../../../styles/Message.module.css';
 
 export default function MessageInput({
   message,
@@ -38,3 +32,9 @@ export default function MessageInput({
     </form>
   );
 }
+
+type MessageInputProps = {
+  message: string;
+  setMessage: (message: string) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+};

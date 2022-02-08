@@ -1,7 +1,7 @@
-import { IMessage } from '../../../interfaces/IMessage';
+import { Message } from '../../../API';
 import styles from '../../../styles/Message.module.css';
 
-export default function MessageBox({ message, isMe }: IMessage) {
+export default function MessageBox({ message, isMe }: MessageBoxProps) {
   return (
     <div
       className={
@@ -15,4 +15,9 @@ export default function MessageBox({ message, isMe }: IMessage) {
       </div>
     </div>
   );
+}
+
+type MessageBoxProps = {
+  message: Message;
+  isMe: boolean;
 }

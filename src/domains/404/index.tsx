@@ -1,4 +1,4 @@
-import './index.css';
+import '../../styles/Notfound.css';
 
 const NotFound = () => (
   <section className="page_404">

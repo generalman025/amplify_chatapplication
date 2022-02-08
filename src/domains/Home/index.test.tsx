@@ -1,16 +1,31 @@
+import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import { mount } from "enzyme";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import Home from ".";
-import { SeverityType } from "../../components/Alert";
-import { UtilContext, utilContextDefaultValue } from "../../context/UtilContext";
+import Alert from "../../components/Alert";
+import AppBar from "../../components/AppBar";
+import UsernameBox from "../../components/UsernameBox";
 
-test('', () => {
-    const zz = jest.fn();
-    (global as any).proceedToChatRoom = zz;
-    const comp = mount(<BrowserRouter>
-    <UtilContext.Provider value={{ ...utilContextDefaultValue, callAlert: jest.fn(), showAlert:true, severity: SeverityType.success }}>
-    <Home />
-    </UtilContext.Provider>
-    </BrowserRouter>);
-    expect(true).toBeTruthy();
+describe('Unit Testing : Home', () => {
+
+    test('Should contains an authenticator', () => {
+        const component = mount(<MemoryRouter><Home /></MemoryRouter>);
+        expect(component.find(AmplifyAuthenticator)).toHaveLength(1);
+    });
+
+    test('Should contains an application bar', () => {
+        const component = mount(<MemoryRouter><Home /></MemoryRouter>);
+        expect(component.find(AppBar)).toHaveLength(1);
+    });
+
+    test('Should contains an username box', () => {
+        const component = mount(<MemoryRouter><Home /></MemoryRouter>);
+        expect(component.find(UsernameBox)).toHaveLength(1);
+    });
+
+    test('Should contains an alert box', () => {
+        const component = mount(<MemoryRouter><Home /></MemoryRouter>);
+        expect(component.find(Alert)).toHaveLength(1);
+    });
+
 })

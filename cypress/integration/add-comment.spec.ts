@@ -15,7 +15,7 @@ describe('03 - add comment', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('bass.kiattisak@gmail.com');
+      .type('kiattisak_c@tripetch-it.co.th'); // TODO: - Hiding from repository
 
     cy.get('amplify-authenticator')
       .shadow()
@@ -27,7 +27,7 @@ describe('03 - add comment', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('ke3f7890', { force: true });
+      .type('ke3f7890', { force: true }); // TODO: - Hiding from repository
 
     cy.get('amplify-authenticator')
       .shadow()
@@ -58,6 +58,5 @@ describe('03 - add comment', () => {
 
     cy.get('[data-test=chatbox').should('contain', id);
   });
-
 
 });

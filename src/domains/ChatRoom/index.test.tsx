@@ -1,31 +1,42 @@
-import React from "react";
+import { mount } from "enzyme";
 import ChatRoom from ".";
-import { mount, render, shallow } from "enzyme";
-import {AuthContextProvider} from '../../context/AuthContext';
-import { ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { waitFor } from "@testing-library/react";
-
-const mockedUsedNavigate = jest.fn();
+import UserListsBox from "../../components/UserListsBox";
+import ChatBox from "../../components/ChatBox";
+import Alert from "../../components/Alert";
 
 jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom') as any,
-    useNavigate: () => mockedUsedNavigate,
+  ...jest.requireActual('react-router-dom') as any,
+  useNavigate: () => jest.fn(),
 }));
 
 jest.mock('react', () => ({
-    ...jest.requireActual('react'),
-    useLayoutEffect: jest.requireActual('react').useEffect,
-  }));
+  ...jest.requireActual('react'),
+  useLayoutEffect: jest.requireActual('react').useEffect,
+}));
 
-test('Should display an alert', () => {
+describe('Unit Testing : ChatRoom', () => {
+  let realConsoleWarning: any;
+  beforeAll(() => {
+    realConsoleWarning = console.warn;
+    console.warn = jest.fn(); // suppress warnings
+  })
 
-    const spy = jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+  afterAll(() => {
+    console.warn = realConsoleWarning;
+  })
 
-      waitFor(() => {
-          render(<ChatRoom />);
-          expect(true).toBeTruthy();
-      })
+  test('Should contains a user list box', () => {
+    const component = mount(<ChatRoom />);
+    expect(component.find(UserListsBox)).toHaveLength(1);
+  });
 
-      spy.mockRestore();
-});
+  test('Should contains a chat box', () => {
+    const component = mount(<ChatRoom />);
+    expect(component.find(ChatBox)).toHaveLength(1);
+  });
+
+  test('Should contains an alert box', () => {
+    const component = mount(<ChatRoom />);
+    expect(component.find(Alert)).toHaveLength(1);
+  });
+})
