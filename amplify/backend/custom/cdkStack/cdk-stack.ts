@@ -134,20 +134,20 @@ export class cdkStack extends cdk.Stack {
     //   functionArn
     // );
 
-    const sourceBurcket = Bucket.fromBucketArn(this, 'sourceBucket', 'arn:aws:s3:::cdk-lambda-src');
-    const awsCliLayer = new AwsCliLayer(this, 'AwsCliLayer');
-    const awsCliLayerVersion = LayerVersion.fromLayerVersionArn(
-      this,
-      'LayerVersion',
-      awsCliLayer.layerVersionArn
-    );
-    const awsCliFunc = new Function(this, 'awsCliFunction', {
-      functionName: `chatapp-${envName}-awscli`,
-      code: Code.fromBucket(sourceBurcket, 'aws-cli-function.zip'),
-      runtime: Runtime.PROVIDED,
-      handler: 'index.handler',
-      layers: [awsCliLayerVersion],
-      timeout: cdk.Duration.seconds(300)
-    });
+    // const sourceBurcket = Bucket.fromBucketArn(this, 'sourceBucket', 'arn:aws:s3:::cdk-lambda-src');
+    // const awsCliLayer = new AwsCliLayer(this, 'AwsCliLayer');
+    // const awsCliLayerVersion = LayerVersion.fromLayerVersionArn(
+    //   this,
+    //   'LayerVersion',
+    //   awsCliLayer.layerVersionArn
+    // );
+    // const awsCliFunc = new Function(this, 'awsCliFunction', {
+    //   functionName: `chatapp-${envName}-awscli`,
+    //   code: Code.fromBucket(sourceBurcket, 'aws-cli-function.zip'),
+    //   runtime: Runtime.PROVIDED,
+    //   handler: 'index.handler',
+    //   layers: [awsCliLayerVersion],
+    //   timeout: cdk.Duration.seconds(300)
+    // });
   }
 }
