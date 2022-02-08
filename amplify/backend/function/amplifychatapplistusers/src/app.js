@@ -28,7 +28,7 @@ app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
-  let allowedOrigins = ["https://chatapp.g025app.com", "https://chatapp-dev.g025app.com"];
+  let allowedOrigins = ["https://chatapp.g025app.com", "https://chatapp-dev.g025app.com", process.env.CLOUDFRONT_URL];
   let origin = req.headers.origin;
   if(allowedOrigins.includes(origin)){
     res.header("Access-Control-Allow-Origin", origin)
@@ -42,7 +42,7 @@ app.get('/users', function(req, res) {
   var params = {
     UserPoolId: process.env.AUTH_AMPLIFYCHATAPP_USERPOOLID
   };
-  
+
   serviceProvider.listUsers(params, function(err, data) {
     if (err) {
       return res.status(500).json(err)

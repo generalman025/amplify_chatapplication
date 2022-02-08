@@ -1,0 +1,9 @@
+{
+  "permissions": {},
+  "lambdaLayers": [
+    {
+      "type": "ExternalLayer",
+      "arn": "arn:aws:lambda:ap-southeast-1:131485244922:layer:serverlessrepo-lambda-layer-awscli:1"
+    }
+  ]
+}

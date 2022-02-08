@@ -11,7 +11,7 @@ export const awsManagedRules: WafRule[] = [
     name: 'AWS-AWSManagedRulesCommonRuleSet',
     rule: {
       name: 'AWS-AWSManagedRulesCommonRuleSet',
-      priority: 20,
+      priority: 10,
       statement: {
         managedRuleGroupStatement: {
           vendorName: 'AWS',
@@ -39,7 +39,7 @@ export const awsManagedRules: WafRule[] = [
     name: 'AWS-AWSManagedRulesAmazonIpReputationList',
     rule: {
       name: 'AWS-AWSManagedRulesAmazonIpReputationList',
-      priority: 10,
+      priority: 20,
       statement: {
         managedRuleGroupStatement: {
           vendorName: 'AWS',
@@ -74,29 +74,6 @@ export const awsManagedRules: WafRule[] = [
           managedRuleGroupStatement: {
             vendorName: 'AWS',
             name: 'AWSManagedRulesSQLiRuleSet',
-            excludedRules: []
-          }
-        }
-      }
-    },
-    // Blocks attacks targeting LFI(Local File Injection) for linux systems
-    {
-      name: 'AWSManagedRuleLinux',
-      rule: {
-        name: 'AWSManagedRuleLinux',
-        priority: 50,
-        visibilityConfig: {
-          sampledRequestsEnabled: true,
-          cloudWatchMetricsEnabled: true,
-          metricName: 'AWSManagedRuleLinux'
-        },
-        overrideAction: {
-          none: {}
-        },
-        statement: {
-          managedRuleGroupStatement: {
-            vendorName: 'AWS',
-            name: 'AWSManagedRulesLinuxRuleSet',
             excludedRules: []
           }
         }
