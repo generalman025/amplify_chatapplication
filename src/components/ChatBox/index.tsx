@@ -49,7 +49,7 @@ export default function ChatBox() {
             response.value.data.onCreateMessage as Message
           ]);
         },
-        error: (error) => {
+        error: (_) => {
           callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
       });
