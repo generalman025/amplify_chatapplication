@@ -1,6 +1,5 @@
-import { waitFor } from '@testing-library/react';
 import { API } from 'aws-amplify';
-import { mount, render } from 'enzyme';
+import { mount } from 'enzyme';
 import UserListsBox from '.';
 
 describe('Unit Testing : UserListBox', () => {
@@ -19,42 +18,12 @@ describe('Unit Testing : UserListBox', () => {
     API.get = realAPIGet;
   });
 
-  test('Should display an alert', () => {
+  test('Should contain a list', () => {
     API.get = jest.fn().mockImplementation(() => {
-      return Promise.resolve({
-        users: [
-          {
-            Attributes: [
-              {
-                Name: 'preferred_username',
-                Value: 'test1'
-              }
-            ]
-          },
-          {
-            Attributes: [
-              {
-                Name: 'preferred_username',
-                Value: 'test2'
-              }
-            ]
-          },
-          {
-            Attributes: [
-              {
-                Name: 'preferred_username',
-                Value: 'test3'
-              }
-            ]
-          }
-        ]
-      });
+      return Promise.resolve(jest.fn());
     });
 
     let component = mount(<UserListsBox />);
-    waitFor(() => {
-        // component.setState({ allUsers: API.get });
-        console.log(component.html());
-    });
+     expect(component.debug()).toContain('List');
   });
 });

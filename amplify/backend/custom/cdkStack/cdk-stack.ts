@@ -2,14 +2,6 @@ import * as cdk from '@aws-cdk/core';
 import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
 import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
 import { CfnWebACL, CfnWebACLAssociation } from '@aws-cdk/aws-wafv2';
-import { Function, Code, Runtime, LayerVersion } from '@aws-cdk/aws-lambda';
-import { AwsCliLayer } from '@aws-cdk/lambda-layer-awscli';
-import { Bucket } from '@aws-cdk/aws-s3';
-import {
-  AwsCustomResource,
-  AwsCustomResourcePolicy,
-  PhysicalResourceId
-} from '@aws-cdk/custom-resources';
 import { awsManagedRules } from './waf-rules';
 
 export class cdkStack extends cdk.Stack {
@@ -46,10 +38,6 @@ export class cdkStack extends cdk.Stack {
           {
             category: 'function',
             resourceName: 'amplifychatapplistusers'
-          },
-          {
-            category: 'hosting',
-            resourceName: 'S3AndCloudFront'
           }
         ]
       );
@@ -59,29 +47,6 @@ export class cdkStack extends cdk.Stack {
     const appSyncId = cdk.Fn.ref(
       dependencies.api.amplifychatapp.GraphQLAPIIdOutput
     );
-
-    // awsCliFunc.addLayers(layer);
-
-    // const policy = AwsCustomResourcePolicy.fromSdkCalls({
-    //   resources: [func.functionArn]
-    // });
-
-    // new AwsCustomResource(this, 'UpdateEnvVar', {
-    //   onCreate: {
-    //     service: 'Lambda',
-    //     action: 'updateFunctionConfiguration',
-    //     parameters: {
-    //       FunctionName: func.functionArn,
-    //       Environment: {
-    //         Variables: {
-    //           CLOUDFRONT_URL: 'https://dy6j8td40wd7r.cloudfront.net'
-    //         }
-    //       }
-    //     },
-    //     physicalResourceId: PhysicalResourceId.of('listUsersFunction')
-    //   },
-    //   policy: policy
-    // });
 
     const webAcl = new CfnWebACL(this, 'WebACL', {
       name: `WebACL-${envName}`,
@@ -119,35 +84,5 @@ export class cdkStack extends cdk.Stack {
     apiGatewayAssociation.node.addDependency(webAcl);
     appSyncAssociation.node.addDependency(appSyncId);
     appSyncAssociation.node.addDependency(webAcl);
-
-    // const functionArn = cdk.Fn.ref(
-    //   dependencies.function.amplifychatapplistusers.Arn
-    // );
-
-    // const cloudfrontUrl = cdk.Fn.ref(
-    //   dependencies.hosting.S3AndCloudFront.CloudFrontSecureURL
-    // );
-
-    // const func = Function.fromFunctionArn(
-    //   this,
-    //   'listUsersFunction',
-    //   functionArn
-    // );
-
-    // const sourceBurcket = Bucket.fromBucketArn(this, 'sourceBucket', 'arn:aws:s3:::cdk-lambda-src');
-    // const awsCliLayer = new AwsCliLayer(this, 'AwsCliLayer');
-    // const awsCliLayerVersion = LayerVersion.fromLayerVersionArn(
-    //   this,
-    //   'LayerVersion',
-    //   awsCliLayer.layerVersionArn
-    // );
-    // const awsCliFunc = new Function(this, 'awsCliFunction', {
-    //   functionName: `chatapp-${envName}-awscli`,
-    //   code: Code.fromBucket(sourceBurcket, 'aws-cli-function.zip'),
-    //   runtime: Runtime.PROVIDED,
-    //   handler: 'index.handler',
-    //   layers: [awsCliLayerVersion],
-    //   timeout: cdk.Duration.seconds(300)
-    // });
   }
 }
