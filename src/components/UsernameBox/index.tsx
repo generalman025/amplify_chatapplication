@@ -67,7 +67,7 @@ export default function UsernameBox() {
         <Grid item xs={12}>
           <TextField
             id="preferredUsername"
-            data-test="preferredUsername"
+            data-testid="preferredUsername"
             label="Preferred Username"
             variant="outlined"
             value={input}

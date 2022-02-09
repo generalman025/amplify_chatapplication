@@ -41,7 +41,7 @@ export default function AppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <MuiAppBar data-test="appbar" position="static">
+      <MuiAppBar data-testid="appbar" position="static">
         <Toolbar>
           <Typography
             variant="h6"
@@ -56,7 +56,7 @@ export default function AppBar() {
             type="submit"
             onClick={() => handleLogout()}
             color="inherit"
-            data-test="logout"
+            data-testid="logout"
           >
             <Typography color="common.white">Logout</Typography>
           </Button>

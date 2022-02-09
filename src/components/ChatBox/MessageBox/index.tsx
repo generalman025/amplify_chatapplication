@@ -12,8 +12,7 @@ import Purify from 'dompurify';
 
 export default function MessageBox({ message, isMe }: MessageBoxProps) {
   return (
-    <div
-    >
+    <div>
       <p className={styles.senderText}>{message.preferredUsername}</p>
       <p className={styles.senderText}>{message.createdAt}</p>
       <div className={isMe ? styles.sendMessage : styles.receivedMessage}>

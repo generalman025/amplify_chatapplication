@@ -91,7 +91,7 @@ export default function ChatBox() {
 
   // return (
   //   <Grid container>
-  //     <div data-test="chatbox">
+  //     <div data-testid="chatbox">
   //       {messages
   //         .sort((prev: Message, next: Message) =>
   //           next.createdAt.localeCompare(prev.createdAt)
@@ -115,7 +115,7 @@ export default function ChatBox() {
   //   </Grid>
   // );  
   return (
-    <Grid container maxHeight="80vh">
+    <Grid container maxHeight="80vh" data-testid="chatbox">
       <ScrollableFeed>
         {messages
           .sort((prev: Message, next: Message) =>

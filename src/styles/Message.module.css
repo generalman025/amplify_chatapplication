@@ -33,6 +33,7 @@
   }
   
   .sendMessage {
+    justify-content: right;
     text-align: right;
     padding: 8px;
     font-family: roboto, sans-serif;

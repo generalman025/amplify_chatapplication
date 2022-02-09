@@ -33,7 +33,7 @@ export default function Alert({
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       onClose={handleClose}
     >
-      <MuiAlert variant="outlined" severity={severity as unknown as AlertColor}>
+      <MuiAlert variant="filled" severity={severity as unknown as AlertColor}>
         {alertMessage}
       </MuiAlert>
     </Snackbar>
