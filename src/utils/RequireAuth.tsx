@@ -18,7 +18,7 @@ export default function RequireAuth() {
           setUser(user);
         }
         setIsLoading(false);
-      } catch (error) {
+      } catch (_) {
         setIsLoading(false);
       }
     };

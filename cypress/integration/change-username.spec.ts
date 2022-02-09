@@ -15,7 +15,7 @@ describe('02 - change username', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('bass.kiattisak@gmail.com');
+      .type(Cypress.env('USERNAME'));
 
     cy.get('amplify-authenticator')
       .shadow()
@@ -27,7 +27,7 @@ describe('02 - change username', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('ke3f7890', { force: true });
+      .type(Cypress.env('PASSWORD'), { force: true });
 
     cy.get('amplify-authenticator')
       .shadow()
@@ -41,7 +41,7 @@ describe('02 - change username', () => {
 
   it('change username', () => {
     const uuid = () => Cypress._.random(0, 1e6)
-    const id = uuid()
+    const id = `test${uuid()}`
 
     cy.get('#preferredUsername').wait(2000).clear().type(id);
     cy.contains('Proceed to Chat Room').click();

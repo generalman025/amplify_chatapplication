@@ -21,6 +21,12 @@ export default function UsernameBox() {
       return;
     }
 
+    const validateUsername = new RegExp('^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$');
+    if(!validateUsername.test(input)){
+      callAlert(true, 'Please input a correct username', SeverityType.error);
+      return;
+    }
+
     try {
       await Auth.updateUserAttributes(user, {
         preferred_username: input
@@ -28,9 +34,8 @@ export default function UsernameBox() {
       setUsername(input);
 
       callAlert(true, 'Redirecting to Chat Room...', SeverityType.success);
-    } catch (error) {
-      if (error instanceof Error)
-        callAlert(true, error.message, SeverityType.error);
+    } catch (_) {
+      callAlert(true, 'Something went wrong!!!', SeverityType.error);
     }
   };
 
@@ -43,9 +48,8 @@ export default function UsernameBox() {
           );
           if (preferredUsername) setInput(preferredUsername.Value);
         });
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+      } catch (_) {
+        callAlert(true, 'Something went wrong!!!', SeverityType.error);
       }
     }
   }, [user, authState]);
@@ -67,6 +71,7 @@ export default function UsernameBox() {
             label="Preferred Username"
             variant="outlined"
             value={input}
+            inputProps={{ maxLength: 12 }}
             onChange={(e) => setInput(e.target.value)}
           ></TextField>
         </Grid>

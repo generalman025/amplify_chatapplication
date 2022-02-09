@@ -19,6 +19,7 @@ export default function MessageInput({
         onChange={(e) => setMessage(e.target.value)}
         fullWidth={true}
         style={{ padding: '5px' }}
+        inputProps={{ maxLength: 200 }}
       ></TextField>
       <Button
         id="sendMessage"

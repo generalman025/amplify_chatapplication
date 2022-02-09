@@ -26,9 +26,8 @@ export default function UserListsBox() {
           {}
         )) as ListUserApi;
         setAllUsers(payload.users);
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+      } catch (_) {
+        callAlert(true, 'Something went wrong!!!', SeverityType.error);
       }
     };
 
@@ -36,7 +35,7 @@ export default function UserListsBox() {
   }, []);
 
   return (
-    <List dense={true}>
+    <List key="footer" dense={true}>
       {allUsers &&
         allUsers.map((iu: User) => {
           const preferredUsername = iu.Attributes.find(

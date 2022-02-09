@@ -30,7 +30,7 @@ export default function Alert({
       data-testid="alert-bar"
       open={showAlert}
       autoHideDuration={1500}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       onClose={handleClose}
     >
       <MuiAlert variant="outlined" severity={severity as unknown as AlertColor}>
