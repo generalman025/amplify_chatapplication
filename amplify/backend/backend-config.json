@@ -88,20 +88,6 @@
             "Region",
             "LambdaExecutionRole"
           ]
-        },
-        {
-          "category": "hosting",
-          "resourceName": "S3AndCloudFront",
-          "attributes": [
-            "Region",
-            "HostingBucketName",
-            "WebsiteURL",
-            "S3BucketSecureURL",
-            "CloudFrontDistributionID",
-            "CloudFrontDomainName",
-            "CloudFrontSecureURL",
-            "CloudFrontOriginAccessIdentity"
-          ]
         }
       ]
     }

@@ -19,6 +19,9 @@
     "authamplifychatappUserPoolId": {
       "Type": "String",
       "Default": "authamplifychatappUserPoolId"
+    },
+    "origins": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -76,6 +79,9 @@
             },
             "AUTH_AMPLIFYCHATAPP_USERPOOLID": {
               "Ref": "authamplifychatappUserPoolId"
+            },
+            "ORIGINS": {
+              "Ref": "origins"
             }
           }
         },
@@ -85,7 +91,7 @@
             "Arn"
           ]
         },
-        "Runtime": "provided",
+        "Runtime": "nodejs14.x",
         "Layers": [],
         "Timeout": 25
       }

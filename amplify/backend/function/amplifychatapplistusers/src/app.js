@@ -1,4 +1,3 @@
-
 /*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -7,55 +6,55 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-
 /* Amplify Params - DO NOT EDIT
 	AUTH_AMPLIFYCHATAPP_USERPOOLID
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
 
-var express = require('express')
-var bodyParser = require('body-parser')
-var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
-const AWS = require('aws-sdk')
+var express = require('express');
+var bodyParser = require('body-parser');
+var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+const AWS = require('aws-sdk');
 
 // declare a new express app
-let helmet = require("helmet")
-var app = express()
-app.use(helmet())
-app.use(bodyParser.json())
-app.use(awsServerlessExpressMiddleware.eventContext())
+let helmet = require('helmet');
+var app = express();
+app.use(helmet());
+app.use(bodyParser.json());
+app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
-app.use(function(req, res, next) {
-  let allowedOrigins = ["https://chatapp.g025app.com", "https://chatapp-dev.g025app.com", process.env.CLOUDFRONT_URL];
+app.use(function (req, res, next) {
+  let allowedOrigins = process.env.ORIGINS.split(",");
   let origin = req.headers.origin;
-  if(allowedOrigins.includes(origin)){
-    res.header("Access-Control-Allow-Origin", origin)
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
   }
-  res.header("Access-Control-Allow-Headers", "*")
-  next()
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET');
+  next();
 });
 
-app.get('/users', function(req, res) {
-  const serviceProvider = new AWS.CognitoIdentityServiceProvider()
+app.get('/users', function (req, res) {
+  const serviceProvider = new AWS.CognitoIdentityServiceProvider();
   var params = {
     UserPoolId: process.env.AUTH_AMPLIFYCHATAPP_USERPOOLID
   };
 
-  serviceProvider.listUsers(params, function(err, data) {
+  serviceProvider.listUsers(params, function (err, data) {
     if (err) {
-      return res.status(500).json(err)
+      return res.status(500).json(err);
     }
-    res.json({users: data.Users});
+    res.json({ users: data.Users });
   });
 });
 
-app.listen(3000, function() {
-    console.log("App started")
+app.listen(3000, function () {
+  console.log('App started');
 });
 
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from
 // this file
-module.exports = app
+module.exports = app;
