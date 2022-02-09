@@ -22,7 +22,7 @@ export default function ChatRoom() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={12}>
+      <Grid item xs={12} maxHeight="20vh">
         <AppBar />
       </Grid>
       <Grid container>
@@ -32,7 +32,7 @@ export default function ChatRoom() {
           </Paper>
         </Grid>
         <Grid item xs={9} padding={1}>
-          <Paper>
+          <Paper style={{padding:10}}>
             <ChatBox />
           </Paper>
         </Grid>

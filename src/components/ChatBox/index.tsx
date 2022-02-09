@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import Purify from 'dompurify';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
@@ -16,7 +17,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
 import styles from '../../styles/Message.module.css';
-import Purify from 'dompurify';
+import ScrollableFeed from 'react-scrollable-feed'
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
@@ -49,7 +50,7 @@ export default function ChatBox() {
             response.value.data.onCreateMessage as Message
           ]);
         },
-        error: (_) => {
+        error: () => {
           callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
       });
@@ -66,7 +67,7 @@ export default function ChatBox() {
       event.preventDefault();
       setMessage('');
 
-      if(Purify.sanitize(message) !== message) { // TODO: Check Size of Message
+      if (Purify.sanitize(message) !== message) {
         callAlert(true, 'Please input a correct message', SeverityType.error);
         return;
       }
@@ -88,12 +89,37 @@ export default function ChatBox() {
     [user, username, message]
   );
 
+  // return (
+  //   <Grid container>
+  //     <div data-test="chatbox">
+  //       {messages
+  //         .sort((prev: Message, next: Message) =>
+  //           next.createdAt.localeCompare(prev.createdAt)
+  //         )
+  //         .map((msg) => (
+  //           <MessageBox
+  //             message={msg}
+  //             isMe={user?.getUsername() === msg.owner}
+  //             key={msg.id}
+  //           />
+  //         ))}
+  //     <div ref={msgEndRef} />
+  //     </div>
+  //     <div className={styles.formContainer}>
+  //       <MessageInput
+  //         message={message}
+  //         setMessage={setMessage}
+  //         handleSubmit={handleSubmit}
+  //       />
+  //     </div>
+  //   </Grid>
+  // );  
   return (
-    <Grid container>
-      <div data-test="chatbox" className={styles.chatbox}>
+    <Grid container maxHeight="80vh">
+      <ScrollableFeed>
         {messages
           .sort((prev: Message, next: Message) =>
-            next.createdAt.localeCompare(prev.createdAt)
+          prev.createdAt.localeCompare(next.createdAt)
           )
           .map((msg) => (
             <MessageBox
@@ -102,14 +128,12 @@ export default function ChatBox() {
               key={msg.id}
             />
           ))}
-      </div>
-      <div className={styles.formContainer}>
-        <MessageInput
+      </ScrollableFeed>
+      <MessageInput
           message={message}
           setMessage={setMessage}
           handleSubmit={handleSubmit}
         />
-      </div>
     </Grid>
   );
 }

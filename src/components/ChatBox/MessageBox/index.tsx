@@ -2,12 +2,17 @@ import { Message } from '../../../API';
 import styles from '../../../styles/Message.module.css';
 import Purify from 'dompurify';
 
+// export default function MessageBox({ message, isMe }: MessageBoxProps) {
+//   return (
+//     <div>
+//         <p>{ Purify.sanitize(message.message)}</p>
+//       </div>
+//   );
+// }
+
 export default function MessageBox({ message, isMe }: MessageBoxProps) {
   return (
     <div
-      className={
-        isMe ? styles.sentMessageContainer : styles.receivedMessageContainer
-      }
     >
       <p className={styles.senderText}>{message.preferredUsername}</p>
       <p className={styles.senderText}>{message.createdAt}</p>
