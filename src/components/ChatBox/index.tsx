@@ -31,9 +31,8 @@ export default function ChatBox() {
           graphqlOperation(listMessages)
         )) as { data: ListMessagesQuery };
         setMessages([...(messageReq.data.listMessages?.items as Message[])]);
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+      } catch (_) {
+        callAlert(true, 'Something went wrong!!!', SeverityType.error);
       }
     };
 
@@ -81,7 +80,7 @@ export default function ChatBox() {
 
         try {
           await API.graphql(graphqlOperation(createMessage, { input }));
-        } catch (error) {
+        } catch (_) {
           callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
       }

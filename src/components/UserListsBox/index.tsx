@@ -26,9 +26,8 @@ export default function UserListsBox() {
           {}
         )) as ListUserApi;
         setAllUsers(payload.users);
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+      } catch (_) {
+        callAlert(true, 'Something went wrong!!!', SeverityType.error);
       }
     };
 

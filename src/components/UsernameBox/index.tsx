@@ -28,9 +28,8 @@ export default function UsernameBox() {
       setUsername(input);
 
       callAlert(true, 'Redirecting to Chat Room...', SeverityType.success);
-    } catch (error) {
-      if (error instanceof Error)
-        callAlert(true, error.message, SeverityType.error);
+    } catch (_) {
+      callAlert(true, 'Something went wrong!!!', SeverityType.error);
     }
   };
 
@@ -43,9 +42,8 @@ export default function UsernameBox() {
           );
           if (preferredUsername) setInput(preferredUsername.Value);
         });
-      } catch (error) {
-        if (error instanceof Error)
-          callAlert(true, error.message, SeverityType.error);
+      } catch (_) {
+        callAlert(true, 'Something went wrong!!!', SeverityType.error);
       }
     }
   }, [user, authState]);

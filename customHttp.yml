@@ -19,4 +19,3 @@ customHeaders:
           base-uri 'self';
           form-action 'self';
           img-src 'self';
-          object-src 'none'
