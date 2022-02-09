@@ -16,6 +16,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
 import styles from '../../styles/Message.module.css';
+import Purify from 'dompurify';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
@@ -50,8 +51,7 @@ export default function ChatBox() {
           ]);
         },
         error: (error) => {
-          if (error instanceof Error)
-            callAlert(true, error.message, SeverityType.error);
+          callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
       });
 
@@ -67,6 +67,11 @@ export default function ChatBox() {
       event.preventDefault();
       setMessage('');
 
+      if(Purify.sanitize(message) !== message) {
+        callAlert(true, 'Please input the correct message', SeverityType.error);
+        return;
+      }
+
       if (user) {
         const input = {
           message,
@@ -77,8 +82,7 @@ export default function ChatBox() {
         try {
           await API.graphql(graphqlOperation(createMessage, { input }));
         } catch (error) {
-          if (error instanceof Error)
-            callAlert(true, error.message, SeverityType.error);
+          callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
       }
     },
