@@ -27,7 +27,7 @@ describe('01 - login & logout', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('ke3f7890', { force: true });
+      .type('ke3f7890', { force: true }); // TODO: - Hiding from repository
 
     cy.get('amplify-authenticator')
       .shadow()
