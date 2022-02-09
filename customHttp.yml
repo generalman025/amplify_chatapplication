@@ -10,11 +10,11 @@ customHeaders:
       - key: X-Content-Type-Options
         value: nosniff
         value: >-
-          default-src https:; 
-          script-src https: 'unsafe-inline';
+          default-src 'self'; 
+          script-src 'self';
           connect-src 'self' wss: *.amazonaws.com;
           style-src https: 'unsafe-inline';
-          font-src https: 'unsafe-inline';
+          font-src fonts.gstatic.com;
           base-uri 'self';
           form-action 'self';
-          img-src 'self';
+          img-src 'self'
