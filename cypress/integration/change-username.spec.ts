@@ -15,7 +15,7 @@ describe('02 - change username', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('bass.kiattisak@gmail.com');
+      .type('kiattisak_c@tripetch-it.co.th'); // TODO: - Hiding from repository
 
     cy.get('amplify-authenticator')
       .shadow()

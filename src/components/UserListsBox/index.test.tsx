@@ -1,8 +1,8 @@
 import { waitFor } from '@testing-library/react';
 import { API } from 'aws-amplify';
-import { mount } from 'enzyme';
+import { mount, render } from 'enzyme';
 import UserListsBox from '.';
-// TODO : FIX UNIT TEST
+
 describe('Unit Testing : UserListBox', () => {
   let realConsoleError: any;
   let realAPIGet: any;
@@ -20,41 +20,41 @@ describe('Unit Testing : UserListBox', () => {
 //   });
 
   test('Should display an alert', () => {
-    // API.get = jest.fn().mockImplementation(() => {
-    //   return Promise.resolve({
-    //     users: [
-    //       {
-    //         Attributes: [
-    //           {
-    //             Name: 'preferred_username',
-    //             Value: 'test1'
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         Attributes: [
-    //           {
-    //             Name: 'preferred_username',
-    //             Value: 'test2'
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         Attributes: [
-    //           {
-    //             Name: 'preferred_username',
-    //             Value: 'test3'
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   });
-    // });
+    API.get = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        users: [
+          {
+            Attributes: [
+              {
+                Name: 'preferred_username',
+                Value: 'test1'
+              }
+            ]
+          },
+          {
+            Attributes: [
+              {
+                Name: 'preferred_username',
+                Value: 'test2'
+              }
+            ]
+          },
+          {
+            Attributes: [
+              {
+                Name: 'preferred_username',
+                Value: 'test3'
+              }
+            ]
+          }
+        ]
+      });
+    });
 
-    let component: any;
-    component = mount(<UserListsBox />);
+    let component = mount(<UserListsBox />);
     waitFor(() => {
-        component.setState({ allUsers: API.get });
+        // component.setState({ allUsers: API.get });
+        console.log(component.html());
     });
   });
 });

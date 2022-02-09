@@ -36,7 +36,7 @@ export default function UserListsBox() {
   }, []);
 
   return (
-    <List dense={true}>
+    <List key="footer" dense={true}>
       {allUsers &&
         allUsers.map((iu: User) => {
           const preferredUsername = iu.Attributes.find(

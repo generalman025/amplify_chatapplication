@@ -10,24 +10,21 @@ import {
   UtilContext,
   utilContextDefaultValue
 } from '../../context/UtilContext';
-// TODO : FIX UNIT TEST
+
 describe('Unit Testing : UsernameBox', () => {
+  
   test('Should render a textbox', () => {
     const component = shallow(<UsernameBox />);
     const input = component.find('#preferredUsername');
     input.simulate('change', { target: { value: 'test' } });
+    expect(component.find('#preferredUsername').debug()).toContain('test');
   });
 
   test('Should render a button', () => {
-    const component = shallow(<UsernameBox />);
-    const input = component.find('#changeUsernameButton');
-    input.simulate('click');
-  });
-
-  test('Should render a button', () => {
-    mount(
+    const callAlert = jest.fn();
+    const component = mount(
       <UtilContext.Provider
-        value={{ ...utilContextDefaultValue, callAlert: jest.fn() }}
+        value={{ ...utilContextDefaultValue, callAlert: callAlert }}
       >
         <AuthContext.Provider
           value={{
@@ -44,5 +41,9 @@ describe('Unit Testing : UsernameBox', () => {
         </AuthContext.Provider>
       </UtilContext.Provider>
     );
+
+    const button = component.find('#changeUsernameButton').last();
+    button.simulate('click');
+    expect(callAlert).toHaveBeenCalled();
   });
 });
