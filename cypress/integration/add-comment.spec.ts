@@ -50,45 +50,6 @@ describe('03 - add comment', () => {
     cy.get('#messageInput').type(id, { force: true });
     cy.get('#sendMessage').click().wait(3000);
 
-    cy.get('[data-test=logout]').click();
-
-    cy.get('amplify-authenticator')
-      .shadow()
-      .find('amplify-sign-in')
-      .shadow()
-      .find('amplify-form-section')
-      .find('amplify-auth-fields')
-      .find('amplify-username-field')
-      .find('amplify-form-field')
-      .find('amplify-input')
-      .find('input')
-      .type('kiattisak_c@tripetch-it.co.th'); // TODO: - Hiding from repository
-
-    cy.get('amplify-authenticator')
-      .shadow()
-      .find('amplify-sign-in')
-      .shadow()
-      .find('amplify-form-section')
-      .find('amplify-auth-fields')
-      .find('amplify-password-field')
-      .find('amplify-form-field')
-      .find('amplify-input')
-      .find('input')
-      .type('ke3f7890', { force: true }); // TODO: - Hiding from repository
-
-    cy.get('amplify-authenticator')
-      .shadow()
-      .find('amplify-sign-in')
-      .shadow()
-      .find('amplify-form-section')
-      .find('[data-test=sign-in-sign-in-button]')
-      .contains('Sign In')
-      .click();
-
-    cy.get('#preferredUsername').wait(5000);
-    cy.contains('Proceed to Chat Room').click();
-    cy.wait(3000);
-
     cy.get('[data-test=chatbox').should('contain', id);
   });
 
