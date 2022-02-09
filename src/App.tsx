@@ -6,6 +6,7 @@ import RequireAuth from './utils/RequireAuth';
 import { AuthContextProvider } from './context/AuthContext';
 import { UtilContextProvider } from './context/UtilContext';
 import NotFound from './domains/404';
+import DOMPurify from 'dompurify';
 
 const theme = createTheme({
   palette: {

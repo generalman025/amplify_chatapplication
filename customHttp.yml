@@ -19,5 +19,4 @@ customHeaders:
           base-uri 'self';
           form-action 'self';
           img-src 'self';
-          object-src 'none';
-          require-trusted-types-for 'script'
+          object-src 'none'
