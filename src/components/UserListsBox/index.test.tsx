@@ -20,7 +20,18 @@ describe('Unit Testing : UserListBox', () => {
 
   test('Should contain a list', () => {
     API.get = jest.fn().mockImplementation(() => {
-      return Promise.resolve(jest.fn());
+      return Promise.resolve({
+        users: [
+          {
+            Attributes: [
+              {
+                Name: 'preferred_username',
+                Value: 'test1'
+              }
+            ]
+          }
+        ]
+      });
     });
 
     let component = mount(<UserListsBox />);
