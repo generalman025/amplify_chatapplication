@@ -16,7 +16,6 @@ import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
-import styles from '../../styles/Message.module.css';
 import ScrollableFeed from 'react-scrollable-feed'
 
 export default function ChatBox() {
@@ -89,31 +88,6 @@ export default function ChatBox() {
     [user, username, message]
   );
 
-  // return (
-  //   <Grid container>
-  //     <div data-testid="chatbox">
-  //       {messages
-  //         .sort((prev: Message, next: Message) =>
-  //           next.createdAt.localeCompare(prev.createdAt)
-  //         )
-  //         .map((msg) => (
-  //           <MessageBox
-  //             message={msg}
-  //             isMe={user?.getUsername() === msg.owner}
-  //             key={msg.id}
-  //           />
-  //         ))}
-  //     <div ref={msgEndRef} />
-  //     </div>
-  //     <div className={styles.formContainer}>
-  //       <MessageInput
-  //         message={message}
-  //         setMessage={setMessage}
-  //         handleSubmit={handleSubmit}
-  //       />
-  //     </div>
-  //   </Grid>
-  // );  
   return (
     <Grid container maxHeight="80vh" data-testid="chatbox">
       <ScrollableFeed>

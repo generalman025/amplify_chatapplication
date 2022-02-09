@@ -39,7 +39,7 @@ const Home = () => {
         <Grid item xs={12}>
           <AppBar />
         </Grid>
-        <Grid margin={5} item xs={3}>
+        <Grid margin={5} item xs={12} style={{flexBasis: 'fit-content'}}>
           <UsernameBox />
         </Grid>
         <Alert
