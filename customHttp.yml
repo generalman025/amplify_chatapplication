@@ -9,3 +9,12 @@ customHeaders:
         value: 1; mode=block
       - key: X-Content-Type-Options
         value: nosniff
+        value: >-
+          default-src 'self'; 
+          script-src 'self'; 
+          connect-src 'self' wss: *.amazonaws.com;
+          style-src 'self' fonts.googleapis.com 'unsafe-inline';
+          font-src fonts.gstatic.com;
+          base-uri 'self';
+          form-action 'self';
+          img-src 'self';
