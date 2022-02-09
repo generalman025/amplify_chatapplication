@@ -41,7 +41,7 @@ describe('02 - change username', () => {
 
   it('change username', () => {
     const uuid = () => Cypress._.random(0, 1e6)
-    const id = uuid()
+    const id = `test${uuid()}`
 
     cy.get('#preferredUsername').wait(2000).clear().type(id);
     cy.contains('Proceed to Chat Room').click();
