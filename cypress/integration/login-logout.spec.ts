@@ -15,7 +15,7 @@ describe('01 - login & logout', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('kiattisak_c@tripetch-it.co.th'); // TODO: - Hiding from repository
+      .type(Cypress.env('USERNAME'));
 
     cy.get('amplify-authenticator')
       .shadow()
@@ -27,7 +27,7 @@ describe('01 - login & logout', () => {
       .find('amplify-form-field')
       .find('amplify-input')
       .find('input')
-      .type('ke3f7890', { force: true }); // TODO: - Hiding from repository
+      .type(Cypress.env('PASSWORD'), { force: true });
 
     cy.get('amplify-authenticator')
       .shadow()

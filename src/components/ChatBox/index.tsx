@@ -66,8 +66,8 @@ export default function ChatBox() {
       event.preventDefault();
       setMessage('');
 
-      if(Purify.sanitize(message) !== message) {
-        callAlert(true, 'Please input the correct message', SeverityType.error);
+      if(Purify.sanitize(message) !== message) { // TODO: Check Size of Message
+        callAlert(true, 'Please input a correct message', SeverityType.error);
         return;
       }
 
