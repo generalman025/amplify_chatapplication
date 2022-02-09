@@ -12,11 +12,12 @@ customHeaders:
       - key: Content-Security-Policy
         value: >-
           default-src 'self'; 
-          script-src 'self'; 
+          script-src 'none'; 
           connect-src 'self' wss: *.amazonaws.com;
           style-src 'self' fonts.googleapis.com 'sha256-/gr5/uyE2uUPKLlJKYXFblnI0K1YJ/f9Slzq8XjLUaM=' 'sha256-ERuEUYbwcsloTxHFULgUmscpMoqd1CMG+UPcEtumKvc=' 'sha256-h2EKlwSNim3MQhd8OYl8eo7M9zBOfEEQv/J2kqa3+uc=' 'sha256-pTe4Cr9vCAnZHKzzJejJetoJldnZHyw4dEXiPu1NAFI=' 'sha256-4hY4C7xfXajWIFTjNT/zk/QqsUeliIYuqgSXI5F3BUs=' 'sha256-7uCwhiosu0Kod9sdEJzoyVaqjupI7pd94EQLvrW3Jdc=' 'sha256-SkXjmil/4eLkT7Y+IBtAATntLsJ8Oe5DudGeKVpOE6U=' 'sha256-ecme0R1eNrnxZJmkNKy6Owvp2pLOS6LP58KXkZ7kznI=' 'sha256-l7ZurxWtPKt1uP/FWihho9JI/u0bEsIkpWlFD6YXPYs=' 'sha256-xW6foUSLlN7BDvMm905ljDa3Pa9r1Qrcre1ckX1o6Xc=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=';
           font-src fonts.gstatic.com;
           base-uri 'self';
           form-action 'self';
           img-src 'self';
-          object-src 'none'
+          object-src 'none';
+          require-trusted-types-for 'script'
