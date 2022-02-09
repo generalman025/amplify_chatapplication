@@ -17,7 +17,7 @@ describe('Unit Testing : MessageBox', () => {
         isMe={true}
       />
     );
-    expect(component.find('.sentMessageContainer')).toHaveLength(1);
+    expect(component.find('.sendMessage')).toHaveLength(1);
   });
 
   test('Should display an owner style', () => {
@@ -35,6 +35,6 @@ describe('Unit Testing : MessageBox', () => {
         isMe={false}
       />
     );
-    expect(component.find('.receivedMessageContainer')).toHaveLength(1);
+    expect(component.find('.receivedMessage')).toHaveLength(1);
   });
 });

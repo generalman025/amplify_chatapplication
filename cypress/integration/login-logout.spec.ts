@@ -40,7 +40,7 @@ describe('01 - login & logout', () => {
   });
 
   it('logout', () => {
-    cy.get('[data-test=logout]').click();
+    cy.get('[data-testid=logout]').click();
 
     cy.get('amplify-authenticator')
       .shadow()

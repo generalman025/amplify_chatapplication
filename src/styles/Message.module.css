@@ -33,12 +33,14 @@
   }
   
   .sendMessage {
-    text-align: left;
+    justify-content: right;
+    text-align: right;
     padding: 8px;
     font-family: roboto, sans-serif;
     color: #fff;
     background: linear-gradient(243deg, #2397f5, #3b6bb9 100%);
     border-radius: 8px;
+    width: 50%;
   }
   
   .receivedMessageContainer {
@@ -70,3 +72,8 @@
     margin-bottom: 4px;
   }
   
+  @media screen and (max-width: 1024px) {
+    .userList {
+        display: none !important;
+    }
+}

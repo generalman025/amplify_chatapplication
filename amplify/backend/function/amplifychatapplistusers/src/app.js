@@ -28,7 +28,7 @@ app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(function (req, res, next) {
   let allowedOrigins = process.env.ORIGINS.split(",");
   let origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
     res.header('Access-Control-Allow-Origin', origin);
   }
   res.header('Access-Control-Allow-Headers', '*');

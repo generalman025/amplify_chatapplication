@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Grid, Paper } from '@mui/material';
 import AppBar from '../../components/AppBar';
 import ChatBox from '../../components/ChatBox';
@@ -7,12 +7,14 @@ import Alert from '../../components/Alert';
 import { UtilContext } from '../../context/UtilContext';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
   const { username } = useContext(AuthContext);
   const { severity, alertMessage, showAlert, setShowAlert } =
     useContext(UtilContext);
+  const [datetime, setDatetime] = useState('');
 
   useEffect(() => {
     if (!username || username === '') {
@@ -20,19 +22,26 @@ export default function ChatRoom() {
     }
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDatetime(dayjs().format());
+    }, 30000);
+    return () => clearInterval(interval)
+  }, [datetime]);
+
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={12}>
+      <Grid item xs={12} maxHeight="20vh">
         <AppBar />
       </Grid>
-      <Grid container>
-        <Grid item xs={3} padding={1}>
-          <Paper>
+      <Grid container maxHeight="80vh">
+        <Grid item xs={3}>
+          <Paper style={{ width: "fit-content", margin: 10 }}>
             <UserListsBox />
           </Paper>
         </Grid>
-        <Grid item xs={9} padding={1}>
-          <Paper>
+        <Grid item xs={9}>
+          <Paper style={{ margin: 10 }}>
             <ChatBox />
           </Paper>
         </Grid>

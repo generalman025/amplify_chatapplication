@@ -11,6 +11,7 @@ import {
   ListItemText
 } from '@mui/material';
 import { Person } from '@mui/icons-material';
+import styles from '../../styles/Message.module.css'
 
 export default function UserListsBox() {
   const [allUsers, setAllUsers] = useState<User[]>();
@@ -43,7 +44,7 @@ export default function UserListsBox() {
           );
           return (
             <ListItem key={iu.Username}>
-              <ListItemAvatar>
+              <ListItemAvatar className={styles.userList}>
                 <Avatar>
                   <Person color="primary" />
                 </Avatar>

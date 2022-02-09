@@ -21,7 +21,8 @@ export default function UsernameBox() {
       return;
     }
 
-    const validateUsername = new RegExp('^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$');
+    const regexUsername = '^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$';
+    const validateUsername = new RegExp(regexUsername);
     if(!validateUsername.test(input)){
       callAlert(true, 'Please input a correct username', SeverityType.error);
       return;
@@ -55,7 +56,7 @@ export default function UsernameBox() {
   }, [user, authState]);
 
   return (
-    <Paper elevation={2}>
+    <Paper elevation={2} style={{width: "fit-content"}}>
       <Grid
         item
         container
@@ -67,11 +68,11 @@ export default function UsernameBox() {
         <Grid item xs={12}>
           <TextField
             id="preferredUsername"
-            data-test="preferredUsername"
+            data-testid="preferredUsername"
             label="Preferred Username"
             variant="outlined"
             value={input}
-            inputProps={{ maxLength: 12 }}
+            inputProps={{ maxLength: 20 }}
             onChange={(e) => setInput(e.target.value)}
           ></TextField>
         </Grid>
