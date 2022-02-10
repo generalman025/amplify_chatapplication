@@ -1,5 +1,5 @@
 import { Message } from '../../../API';
-import styles from '../../../styles/Message.module.css';
+import styles from '../../../styles/ChatBox.module.css';
 import Purify from 'dompurify';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';

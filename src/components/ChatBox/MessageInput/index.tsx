@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import { Send } from '@mui/icons-material';
-import styles from '../../../styles/Message.module.css';
+import styles from '../../../styles/ChatBox.module.css';
 
 export default function MessageInput({
   message,
