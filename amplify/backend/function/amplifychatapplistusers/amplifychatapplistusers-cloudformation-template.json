@@ -19,9 +19,6 @@
     "authamplifychatappUserPoolId": {
       "Type": "String",
       "Default": "authamplifychatappUserPoolId"
-    },
-    "origins": {
-      "Type": "String"
     }
   },
   "Conditions": {
