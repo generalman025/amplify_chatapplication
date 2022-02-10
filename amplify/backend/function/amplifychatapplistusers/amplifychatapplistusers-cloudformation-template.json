@@ -22,9 +22,6 @@
     },
     "customOrigins": {
       "Type": "String"
-    },
-    "origins": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -85,9 +82,6 @@
             },
             "CUSTOM_ORIGINS": {
               "Ref": "customOrigins"
-            },
-            "ORIGINS": {
-              "Ref": "origins"
             }
           }
         },
