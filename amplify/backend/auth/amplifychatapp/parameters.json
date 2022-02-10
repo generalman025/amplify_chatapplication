@@ -1,0 +1,68 @@
+{
+  "identityPoolName": "amplifychatapp_identitypool",
+  "allowUnauthenticatedIdentities": false,
+  "resourceNameTruncated": "amplif5b34aa7e",
+  "userPoolName": "amplifychatappuserpool",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaConfiguration": "OPTIONAL",
+  "mfaTypes": [
+    "SMS Text Message",
+    "TOTP"
+  ],
+  "smsAuthenticationMessage": "Your authentication code is {####}",
+  "smsVerificationMessage": "Your verification code is {####}",
+  "emailVerificationSubject": "Your verification code",
+  "emailVerificationMessage": "Your verification code is {####}",
+  "defaultPasswordPolicy": false,
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [],
+  "requiredAttributes": [],
+  "aliasAttributes": [],
+  "userpoolClientGenerateSecret": false,
+  "userpoolClientRefreshTokenValidity": 30,
+  "userpoolClientWriteAttributes": [
+    "email"
+  ],
+  "userpoolClientReadAttributes": [
+    "email"
+  ],
+  "userpoolClientLambdaRole": "amplif5b34aa7e_userpoolclient_lambda_role",
+  "userpoolClientSetAttributes": false,
+  "sharedId": "5b34aa7e",
+  "resourceName": "amplifychatapp",
+  "authSelections": "identityPoolAndUserPool",
+  "useDefault": "manual",
+  "thirdPartyAuth": true,
+  "authProviders": [],
+  "usernameAttributes": [
+    "email"
+  ],
+  "userPoolGroups": false,
+  "adminQueries": false,
+  "triggers": "{}",
+  "hostedUI": false,
+  "userPoolGroupList": [],
+  "serviceName": "Cognito",
+  "usernameCaseSensitive": false,
+  "useEnabledMfas": true,
+  "authRoleArn": {
+    "Fn::GetAtt": [
+      "AuthRole",
+      "Arn"
+    ]
+  },
+  "unauthRoleArn": {
+    "Fn::GetAtt": [
+      "UnauthRole",
+      "Arn"
+    ]
+  },
+  "breakCircularDependency": true,
+  "dependsOn": [],
+  "parentStack": {
+    "Ref": "AWS::StackId"
+  },
+  "permissions": []
+}
