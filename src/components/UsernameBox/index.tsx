@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { AuthState } from '@aws-amplify/ui-components';
 import { Paper, Grid, TextField, Button, Typography } from '@mui/material';
@@ -11,7 +11,7 @@ export default function UsernameBox() {
   const { user, authState, setUsername } = useContext(AuthContext);
   const { callAlert } = useContext(UtilContext);
 
-  const modifyUsername = async () => {
+  const modifyUsername = useCallback(async () => {
     if (!input || input === '') {
       callAlert(
         true,
@@ -38,7 +38,7 @@ export default function UsernameBox() {
     } catch (_) {
       callAlert(true, 'Something went wrong!!!', SeverityType.error);
     }
-  };
+  }, [input, user]);
 
   useEffect(() => {
     if (authState === AuthState.SignedIn && user) {

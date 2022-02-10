@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CognitoUser } from '@aws-amplify/auth';
 import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
@@ -25,9 +25,9 @@ const Home = () => {
     );
   }, []);
 
-  const proceedToChatRoom = () => {
+  const proceedToChatRoom = useCallback(() => {
     navigate('/chatroom');
-  };
+  },[]);
 
   return (
     <AmplifyAuthenticator>
