@@ -1,17 +1,3 @@
-.chatbox {
-  min-width: 100%;
-  height: calc(83vh);
-  display: flex;
-  overflow-y: auto;
-  flex-direction: column-reverse;
-  text-align: center;
-}
-
-.formContainer {
-  width: 98%;
-  min-height: 48px;
-}
-
 .formBase {
   display: flex;
   flex-direction: row;
@@ -20,76 +6,41 @@
   margin-top: "16px";
   height: 100%;
   width: 100%;
-  padding: 15px;
 }
 
-.sentMessageContainer {
-    display: flex;
-    flex-direction: column;
-    float: right;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin: 8px;
-  }
-  
-  .sendMessage {
-    justify-content: right;
-    text-align: right;
-    padding: 8px;
-    font-family: roboto, sans-serif;
-    color: #fff;
-    background: linear-gradient(243deg, #2397f5, #3b6bb9 100%);
-    border-radius: 8px;
-  }
-  
-  .receivedMessageContainer {
-    display: flex;
-    flex-direction: column;
-    float: right;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 8px;
-  }
-  
-  .receivedMessage {
-    text-align: left;
-    padding: 8px;
-    font-family: roboto, sans-serif;
-    color: #000;
-    background: linear-gradient(
-      193deg,
-      rgba(237, 247, 255, 1) 0%,
-      rgba(223, 223, 223, 1) 100%
-    );
-    border-radius: 8px;
-    width: fit-content;
-  }
-  
-  .senderText {
-    font-family: roboto, sans-serif;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 4px;
-  }
-  
-  @media screen and (max-width: 1024px) {
-    .userList {
-        display: none !important;
-    }
+.sendMessage {
+  justify-content: right;
+  text-align: right;
+  padding: 8px;
+  font-family: roboto, sans-serif;
+  color: #fff;
+  background: linear-gradient(243deg, #2397f5, #3b6bb9 100%);
+  border-radius: 8px;
 }
 
-/* .chatbox {
-  max-height: 90vh;
-} */
-
-/* @media screen and (max-height: 300px) {
-  .chatBox {
-      max-height: 90vh;
-  }
+.senderText {
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 4px;
 }
 
-@media screen and (max-height: 1024px) {
-  .chatBox {
-      max-height: 70vh;
+.receivedMessage {
+  text-align: left;
+  padding: 8px;
+  font-family: roboto, sans-serif;
+  color: #000;
+  background: linear-gradient(
+    193deg,
+    rgba(237, 247, 255, 1) 0%,
+    rgba(223, 223, 223, 1) 100%
+  );
+  border-radius: 8px;
+  width: fit-content;
+}
+
+@media screen and (max-width: 1024px) {
+  .userList {
+      display: none !important;
   }
-} */
+}

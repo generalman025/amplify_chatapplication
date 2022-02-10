@@ -56,7 +56,7 @@ export default function UsernameBox() {
   }, [user, authState]);
 
   return (
-    <Paper elevation={2} style={{width: "fit-content"}}>
+    <Paper elevation={2}>
       <Grid
         item
         container

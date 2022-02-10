@@ -18,14 +18,15 @@ export default function MessageInput({
         placeholder="Type your message here..."
         onChange={(e) => setMessage(e.target.value)}
         fullWidth={true}
-        style={{ padding: '5px' }}
+        style={{ paddingTop: '20px' }}
         inputProps={{ maxLength: 200 }}
       ></TextField>
       <Button
         id="sendMessage"
-        style={{ marginLeft: '8px' }}
+        style={{ marginLeft: '8px', marginTop: '12px' }}
         type="submit"
         variant="contained"
+        size='large'
         endIcon={<Send />}
       >
         Send
