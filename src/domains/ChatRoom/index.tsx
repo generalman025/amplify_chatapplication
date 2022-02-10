@@ -30,8 +30,8 @@ export default function ChatRoom() {
   }, [datetime]);
 
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={12} maxHeight="20vh">
+    <Grid container justifyContent="center" maxHeight="100vh">
+      <Grid item xs={12}>
         <AppBar />
       </Grid>
       <Grid container maxHeight="80vh">

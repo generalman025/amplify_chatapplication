@@ -50,7 +50,7 @@ describe('03 - add comment', () => {
     cy.get('#messageInput').type(id, { force: true });
     cy.get('#sendMessage').click().wait(3000);
 
-    if(!Cypress.env('LOCAL')) cy.get('[data-test=chatbox').should('contain', id);
+    if(!Cypress.env('LOCAL')) cy.get('[data-testid=chatbox]').should('contain', id);
   });
 
 });
