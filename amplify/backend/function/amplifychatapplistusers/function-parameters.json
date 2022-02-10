@@ -11,10 +11,6 @@
     {
       "cloudFormationParameterName": "customOrigins",
       "environmentVariableName": "CUSTOM_ORIGINS"
-    },
-    {
-      "cloudFormationParameterName": "origins",
-      "environmentVariableName": "ORIGINS"
     }
   ]
 }
