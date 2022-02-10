@@ -20,8 +20,8 @@
       "function": {
         "amplifychatapplistusers": {
           "deploymentBucketName": "amplify-amplifychatapp-dev-10959-deployment",
-          "s3Key": "amplify-builds/amplifychatapplistusers-684e6545694b7a645749-build.zip",
-          "origins": "https://chatapp.g025app.com,https://chatapp-dev.g025app.com"
+          "s3Key": "amplify-builds/amplifychatapplistusers-366f59354a3974795945-build.zip",
+          "customOrigins": "https://chatapp.g025app.com,https://chatapp-dev.g025app.com"
         }
       }
     }

@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Alert as MuiAlert, AlertColor, Snackbar } from '@mui/material';
 
 type AlertBoxProps = {
@@ -20,10 +21,10 @@ export default function Alert({
   setShowAlert,
   onSuccess
 }: AlertBoxProps) {
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setShowAlert(false);
     if (severity === SeverityType.success) onSuccess();
-  };
+  }, [severity]);
 
   return (
     <Snackbar

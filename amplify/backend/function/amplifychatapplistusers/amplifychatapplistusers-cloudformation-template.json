@@ -20,7 +20,7 @@
       "Type": "String",
       "Default": "authamplifychatappUserPoolId"
     },
-    "origins": {
+    "customOrigins": {
       "Type": "String"
     }
   },
@@ -80,8 +80,8 @@
             "AUTH_AMPLIFYCHATAPP_USERPOOLID": {
               "Ref": "authamplifychatappUserPoolId"
             },
-            "ORIGINS": {
-              "Ref": "origins"
+            "CUSTOM_ORIGINS": {
+              "Ref": "customOrigins"
             }
           }
         },

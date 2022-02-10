@@ -9,8 +9,8 @@
   "lambdaLayers": [],
   "environmentVariableList": [
     {
-      "cloudFormationParameterName": "origins",
-      "environmentVariableName": "ORIGINS"
+      "cloudFormationParameterName": "customOrigins",
+      "environmentVariableName": "CUSTOM_ORIGINS"
     }
   ]
 }
