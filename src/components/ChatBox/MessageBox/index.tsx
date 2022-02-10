@@ -15,11 +15,13 @@ export default function MessageBox({ message, isMe }: MessageBoxProps) {
   }, []);
 
   return (
-    <div>
+    <div style={isMe ? {display: "flex", flexDirection: "row-reverse", textAlign: 'right'}: {}}>
+      <div>
       <p className={styles.senderText}>{message.preferredUsername}</p>
       <p className={styles.senderText}>{dateFormat(message.createdAt)}</p>
       <div className={isMe ? styles.sendMessage : styles.receivedMessage}>
         <p>{ Purify.sanitize(message.message)}</p>
+      </div>
       </div>
     </div>
   );

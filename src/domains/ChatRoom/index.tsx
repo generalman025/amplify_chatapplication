@@ -41,7 +41,7 @@ export default function ChatRoom() {
           </Paper>
         </Grid>
         <Grid item xs={9}>
-          <Paper style={{ margin: 10 }}>
+          <Paper style={{ margin: 10, padding: 3 }}>
             <ChatBox />
           </Paper>
         </Grid>
