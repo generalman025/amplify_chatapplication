@@ -34,9 +34,9 @@ export default function ChatRoom() {
       <Grid item xs={12}>
         <AppBar />
       </Grid>
-      <Grid container maxHeight="80vh">
+      <Grid container>
         <Grid item xs={3}>
-          <Paper style={{ width: "fit-content", margin: 10 }}>
+          <Paper style={{ margin: 10 }}>
             <UserListsBox />
           </Paper>
         </Grid>

@@ -77,3 +77,20 @@
         display: none !important;
     }
 }
+
+.chatbox {
+  max-height: 80vh;
+  /* max-height: 90vh; */
+}
+
+/* @media screen and (max-height: 300px) {
+  .chatBox {
+      max-height: 90vh;
+  }
+}
+
+@media screen and (max-height: 1024px) {
+  .chatBox {
+      max-height: 70vh;
+  }
+} */
