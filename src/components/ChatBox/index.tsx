@@ -90,7 +90,7 @@ export default function ChatBox() {
   );
 
   return (
-    <Grid container className={styles.chatBox} data-testid="chatbox">
+    <Grid className={styles.chatBox} style={{maxHeight: "80vh", margin: 10}} data-testid="chatbox">
       <ScrollableFeed>
         {messages
           .sort((prev: Message, next: Message) =>
