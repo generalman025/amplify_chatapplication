@@ -13,7 +13,7 @@ customHeaders:
         value: >-
           default-src 'self'; 
           script-src 'self';
-          connect-src 'self' wss: *.amazonaws.com;
+          connect-src 'self' https: ws: wss: *.amazonaws.com;
           style-src https: 'unsafe-inline';
           font-src fonts.gstatic.com;
           base-uri 'self';
