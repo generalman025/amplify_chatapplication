@@ -29,7 +29,7 @@ export class cdkStack extends cdk.Stack {
         [
           {
             category: 'api',
-            resourceName: 'listUsersApi'
+            resourceName: 'amplifychatapp'
           }
         ]
       );
