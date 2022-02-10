@@ -31,10 +31,10 @@ export default function ChatRoom() {
 
   return (
     <Grid container justifyContent="center" maxHeight="100vh">
-      <Grid item xs={12}>
+      <Grid>
         <AppBar />
       </Grid>
-      <Grid container maxHeight="80vh">
+      <Grid container>
         <Grid item xs={3}>
           <Paper style={{ width: "fit-content", margin: 10 }}>
             <UserListsBox />

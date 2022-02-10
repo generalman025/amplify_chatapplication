@@ -17,6 +17,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
 import ScrollableFeed from 'react-scrollable-feed'
+import styles from '../../styles/Message.module.css'
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
@@ -89,7 +90,7 @@ export default function ChatBox() {
   );
 
   return (
-    <Grid container maxHeight="80vh" data-testid="chatbox">
+    <Grid container className={styles.chatBox} data-testid="chatbox">
       <ScrollableFeed>
         {messages
           .sort((prev: Message, next: Message) =>

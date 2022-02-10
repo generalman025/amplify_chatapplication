@@ -41,3 +41,8 @@ test:
     files:
       - '**/*.png'
       - '**/*.mp4'
+deploy:
+  phases:
+    deploy:
+      commands:
+        - amplifyPublish -c

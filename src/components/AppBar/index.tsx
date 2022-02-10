@@ -41,7 +41,7 @@ export default function AppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <MuiAppBar data-testid="appbar" position="static">
+      <MuiAppBar data-testid="appbar">
         <Toolbar>
           <Typography
             variant="h6"
