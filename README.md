@@ -6,11 +6,11 @@
 - Node.js
 - AWS
     - S3 & Cloudfront
+    - WAF
     - Lambda & API Gateway
     - AppSync
     - DynamoDB
-    - WAF
-    - X-Ray & CloudWatch
+    - X-Ray
 
 ### Sample  Site
 - [https://chatapp.g025app.com/](https://chatapp.g025app.com/)
@@ -30,7 +30,7 @@
     3. After installation, you should config your origins in `amplify/backend/function/amplifychatapplistusers/parameters.json`(comma separated) and publish the application again via command `amplify publish`. 
 
 #### To enable End to End Testing
-- Add cypress username & Password for E2E testing in `cypress.env.json`
+- Add cypress username & password for end to end testing in `cypress.env.json`
 
 #### To integrate with Amplify console
 - Add Custom Rules in Amplify console (Rewrites and redirects)

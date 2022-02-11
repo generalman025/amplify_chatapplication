@@ -31,7 +31,6 @@ const Home = () => {
 
   return (
     <AmplifyAuthenticator>
-      <AmplifySignIn headerText='Welcome to Chat Application' slot='sign-in' />
       <AmplifySignUp
         slot="sign-up"
         formFields={[{ type: 'username' }, { type: 'password' }]}
