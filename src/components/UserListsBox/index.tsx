@@ -11,7 +11,7 @@ import {
   ListItemText
 } from '@mui/material';
 import { Person } from '@mui/icons-material';
-import styles from '../../styles/ChatBox.module.css'
+import styles from '../../styles/ChatBox.module.css';
 
 export default function UserListsBox() {
   const [allUsers, setAllUsers] = useState<User[]>();

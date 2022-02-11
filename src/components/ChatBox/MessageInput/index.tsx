@@ -26,7 +26,7 @@ export default function MessageInput({
         style={{ marginLeft: '8px', marginTop: '12px' }}
         type="submit"
         variant="contained"
-        size='large'
+        size="large"
         endIcon={<Send />}
       >
         Send

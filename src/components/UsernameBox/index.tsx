@@ -24,8 +24,12 @@ export default function UsernameBox() {
 
     const regexUsername = '[A-Za-z0-9_]{6,20}$';
     const validateUsername = new RegExp(regexUsername);
-    if(!validateUsername.test(input) || Purify.sanitize(input) !== input){
-      callAlert(true, 'Username should contains only alphabets, numbers or an underscore and its length should be 6 - 20 characters', SeverityType.error);
+    if (!validateUsername.test(input) || Purify.sanitize(input) !== input) {
+      callAlert(
+        true,
+        'Username should contains only alphabets, numbers or an underscore and its length should be 6 - 20 characters',
+        SeverityType.error
+      );
       return;
     }
 

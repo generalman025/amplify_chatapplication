@@ -27,7 +27,7 @@ const Home = () => {
 
   const proceedToChatRoom = useCallback(() => {
     navigate('/chatroom');
-  },[]);
+  }, []);
 
   return (
     <AmplifyAuthenticator>
@@ -39,7 +39,7 @@ const Home = () => {
         <Grid item xs={12}>
           <AppBar />
         </Grid>
-        <Grid margin={5} item xs={12} style={{flexBasis: 'fit-content'}}>
+        <Grid margin={5} item xs={12} style={{ flexBasis: 'fit-content' }}>
           <UsernameBox />
         </Grid>
         <Alert

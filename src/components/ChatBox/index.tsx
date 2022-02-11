@@ -88,12 +88,12 @@ export default function ChatBox() {
   );
 
   return (
-    <Grid style={{maxHeight: "78vh", margin: 10}} data-testid="chatbox">
+    <Grid style={{ maxHeight: '78vh', margin: 10 }} data-testid="chatbox">
       <ScrollableFeed>
-        {messages.length < 10 ? (<div style={{height: '78vh'}} />) : <div />}
+        {messages.length < 10 ? <div style={{ height: '78vh' }} /> : <div />}
         {messages
           .sort((prev: Message, next: Message) =>
-          prev.createdAt.localeCompare(next.createdAt)
+            prev.createdAt.localeCompare(next.createdAt)
           )
           .map((msg) => (
             <MessageBox
@@ -104,10 +104,10 @@ export default function ChatBox() {
           ))}
       </ScrollableFeed>
       <MessageInput
-          message={message}
-          setMessage={setMessage}
-          handleSubmit={handleSubmit}
-        />
+        message={message}
+        setMessage={setMessage}
+        handleSubmit={handleSubmit}
+      />
     </Grid>
   );
 }
