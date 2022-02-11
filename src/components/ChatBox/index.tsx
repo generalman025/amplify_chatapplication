@@ -38,7 +38,6 @@ export default function ChatBox() {
 
     getMessages();
 
-    // Need to fix subscription feature for local simulation, issue: https://github.com/aws-amplify/amplify-cli/issues/9621
     const subscription = API.graphql(graphqlOperation(onCreateMessage));
     let unsubscribe;
     if (subscription instanceof Observable) {

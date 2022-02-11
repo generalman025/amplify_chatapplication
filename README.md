@@ -1,6 +1,45 @@
 # Assignment : Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Key Points:
+- Security : DOM Purification, Secure Headers, WAF for API Gateway & AppSync
+- Maintainability : Sonar Cloud, ESlint, Unit testing by Jest, End to End Testing by Cypress
+- As simple as possible : Amplify
+
+Tech Stack:
+- TypeScript / JavaScript
+- React.js
+- Node.js
+- AWS
+    - S3 & Cloudfront
+    - WAF
+    - Lambda & API Gateway
+    - AppSync
+    - DynamoDB
+
+1. Install Amplify CLI
+2. Create an empty folder and run command `amplify init --app amplify init --app https://github.com/generalman025/amplify_chatapplication.git`
+
+Concern
+    1. Error Custom CDK but it’s still work
+    2. Bucket name conflict
+    3. App will run but it’s may occur a CORS problem can be fix [comma separated]
+
+To enable End to End Testing
+1. Registered Cypress username & Password for E2E testing and specify in cypress.env.json
+
+
+Using Amplify console
+1. Modify Custom Rules
+
+
+Deployemt to CloudFront
+1. Run command ===> `amplify publish`
+
+
+Development Environment
+- node ===> 15.14.0
+- npm ===> 6.14.16
+- Amplify CLI ===> 7.6.4
 
 ## Available Scripts
 

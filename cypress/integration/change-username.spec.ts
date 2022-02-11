@@ -49,6 +49,6 @@ describe('02 - change username', () => {
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 
-    cy.get('[data-testid=appbar').should('contain', id);
+    cy.get('[data-testid=appbar]').should('contain', id);
   });
 });
