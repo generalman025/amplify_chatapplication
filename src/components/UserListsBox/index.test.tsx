@@ -35,6 +35,6 @@ describe('Unit Testing : UserListBox', () => {
     });
 
     let component = mount(<UserListsBox />);
-     expect(component.debug()).toContain('List');
+    expect(component.debug()).toContain('List');
   });
 });

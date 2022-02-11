@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
 
 describe('Unit Testing : RequireAuth', () => {
-
   test('Should renders a loading text', () => {
     Auth.currentAuthenticatedUser = jest.fn().mockImplementation(() => {
       return Promise.resolve({
@@ -23,11 +22,10 @@ describe('Unit Testing : RequireAuth', () => {
       </MemoryRouter>
     );
     waitFor(() => {
-      
       expect(component).toContain('Loading...');
-      
+
       (global as any).setIsAuth = realSetIsAuth;
       (global as any).setUser = realSetUser;
-    })
+    });
   });
 });

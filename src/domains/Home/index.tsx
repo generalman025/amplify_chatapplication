@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CognitoUser } from '@aws-amplify/auth';
-import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp } from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
 import { Grid } from '@mui/material';
 import AppBar from '../../components/AppBar';
@@ -27,7 +27,7 @@ const Home = () => {
 
   const proceedToChatRoom = useCallback(() => {
     navigate('/chatroom');
-  },[]);
+  }, []);
 
   return (
     <AmplifyAuthenticator>
@@ -39,7 +39,7 @@ const Home = () => {
         <Grid item xs={12}>
           <AppBar />
         </Grid>
-        <Grid margin={5} item xs={12} style={{flexBasis: 'fit-content'}}>
+        <Grid margin={5} item xs={12} style={{ flexBasis: 'fit-content' }}>
           <UsernameBox />
         </Grid>
         <Alert

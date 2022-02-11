@@ -26,7 +26,7 @@ export default function ChatRoom() {
     const interval = setInterval(() => {
       setDatetime(dayjs().format());
     }, 30000);
-    return () => clearInterval(interval)
+    return () => clearInterval(interval);
   }, [datetime]);
 
   return (

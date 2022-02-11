@@ -12,7 +12,6 @@ import {
 } from '../../context/UtilContext';
 
 describe('Unit Testing : UsernameBox', () => {
-  
   test('Should render a textbox', () => {
     const component = shallow(<UsernameBox />);
     const input = component.find('#preferredUsername');
