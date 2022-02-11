@@ -30,11 +30,15 @@ export class cdkStack extends cdk.Stack {
           {
             category: 'api',
             resourceName: 'listUsersApi'
+          },
+          {
+            category: 'api',
+            resourceName: 'amplifychatapp'
           }
         ]
       );
 
-    const apiGatewayId = dependencies.api.listUsersApi.ApiId;
+    const apiGatewayId = cdk.Fn.ref(dependencies.api.listUsersApi.ApiId);
 
     const appSyncId = cdk.Fn.ref(
       dependencies.api.amplifychatapp.GraphQLAPIIdOutput

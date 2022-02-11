@@ -1,3 +1,5 @@
+Cypress.config('defaultCommandTimeout', 30000);
+
 describe('01 - login & logout', () => {
 
   it('visit', () => {

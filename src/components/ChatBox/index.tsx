@@ -16,7 +16,7 @@ import { SeverityType } from '../Alert';
 import { AuthContext } from '../../context/AuthContext';
 import { UtilContext } from '../../context/UtilContext';
 import { Grid } from '@mui/material';
-import ScrollableFeed from 'react-scrollable-feed'
+import ScrollableFeed from 'react-scrollable-feed';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState(Array<Message>());
