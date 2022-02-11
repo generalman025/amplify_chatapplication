@@ -17,7 +17,7 @@
 
 ## Key Points
 - **Secure** : DOM Purify, Secure Headers, WAF for API Gateway & AppSync
-- **Maintainability & Quality** : Static Code Analysis (ESlint, Sonar Cloud (Github App), GitGuardian (Github App)), Unit Test (Jest), End to End Test (Cypress), 
+- **Maintainability & Quality** : Static Code Analysis (ESlint, Sonar Cloud (Github App), GitGuardian (Github App)), Unit Testing (Jest), End to End Testing (Cypress), 
 - **As simple as possible** : Amplify
 
 ## Installation
@@ -25,7 +25,7 @@
 2. Create an empty folder and execute command `amplify init --app amplify init --app https://github.com/generalman025/amplify_chatapplication.git`
 
 #### Concern
-    1. You'll get an error during installation because of CDK resource provisioning, but it’s still work in the end. (Investigating)
+    1. You'll get an error during installation because of CDK resource provisioning, but it still works. (Investigating)
     2. Please be aware of bucket name conflict.
     3. After installation, you should config your origins in `amplify/backend/function/amplifychatapplistusers/parameters.json`(comma separated) and publish the application again via command `amplify publish`. 
 
