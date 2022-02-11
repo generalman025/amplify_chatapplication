@@ -3,5 +3,10 @@
       "testFiles": "**/*.test.{js,ts,jsx,tsx}",
       "componentFolder": "src"
     },
-    "chromeWebSecurity": false
+    "chromeWebSecurity": false,
+    "testFiles": [
+      "login-logout.spec.ts",
+      "change-username.spec.ts",
+      "add-comment.spec.ts"
+    ]
   }
