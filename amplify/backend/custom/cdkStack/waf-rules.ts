@@ -1,23 +1,43 @@
-import { CfnWebACL } from "@aws-cdk/aws-wafv2";
+import { CfnWebACL } from '@aws-cdk/aws-wafv2';
 
 export type WafRule = {
-    name: string;
-    rule: CfnWebACL.RuleProperty;
-  }
-  
+  name: string;
+  rule: CfnWebACL.RuleProperty;
+};
+
 export const awsManagedRules: WafRule[] = [
+  // Protection against automated bots
+  {
+    name: 'AWS-AWSManagedRulesBotControlRuleSet',
+    rule: {
+      name: 'AWS-AWSManagedRulesBotControlRuleSet',
+      priority: 10,
+      statement: {
+        managedRuleGroupStatement: {
+          vendorName: 'AWS',
+          name: 'AWSManagedRulesBotControlRuleSet'
+        }
+      },
+      overrideAction: {
+        none: {}
+      },
+      visibilityConfig: {
+        sampledRequestsEnabled: true,
+        cloudWatchMetricsEnabled: true,
+        metricName: 'AWSManagedRulesBotControlRuleSet'
+      }
+    }
+  },
   // Common Rule Set aligns with major portions of OWASP Core Rule Set
   {
     name: 'AWS-AWSManagedRulesCommonRuleSet',
     rule: {
       name: 'AWS-AWSManagedRulesCommonRuleSet',
-      priority: 10,
+      priority: 20,
       statement: {
         managedRuleGroupStatement: {
           vendorName: 'AWS',
           name: 'AWSManagedRulesCommonRuleSet',
-          // Excluding generic RFI body rule for sns notifications
-          // https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list.html
           excludedRules: [
             { name: 'GenericRFI_BODY' },
             { name: 'SizeRestrictions_BODY' }
@@ -39,7 +59,7 @@ export const awsManagedRules: WafRule[] = [
     name: 'AWS-AWSManagedRulesAmazonIpReputationList',
     rule: {
       name: 'AWS-AWSManagedRulesAmazonIpReputationList',
-      priority: 20,
+      priority: 30,
       statement: {
         managedRuleGroupStatement: {
           vendorName: 'AWS',
@@ -56,28 +76,71 @@ export const awsManagedRules: WafRule[] = [
       }
     }
   },
+  // Block requests from services that allow obfuscation of viewer identity
+  {
+    name: 'AWS-AWSManagedRulesAnonymousIpList',
+    rule: {
+      name: 'AWS-AWSManagedRulesAnonymousIpList',
+      priority: 40,
+      statement: {
+        managedRuleGroupStatement: {
+          vendorName: 'AWS',
+          name: 'AWSManagedRulesAnonymousIpList'
+        }
+      },
+      overrideAction: {
+        none: {}
+      },
+      visibilityConfig: {
+        sampledRequestsEnabled: true,
+        cloudWatchMetricsEnabled: true,
+        metricName: 'AWSManagedRulesAnonymousIpList'
+      }
+    }
+  },
+  // Block request patterns that are known to be invalid and associated with exploitation or discovery of vulnerabilities
+  {
+    name: 'AWS-AWSManagedRulesKnownBadInputsRuleSet',
+    rule: {
+      name: 'AWS-AWSManagedRulesKnownBadInputsRuleSet',
+      priority: 50,
+      statement: {
+        managedRuleGroupStatement: {
+          vendorName: 'AWS',
+          name: 'AWSManagedRulesKnownBadInputsRuleSet'
+        }
+      },
+      overrideAction: {
+        none: {}
+      },
+      visibilityConfig: {
+        sampledRequestsEnabled: true,
+        cloudWatchMetricsEnabled: true,
+        metricName: 'AWSManagedRulesKnownBadInputsRuleSet'
+      }
+    }
+  },
   // Blocks common SQL Injection
   {
-    name: 'AWSManagedRulesSQLiRuleSet',
+    name: 'AWS-AWSManagedRulesSQLiRuleSet',
     rule: {
-        name: 'AWSManagedRulesSQLiRuleSet',
-        priority: 30,
-        visibilityConfig: {
-          sampledRequestsEnabled: true,
-          cloudWatchMetricsEnabled: true,
-          metricName: 'AWSManagedRulesSQLiRuleSet'
-        },
-        overrideAction: {
-          none: {}
-        },
-        statement: {
-          managedRuleGroupStatement: {
-            vendorName: 'AWS',
-            name: 'AWSManagedRulesSQLiRuleSet',
-            excludedRules: []
-          }
+      name: 'AWS-AWSManagedRulesSQLiRuleSet',
+      priority: 60,
+      visibilityConfig: {
+        sampledRequestsEnabled: true,
+        cloudWatchMetricsEnabled: true,
+        metricName: 'AWSManagedRulesSQLiRuleSet'
+      },
+      overrideAction: {
+        none: {}
+      },
+      statement: {
+        managedRuleGroupStatement: {
+          vendorName: 'AWS',
+          name: 'AWSManagedRulesSQLiRuleSet',
+          excludedRules: []
         }
       }
     }
-  ];
-  
+  }
+];
