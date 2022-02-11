@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useContext, useEffect } from 'react';
+import Purify from 'dompurify';
 import { Auth } from 'aws-amplify';
 import { AppBar as MuiAppBar } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -49,7 +50,7 @@ export default function AppBar() {
             color="common.white"
             sx={{ flexGrow: 1 }}
           >
-            {user && username ? `Hello, ${username}` : ''}
+            {user && username ? `Hello, ${Purify.sanitize(username)}` : ''}
           </Typography>
           <Button
             id="logoutButton"
