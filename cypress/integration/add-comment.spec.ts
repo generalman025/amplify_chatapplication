@@ -41,12 +41,19 @@ describe('03 - add comment', () => {
       .click();
   });
 
-  it('access to chatroom', () => {
+  it('go to chat room and add comment', () => {
     cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 
-    
+    if(Cypress.env('LOCAL')){
+      const uuid = () => Cypress._.random(0, 1e6)
+      const id = uuid()
+      cy.get('#messageInput').type(id, { force: true });
+      cy.get('#sendMessage').click().wait(3000);
+  
+      // cy.get('[data-testid=chatbox]').should('contain', id); // Need to fix subscription feature for local simulation
+    }
   });
 
 });

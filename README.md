@@ -1,45 +1,70 @@
 # Assignment : Chat Application
 
-Key Points:
-- Security : DOM Purification, Secure Headers, WAF for API Gateway & AppSync
-- Maintainability : Sonar Cloud, ESlint, Unit testing by Jest, End to End Testing by Cypress
-- As simple as possible : Amplify
-
-Tech Stack:
+## Tech Stack:
 - TypeScript / JavaScript
 - React.js
 - Node.js
 - AWS
     - S3 & Cloudfront
-    - WAF
     - Lambda & API Gateway
     - AppSync
     - DynamoDB
+    - WAF
+    - X-Ray & CloudWatch
 
-1. Install Amplify CLI
+### Sample  Site
+- [https://chatapp.g025app.com/](https://chatapp.g025app.com/)
+
+## Key Points
+- **Secure** : DOM Purify, Secure Headers, WAF for API Gateway & AppSync
+- **Maintainability & Quality** : Static Code Analysis (ESlint, Sonar Cloud (Github App), GitGuardian (Github App)), Unit Test (Jest), End to End Test (Cypress), 
+- **As simple as possible** : Amplify
+
+## Installation
+1. Install Amplify CLI, Node
 2. Create an empty folder and run command `amplify init --app amplify init --app https://github.com/generalman025/amplify_chatapplication.git`
 
-Concern
-    1. Error Custom CDK but it’s still work
-    2. Bucket name conflict
-    3. App will run but it’s may occur a CORS problem can be fix [comma separated]
+#### Concern
+    1. You'll get an error during installation because of Custom CDK provisioning, but it’s still work in the end. [Investigating]
+    2. Please aware of bucket name conflict.
+    3. After installation, you'll need to config the origins in the file `xxxxxx`. [comma separated]
 
-To enable End to End Testing
-1. Registered Cypress username & Password for E2E testing and specify in cypress.env.json
-
-
-Using Amplify console
-1. Modify Custom Rules
-
-
-Deployemt to CloudFront
+#### Deployemt to CloudFront
 1. Run command ===> `amplify publish`
 
+#### To enable End to End Testing
+- Cypress username & Password for E2E testing and specify in cypress.env.json
 
-Development Environment
+#### Using Amplify console
+- Add Custom Rules
+
+## Development Environment
 - node ===> 15.14.0
 - npm ===> 6.14.16
 - Amplify CLI ===> 7.6.4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Available Scripts
 
