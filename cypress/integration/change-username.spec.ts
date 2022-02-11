@@ -1,3 +1,5 @@
+Cypress.config('defaultCommandTimeout', 30000);
+
 describe('02 - change username', () => {
 
   it('visit', () => {

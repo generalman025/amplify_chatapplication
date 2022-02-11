@@ -1,3 +1,5 @@
+Cypress.config('defaultCommandTimeout', 30000);
+
 describe('03 - add comment', () => {
 
   it('visit', () => {
