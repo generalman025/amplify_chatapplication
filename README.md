@@ -1,6 +1,6 @@
 # Assignment : Chat Application
 
-![alt text](https://github.com/generalman025/amplify_chatapplication/blob/main/diagram.png?raw=true)
+![alt text](https://github.com/generalman025/amplify_chatapplication/blob/dev/diagram.png?raw=true)
 
 ## Tech Stack:
 - TypeScript / JavaScript
