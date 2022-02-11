@@ -1,20 +1,21 @@
 # Assignment : Chat Application
 
-Key Points:
-- Security : DOM Purification, Secure Headers, WAF for API Gateway & AppSync
-- Maintainability : Sonar Cloud, ESlint, Unit testing by Jest, End to End Testing by Cypress
-- As simple as possible : Amplify
-
 Tech Stack:
 - TypeScript / JavaScript
 - React.js
 - Node.js
 - AWS
     - S3 & Cloudfront
-    - WAF
     - Lambda & API Gateway
     - AppSync
     - DynamoDB
+    - WAF
+    - X-Ray & CloudWatch
+
+Key Points:
+- Security : DOM Purification, Secure Headers, WAF for API Gateway & AppSync
+- Maintainability & Quality : Static Code Analysis (ESlint + Sonar Cloud & GitGuardian (Github Action)), Unit testing (Jest), End to End Testing (Cypress), 
+- As simple as possible : Amplify
 
 1. Install Amplify CLI
 2. Create an empty folder and run command `amplify init --app amplify init --app https://github.com/generalman025/amplify_chatapplication.git`
@@ -29,7 +30,7 @@ To enable End to End Testing
 
 
 Using Amplify console
-1. Modify Custom Rules
+1. Add Custom Rules
 
 
 Deployemt to CloudFront

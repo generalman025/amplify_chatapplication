@@ -41,12 +41,23 @@ describe('03 - add comment', () => {
       .click();
   });
 
-  it('access to chatroom', () => {
+  it('go to chat room and add comment', () => {
     cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 
-    
+    const uuid = () => Cypress._.random(0, 1e6)
+    const id = uuid()
+
+
+    cy.get('#messageInput').type(id, { force: true });
+    cy.get('#sendMessage').click().catch(() => {
+      console.log('error from WAF forbidden rules');
+      done();
+    });
+    cy.wait(3000);
+
+    if(!Cypress.env('LOCAL')) cy.get('[data-testid=chatbox]').should('contain', id);
   });
 
 });
