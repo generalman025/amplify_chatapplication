@@ -41,18 +41,12 @@ describe('03 - add comment', () => {
       .click();
   });
 
-  it('go to chat room and add comment', () => {
+  it('access to chatroom', () => {
     cy.get('#preferredUsername').wait(5000);
     cy.contains('Proceed to Chat Room').click();
     cy.wait(3000);
 
-    const uuid = () => Cypress._.random(0, 1e6)
-    const id = uuid()
-
-    cy.get('#messageInput').type(id, { force: true });
-    cy.get('#sendMessage').click().wait(3000);
-
-    if(!Cypress.env('LOCAL')) cy.get('[data-testid=chatbox]').should('contain', id);
+    
   });
 
 });
