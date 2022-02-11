@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import Purify from 'dompurify';
 import { Alert as MuiAlert, AlertColor, Snackbar } from '@mui/material';
 
 type AlertBoxProps = {
@@ -35,7 +36,7 @@ export default function Alert({
       onClose={handleClose}
     >
       <MuiAlert variant="filled" severity={severity as unknown as AlertColor}>
-        {alertMessage}
+        {Purify.sanitize(alertMessage)}
       </MuiAlert>
     </Snackbar>
   );
