@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import Purify from 'dompurify';
 import { Auth } from 'aws-amplify';
 import { AuthState } from '@aws-amplify/ui-components';
 import { Paper, Grid, TextField, Button, Typography } from '@mui/material';
@@ -21,10 +22,10 @@ export default function UsernameBox() {
       return;
     }
 
-    const regexUsername = '^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$';
+    const regexUsername = '[A-Za-z0-9_]{6,20}$';
     const validateUsername = new RegExp(regexUsername);
-    if(!validateUsername.test(input)){
-      callAlert(true, 'Please input a correct username', SeverityType.error);
+    if(!validateUsername.test(input) || Purify.sanitize(input) !== input){
+      callAlert(true, 'Username should contains only alphabets, numbers or an underscore and its length should be 6 - 20 characters', SeverityType.error);
       return;
     }
 
