@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/react';
 import { mount, shallow } from 'enzyme';
 import Alert, { SeverityType } from '.';
 
