@@ -30,7 +30,7 @@ export default function Alert({
     <Snackbar
       data-testid="alert-bar"
       open={showAlert}
-      autoHideDuration={1500}
+      autoHideDuration={2000}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       onClose={handleClose}
     >
