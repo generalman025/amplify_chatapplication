@@ -90,6 +90,7 @@ export default function ChatBox() {
   return (
     <Grid style={{maxHeight: "78vh", margin: 10}} data-testid="chatbox">
       <ScrollableFeed>
+        {messages.length < 10 ? (<div style={{height: '78vh'}} />) : <div />}
         {messages
           .sort((prev: Message, next: Message) =>
           prev.createdAt.localeCompare(next.createdAt)
