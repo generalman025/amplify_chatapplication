@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CognitoUser } from '@aws-amplify/auth';
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
 import { Grid } from '@mui/material';
 import AppBar from '../../components/AppBar';
