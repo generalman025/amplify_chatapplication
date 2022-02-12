@@ -24,6 +24,7 @@
     "aws-amplify": "^4.3.13",
     "dayjs": "^1.10.7",
     "dompurify": "^2.3.5",
+    "html-entities": "^2.3.2",
     "kill-port": "^1.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

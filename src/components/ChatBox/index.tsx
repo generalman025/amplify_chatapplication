@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import Purify from 'dompurify';
+import {decode} from 'html-entities';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
@@ -65,7 +66,7 @@ export default function ChatBox() {
       event.preventDefault();
       setMessage('');
 
-      if (Purify.sanitize(message) !== message) {
+      if (Purify.sanitize(message) !== message || decode(message) !== message) {
         callAlert(true, 'Please input a correct message', SeverityType.error);
         return;
       }
