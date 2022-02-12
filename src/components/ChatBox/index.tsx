@@ -79,7 +79,7 @@ export default function ChatBox() {
         };
 
         try {
-          API.graphql(graphqlOperation(createMessage, { input }));
+          await API.graphql(graphqlOperation(createMessage, { input }));
         } catch (_) {
           callAlert(true, 'Something went wrong!!!', SeverityType.error);
         }
