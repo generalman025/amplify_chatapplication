@@ -11,9 +11,8 @@
     - WAF
     - Cognito
     - Lambda & API Gateway
-    - AppSync
+    - AppSync & X-Ray
     - DynamoDB
-    - X-Ray
 
 ### Sample  Site
 - [https://chatapp.g025app.com/](https://chatapp.g025app.com/)
