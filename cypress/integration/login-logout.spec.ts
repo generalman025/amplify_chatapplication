@@ -8,7 +8,6 @@ describe('01 - login & logout', () => {
 
   it('login', () => {
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
@@ -20,7 +19,6 @@ describe('01 - login & logout', () => {
       .type(Cypress.env('USERNAME'));
 
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
@@ -32,7 +30,6 @@ describe('01 - login & logout', () => {
       .type(Cypress.env('PASSWORD'), { force: true });
 
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
@@ -45,11 +42,10 @@ describe('01 - login & logout', () => {
     cy.get('[data-testid=logout]').click();
 
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
-      .should('contain', 'Sign in to your account');
+      .should('contain', 'Welcome to Chat Application');
   });
 
 
