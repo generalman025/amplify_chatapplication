@@ -8,7 +8,6 @@ describe('02 - change username', () => {
 
   it('login', () => {
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
@@ -20,7 +19,6 @@ describe('02 - change username', () => {
       .type(Cypress.env('USERNAME'));
 
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
@@ -32,7 +30,6 @@ describe('02 - change username', () => {
       .type(Cypress.env('PASSWORD'), { force: true });
 
     cy.get('amplify-authenticator')
-      .shadow()
       .find('amplify-sign-in')
       .shadow()
       .find('amplify-form-section')
