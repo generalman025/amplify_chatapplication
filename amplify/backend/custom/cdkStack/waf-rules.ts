@@ -141,28 +141,5 @@ export const awsManagedRules: WafRule[] = [
         metricName: 'AWSManagedRulesKnownBadInputsRuleSet'
       }
     }
-  },
-  // Blocks common SQL Injection
-  {
-    name: 'AWS-AWSManagedRulesSQLiRuleSet',
-    rule: {
-      name: 'AWS-AWSManagedRulesSQLiRuleSet',
-      priority: 70,
-      visibilityConfig: {
-        sampledRequestsEnabled: true,
-        cloudWatchMetricsEnabled: true,
-        metricName: 'AWSManagedRulesSQLiRuleSet'
-      },
-      overrideAction: {
-        none: {}
-      },
-      statement: {
-        managedRuleGroupStatement: {
-          vendorName: 'AWS',
-          name: 'AWSManagedRulesSQLiRuleSet',
-          excludedRules: []
-        }
-      }
-    }
   }
 ];
