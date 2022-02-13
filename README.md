@@ -9,6 +9,7 @@
 - AWS
     - S3 & Cloudfront
     - WAF
+    - Cognito
     - Lambda & API Gateway
     - AppSync
     - DynamoDB

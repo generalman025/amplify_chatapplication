@@ -98,12 +98,34 @@ export const awsManagedRules: WafRule[] = [
       }
     }
   },
+    // Protection against HTTP flood attack
+    {
+      name: 'Custom-RateLimit500',
+      rule: {
+        name: 'Custom-RateLimit500',
+        priority: 50,
+        action: {
+          block: {}
+        },
+        visibilityConfig: {
+          sampledRequestsEnabled: true,
+          cloudWatchMetricsEnabled: true,
+          metricName: 'RateLimit500'
+        },
+        statement: {
+          rateBasedStatement: {
+            limit: 500,
+            aggregateKeyType: 'IP'
+          }
+        }
+      }
+    },
   // Block request patterns that are known to be invalid and associated with exploitation or discovery of vulnerabilities
   {
     name: 'AWS-AWSManagedRulesKnownBadInputsRuleSet',
     rule: {
       name: 'AWS-AWSManagedRulesKnownBadInputsRuleSet',
-      priority: 50,
+      priority: 60,
       statement: {
         managedRuleGroupStatement: {
           vendorName: 'AWS',
@@ -125,7 +147,7 @@ export const awsManagedRules: WafRule[] = [
     name: 'AWS-AWSManagedRulesSQLiRuleSet',
     rule: {
       name: 'AWS-AWSManagedRulesSQLiRuleSet',
-      priority: 60,
+      priority: 70,
       visibilityConfig: {
         sampledRequestsEnabled: true,
         cloudWatchMetricsEnabled: true,
