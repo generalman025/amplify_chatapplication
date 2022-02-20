@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import Purify from 'dompurify';
-import {decode} from 'html-entities';
+import { decode } from 'html-entities';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
