@@ -22,6 +22,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^8.3.4",
     "aws-amplify": "^4.3.13",
+    "css-what": "^5.0.1",
     "dayjs": "^1.10.7",
     "dompurify": "^2.3.5",
     "html-entities": "^2.3.2",
@@ -95,6 +96,7 @@
   },
   "resolutions": {
     "postcss": "^8.2.13",
-    "nth-check": "^2.0.1"
+    "nth-check": "^2.0.1",
+    "css-what": "^5.0.1"
   }
 }
