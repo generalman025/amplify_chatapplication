@@ -16,6 +16,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 const AWS = require('aws-sdk');
+const serviceProvider = new AWS.CognitoIdentityServiceProvider();
 
 // declare a new express app
 let helmet = require('helmet');
@@ -37,7 +38,6 @@ app.use(function (req, res, next) {
 });
 
 app.get('/users', function (req, res) {
-  const serviceProvider = new AWS.CognitoIdentityServiceProvider();
   var params = {
     UserPoolId: process.env.AUTH_AMPLIFYCHATAPP_USERPOOLID
   };
