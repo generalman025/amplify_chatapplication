@@ -1,7 +1,11 @@
 import { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CognitoUser } from '@aws-amplify/auth';
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp } from '@aws-amplify/ui-react';
+import {
+  AmplifyAuthenticator,
+  AmplifySignIn,
+  AmplifySignUp
+} from '@aws-amplify/ui-react';
 import { onAuthUIStateChange, AuthState } from '@aws-amplify/ui-components';
 import { Grid } from '@mui/material';
 import AppBar from '../../components/AppBar';
@@ -31,7 +35,7 @@ const Home = () => {
 
   return (
     <AmplifyAuthenticator>
-      <AmplifySignIn slot='sign-in' headerText='Welcome to Chat Application'/>
+      <AmplifySignIn slot="sign-in" headerText="Welcome to Chat Application" />
       <AmplifySignUp
         slot="sign-up"
         formFields={[{ type: 'username' }, { type: 'password' }]}
