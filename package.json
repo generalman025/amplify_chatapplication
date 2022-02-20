@@ -95,8 +95,8 @@
     "typescript": "^4.5.5"
   },
   "resolutions": {
-    "postcss": "^8.2.13",
-    "nth-check": "^2.0.1",
-    "css-what": "^5.0.1"
+    "postcss": "8.2.13",
+    "nth-check": "2.0.1",
+    "css-what": "5.0.1"
   }
 }
