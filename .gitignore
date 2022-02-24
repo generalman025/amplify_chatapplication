@@ -46,3 +46,6 @@ amplifytools.xcconfig
 #cypress
 cypress/videos
 cypress/screenshots
+
+#public-shared
+amplify/team-provider-info.json
