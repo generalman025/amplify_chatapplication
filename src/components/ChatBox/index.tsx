@@ -66,6 +66,11 @@ export default function ChatBox() {
       event.preventDefault();
       setMessage('');
 
+      if(message.length > 200){
+        callAlert(true, 'Please input no more than 200 characters', SeverityType.error);
+        return;
+      }
+
       if (Purify.sanitize(message) !== message || decode(message) !== message) {
         callAlert(true, 'Please input a correct message', SeverityType.error);
         return;
