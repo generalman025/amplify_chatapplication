@@ -22,7 +22,7 @@ export default function UsernameBox() {
       return;
     }
 
-    const regexUsername = '[A-Za-z0-9_]{6,20}$';
+    const regexUsername = '^[A-Za-z0-9_]{6,20}$';
     const validateUsername = new RegExp(regexUsername);
     if (!validateUsername.test(input) || Purify.sanitize(input) !== input) {
       callAlert(
