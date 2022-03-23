@@ -1,4 +1,4 @@
-# Assignment : Chat Application
+# Chat Application
 
 ![alt text](https://github.com/generalman025/amplify_chatapplication/blob/main/diagram.png?raw=true)
 
@@ -27,7 +27,7 @@
 2. Create an empty folder and execute command `amplify init --app https://github.com/generalman025/amplify_chatapplication.git`
 
 #### Concern
-    1. You may get an error during installation because of CDK resource provisioning, but it still works. (Investigating)
+    1. You may get an error during installation because of CDK resource provisioning, but it still works.
     2. Please be aware of bucket name conflict.
     3. After installation, you should config your origins in `amplify/backend/function/amplifychatapplistusers/parameters.json`(comma separated) and publish the application again via command `amplify publish`. 
 
