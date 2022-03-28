@@ -26,7 +26,9 @@ export default function MessageBox({ message, isMe }: MessageBoxProps) {
       }
     >
       <div>
-        <p className={styles.senderUsernameText} style={{fontSize: 'larger'}}>{isMe  ? 'You' : Purify.sanitize(message.preferredUsername)}</p>
+        <p className={styles.senderUsernameText} style={{ fontSize: 'larger' }}>
+          {isMe ? 'You' : Purify.sanitize(message.preferredUsername)}
+        </p>
         <p className={styles.senderText}>{dateFormat(message.createdAt)}</p>
         <div className={isMe ? styles.sendMessage : styles.receivedMessage}>
           <p>{Purify.sanitize(message.message)}</p>

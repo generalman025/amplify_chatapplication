@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import Purify from 'dompurify';
-import {decode} from 'html-entities';
+import { decode } from 'html-entities';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../graphql/mutations';
 import { listMessages } from '../../graphql/queries';
@@ -65,6 +65,11 @@ export default function ChatBox() {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setMessage('');
+
+      if(message.length > 200){
+        callAlert(true, 'Please input no more than 200 characters', SeverityType.error);
+        return;
+      }
 
       if (Purify.sanitize(message) !== message || decode(message) !== message) {
         callAlert(true, 'Please input a correct message', SeverityType.error);
