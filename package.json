@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.5",
-    "@aws-cdk/aws-amplify": "^1.143.0",
+    "@aws-cdk/aws-amplify": "^1.157.0",
     "@aws-cdk/aws-cloudfront": "^1.143.0",
     "@aws-cdk/aws-wafv2": "^1.142.0",
     "@aws-cdk/lambda-layer-awscli": "^1.143.0",
