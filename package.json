@@ -21,7 +21,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^8.3.4",
-    "aws-amplify": "^4.3.13",
+    "aws-amplify": "^5.3.4",
     "css-what": "^5.1.0",
     "dayjs": "^1.10.7",
     "dompurify": "^2.3.5",
