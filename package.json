@@ -24,7 +24,7 @@
     "aws-amplify": "^4.3.13",
     "css-what": "^5.1.0",
     "dayjs": "^1.10.7",
-    "dompurify": "^2.3.5",
+    "dompurify": "^2.4.9",
     "html-entities": "^2.3.2",
     "kill-port": "^1.6.1",
     "nth-check": "^2.0.1",
